@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>{{model.title}}</title>
+    {{> partials/metadata.partial.html }}
+    {{{bundles model.shaman.bundles}}}
+  </head>
+  <body>
+    {{> partials/header.partial.html }}
+    <div class="container-fluid top">
+      <div class="row">
+        {{#each query.recentBlogs}}
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card">
+              <a class="cover" href="/blogs/{{this.filename}}" 
+                style="background-image: url({{this.image}})"></a>  
+              <div class="content">
+                <h2>{{this.title}}</h2>
+                <small>By {{this.author}}, {{date this.date ''}}</small>
+                <br />
+                <p>{{truncate this.description 160}}</p>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </body>
+</html>

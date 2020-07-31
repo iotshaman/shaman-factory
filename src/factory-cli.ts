@@ -3,7 +3,8 @@ import { Factory } from './factory';
 
 /* istanbul ignore next */
 (function() {
-  const [command, name, template] = process.argv.slice(2);
+  if (process.argv.length < 4) throw new Error("Invalid number of arguments.");
   const factory = new Factory();
-  factory.Generate(command, name, template);
+  const [command] = process.argv.slice(2);
+  factory.Generate(command, process.argv.slice(3));
 })();

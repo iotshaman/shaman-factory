@@ -1,0 +1,12 @@
+{
+  "production": false,
+  "logLevel": "info",
+  "output": "./dist",
+  "adapter": {
+    "name": "JsonRepoAdapter",
+    "configuration": {
+      "dataPath": "./data/db.json",
+      "models": ["blogs"]
+    }
+  }
+}

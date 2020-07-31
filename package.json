@@ -10,6 +10,9 @@
     "build": "tsc",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
+  "bin": {
+    "factory": "./dist/factory-cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iotshaman/shaman-factory.git"
@@ -28,10 +31,11 @@
   },
   "homepage": "https://github.com/iotshaman/shaman-factory#readme",
   "dependencies": {
-    "shaman-website-compiler": "^4.0.3"
+    "fs-extra": "^9.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
+    "@types/fs-extra": "9.0.1",
     "@types/mocha": "^7.0.2",
     "@types/node": "^14.0.14",
     "@types/sinon": "9.0.4",

@@ -6,7 +6,7 @@ describe('Factory', () => {
 
   it('Generate placeholder', () => {
     let factory = new Factory();
-    factory.Generate("create", "sample", "sample");
+    factory.Generate("create", []);
     expect(factory).not.to.be.null;
   })
 

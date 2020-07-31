@@ -1,0 +1,13 @@
+{
+  "shaman": {
+    "dynamic": {
+      "path": "blogs/",
+      "name": "filename"
+    },
+    "query": [{
+      "path": "blogs",
+      "dynamic": true,
+      "args": ["*"]
+    }]
+  }
+}
