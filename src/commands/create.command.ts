@@ -11,10 +11,12 @@ export class CreateCommand implements ICommand {
 
   run = (name: string, template: string = "default"): Promise<void> => {
     if (!name) throw new Error("Name parameter not provided to create command.");
+    console.log(`Creating website '${name}' from template '${template}'...`);
     return this.getTemplates()
       .then(templates => this.checkTemplateExists(template, templates))
       .then(_ => this.copyFiles(name, template))
-      .then(_ => this.installDependencies(name));
+      .then(_ => this.installDependencies(name))
+      .then(_ => console.log("Website has been created."));
   }
 
   private getTemplates = (): Promise<string[]> => {
@@ -38,10 +40,11 @@ export class CreateCommand implements ICommand {
   
   installDependencies = (name: string): Promise<void> => {
     return new Promise((res, err) => {
+      console.log("Installing dependencies...")
       var path = `./${name}`;
       _cmd.exec(`${this.npm} install`, { cwd: path}, function(ex, _stdout, stderr) {
         if (ex) return err(ex);
-        if (stderr) return err(stderr);
+        if (stderr) console.log(stderr);
         res();
       });
     })

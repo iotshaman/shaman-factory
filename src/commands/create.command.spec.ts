@@ -83,14 +83,14 @@ describe('CreateCommand', () => {
     subject.run("sample").catch(() => done());
   });
 
-  it('run should throw if stderr has value', (done) => {
+  it('run should NOT throw if stderr has value', (done) => {
     sandbox.stub(_fsx, 'readdir').returns(Promise.resolve(["default"]));
     sandbox.stub(_fsx, 'pathExists').returns(<any>Promise.resolve(false));
     sandbox.stub(_fsx, 'copy').returns(<any>Promise.resolve());
     sandbox.stub(_cmd, 'exec').yields(null, null, "test error");
     let stub = sandbox.stub(_fsx, 'writeFile').returns(<any>Promise.resolve());
     let subject = new CreateCommand();
-    subject.run("sample").catch(() => done());
+    subject.run("sample").then(() => done());
   });
 
 });
