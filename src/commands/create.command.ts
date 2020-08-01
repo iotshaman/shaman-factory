@@ -1,5 +1,6 @@
 import * as _fsx from 'fs-extra';
 import * as _path from 'path';
+import * as _cmd from 'child_process';
 import { ICommand } from "./command";
 
 export class CreateCommand implements ICommand {
@@ -10,7 +11,8 @@ export class CreateCommand implements ICommand {
     if (!name) throw new Error("Name parameter not provided to create command.");
     return this.getTemplates()
       .then(templates => this.checkTemplateExists(template, templates))
-      .then(_ => this.copyFiles(name, template));
+      .then(_ => this.copyFiles(name, template))
+      .then(_ => this.installDependencies(name));
   }
 
   private getTemplates = (): Promise<string[]> => {
@@ -30,6 +32,18 @@ export class CreateCommand implements ICommand {
       .then(_ => _fsx.ensureDir(outputPath))
       .then(_ => _fsx.copy(templatePath, outputPath))
       .then(_ => _fsx.writeFile(jsonPackageFile, CreateJsonPackage(name)))
+  }
+  
+  installDependencies = (name: string): Promise<void> => {
+    return new Promise((res, err) => {
+      var npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+      var path = `./${name}`;
+      _cmd.exec(`${npm} install`, { cwd: path}, function(ex, _stdout, stderr) {
+        if (ex) return err(ex);
+        if (stderr) return err(stderr);
+        res();
+      });
+    })
   }
 
 }

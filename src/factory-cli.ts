@@ -6,5 +6,8 @@ import { Factory } from './factory';
   if (process.argv.length < 4) throw new Error("Invalid number of arguments.");
   const factory = new Factory();
   const [command] = process.argv.slice(2);
-  factory.Generate(command, process.argv.slice(3));
+  factory.Generate(command, process.argv.slice(3)).catch(ex => {
+    console.error(ex);
+    process.exit(1);
+  });
 })();

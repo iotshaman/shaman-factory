@@ -31,7 +31,8 @@
   },
   "homepage": "https://github.com/iotshaman/shaman-factory#readme",
   "dependencies": {
-    "fs-extra": "^9.0.1"
+    "fs-extra": "^9.0.1",
+    "npmi": "^4.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",

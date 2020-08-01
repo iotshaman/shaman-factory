@@ -1,1 +1,2 @@
-export * from './factory-cli';
+export * from './factory';
+export * from './commands/command';
