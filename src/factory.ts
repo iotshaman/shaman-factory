@@ -1,5 +1,6 @@
 import { CreateCommand } from "./commands/create.command";
 import { ICommand } from "./commands/command";
+import { ListenCommand } from "./commands/listen.command";
 
 export class Factory {
 
@@ -15,5 +16,6 @@ export class Factory {
 }
 
 const FactoryCommands: ICommand[] = [
-  new CreateCommand()
+  new CreateCommand(),
+  new ListenCommand()
 ]

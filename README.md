@@ -34,7 +34,7 @@ The factory script follows the following format:
 factory [command] [...arguments]
 ```
 
-- **command:** The specific command you wish Shaman Factory to run. As of version 1.0.x the only available command is `create`.
+- **command:** The specific command you wish Shaman Factory to run. As of version 1.0.x the only available commands are `create` and `listen`.
 - **arguments:** Arguments specific to the command that you are running.
 
 #### Create Command
@@ -47,6 +47,17 @@ factory create [name] [template]
 
 - **name:** Name of the website you are creating.
 - **template:** (Optional) Name of the template to use (see [Templates](#templates)). If no template is provided, it will use the default template.
+
+#### Listen Command
+
+The listen command will create an http server to listen for compilation requests. This allows websites to be setup to request re-compilation programatically. Once you have called "factory listen..." simply make an HTTP POST call to "http://localhost:10003/compile" and your website will be compiled. 
+
+```sh
+factory listen [path] [port]
+```
+
+- **path:** Path (relative or absolute) to your website. The website must be a [shaman-website-compiler](https://github.com/iotshaman/shaman-website-compiler) compatible website. To use the current directory, use "." as the path parameter.
+- **port:** (Optional) Http port to listen on. Defaults to "10003".
 
 ## Templates
 

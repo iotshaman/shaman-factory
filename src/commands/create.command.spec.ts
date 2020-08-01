@@ -11,6 +11,7 @@ describe('CreateCommand', () => {
 
   beforeEach(() => {
     sandbox = sinon.createSandbox();
+    sandbox.stub(console, 'log');
   })
 
   afterEach(() => {
