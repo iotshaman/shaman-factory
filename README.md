@@ -4,10 +4,10 @@
 
 ### Build high quality websites with minimal effort. Just start designing!
 
-### Requirements
+## Requirements
 - Node JS
 
-### Quick Start
+## Quick Start
 
 Open a terminal and navigate to the folder where you wish to create your website. The, enter the following commands (replacing `my-website` with the name of your website):
 
@@ -26,7 +26,7 @@ To stop the development sever, hold the Cntl button then click the "c" button (C
 
 To make a production-ready copy of your website, open the file *website.json* and change the "production" value to "true". Then, enter the same command seen above. Once the command is finished, the "dest" folder will now contain the fully-compiled contents of your website. The compiled website is completely minimized, bundles injected, etc. and is ready to deploy to your web hosting server. 
 
-### CLI Reference
+## CLI Reference
 
 The factory script follows the following format:
 
@@ -48,7 +48,7 @@ factory create [name] [template]
 - **name:** Name of the website you are creating.
 - **template:** (Optional) Name of the template to use (see [Templates](#templates)). If no template is provided, it will use the default template.
 
-### Templates
+## Templates
 
 Shaman Factory comes pre-installed with templates to choose from. Every template is [shaman-website-compiler](https://github.com/iotshaman/shaman-website-compiler) compatible, meaning every website created by Shaman Factory will follow the best-practices of file minification, file bundling, pre-rendering, and so much more. This is a solid start gaining a competitive advantage in the online marketplace! This list is subject to change, so check back in periodically to see what's new.
 

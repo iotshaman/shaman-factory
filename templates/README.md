@@ -2,11 +2,11 @@
 
 ![Build Status](https://travis-ci.org/iotshaman/shaman-factory.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/iotshaman/shaman-factory/badge.svg?branch=master)](https://coveralls.io/github/iotshaman/shaman-factory?branch=master)
 
-### Templates
+## Templates
 
 Shaman Factory comes pre-installed with templates to choose from. Every template is [shaman-website-compiler](https://github.com/iotshaman/shaman-website-compiler) compatible, meaning every website created by Shaman Factory will follow the best-practices of file minification, file bundling, pre-rendering, and so much more. This is a solid start gaining a competitive advantage in the online marketplace! This list is subject to change, so check back in periodically to see what's new.
 
-#### Default Template
+### Default Template
 
 ```sh
 factory create [name]
