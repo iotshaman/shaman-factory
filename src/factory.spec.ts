@@ -5,6 +5,11 @@ import { ICommand } from './commands/command';
 
 describe('Factory', () => {
 
+  it('should be created', () => {
+    let factory = new Factory();
+    expect(factory).not.to.be.null;
+  })
+
   it('Generate should throw if no command provided', () => {
     let factory = new Factory([new MockCommand()]);
     let msg = "Command parameter not provided.";

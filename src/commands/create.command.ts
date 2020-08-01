@@ -6,6 +6,8 @@ import { ICommand } from "./command";
 export class CreateCommand implements ICommand {
 
   get name(): string { return "create"; }
+  /* istanbul ignore next */
+  private npm: string = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 
   run = (name: string, template: string = "default"): Promise<void> => {
     if (!name) throw new Error("Name parameter not provided to create command.");
@@ -36,9 +38,8 @@ export class CreateCommand implements ICommand {
   
   installDependencies = (name: string): Promise<void> => {
     return new Promise((res, err) => {
-      var npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
       var path = `./${name}`;
-      _cmd.exec(`${npm} install`, { cwd: path}, function(ex, _stdout, stderr) {
+      _cmd.exec(`${this.npm} install`, { cwd: path}, function(ex, _stdout, stderr) {
         if (ex) return err(ex);
         if (stderr) return err(stderr);
         res();
