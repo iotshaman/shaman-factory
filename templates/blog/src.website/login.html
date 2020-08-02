@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>{{model.title}}</title>
+    {{> partials/metadata.partial.html }}
+    {{> partials/fontawesome.partial.html }}
+    {{{bundles model.shaman.bundles}}}
+  </head>
+  <body>
+    {{> partials/header.partial.html }}
+    <div class="container-fluid top">
+      <div class="login-container">
+        <i class="fas fa-user fa-5x"></i>
+        <form onsubmit="OnClickSubmitForm(event)">
+          <div class='form-group'>
+            <input class="form-control fw" type="text" 
+              placeholder="Email Address" name="email" />
+          </div>
+          <div class='form-group'>
+            <input class="form-control fw" type="text" 
+              placeholder="Password" name="password" />
+          </div>
+          <div class="form-group">
+            <button class="primary xl fw">Sign In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      function OnClickSubmitForm(event) {
+        var email = document.querySelector('input[name="email"]').value;
+        var pass = document.querySelector('input[name="password"]').value;
+        SubmitLogin(email, pass);
+        event.preventDefault();
+        return false;
+      }
+    </script>
+  </body>
+</html>

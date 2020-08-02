@@ -1,0 +1,70 @@
+.card {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+}
+.card:hover {
+  outline: 1px solid #011c254a;
+  box-shadow: 0 5px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+}
+.card a.cover {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 350px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+.card a.cover::after {
+  background: #011d28;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+  width: 100%;
+}
+.card:hover a.cover::after {
+  opacity: .5;
+}
+.card .content h2 {
+  margin-bottom: 10px;
+  font-family: "Proxima Nova",Arial,sans-serif;
+  font-weight: 400;
+}
+.card .content small {
+  font-family: "Proxima Nova",Arial,sans-serif;
+  font-weight: 400;
+}
+.card .content p {
+  font-family: Merriweather,Georgia,"Times New Roman",serif;
+  font-weight: 300;
+}
+@media(max-width: 1599px) {
+  .card a.cover {
+    height: 250px;
+  }
+}
+@media(max-width: 767px) {
+  .card a.cover {
+    height: 400px;
+  }
+}

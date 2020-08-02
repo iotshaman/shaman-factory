@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>{{model.title}}</title>
+    {{> partials/metadata.partial.html }}
+    {{> partials/fontawesome.partial.html }}
+    {{{bundles model.shaman.bundles}}}
+  </head>
+  <body>
+    {{> partials/admin-header.partial.html }}
+    <div class="container-fluid top">
+      <div class="row">
+        {{#each query.recentBlogs}}
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card">
+              <div class="content">
+                <h2>{{this.title}}</h2>
+                <small>By {{this.author}}, {{date this.date ''}}</small>
+                <br />
+                <p>{{truncate this.description 160}}</p>
+                <button class="primary">Edit Blog</button>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </body>
+</html>
