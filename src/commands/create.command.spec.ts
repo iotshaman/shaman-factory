@@ -100,6 +100,14 @@ describe('CreateCommand', () => {
     let subject = new CreateCommand();
     subject.run("sample").then(() => done());
   });
+  
+  it('CreateJsonPackage should inject config scripts', () => {
+    let config = {
+      scripts: { build: "tsc" }
+    }
+    let result = CreateJsonPackage("sample", config);
+    expect(result.scripts.build).to.equal("tsc");
+  });
 
   it('CreateJsonPackage should inject config dependencies', () => {
     let config = {
@@ -108,7 +116,7 @@ describe('CreateCommand', () => {
       }
     }
     let result = CreateJsonPackage("sample", config);
-    expect(result.dependencies.express).to.equal("4.17.1")
+    expect(result.dependencies.express).to.equal("4.17.1");
   });
 
   it('CreateJsonPackage should inject config devDependencies', () => {
@@ -118,7 +126,15 @@ describe('CreateCommand', () => {
       }
     }
     let result = CreateJsonPackage("sample", config);
-    expect(result.devDependencies['@types/express']).to.equal("4.17.7")
+    expect(result.devDependencies['@types/express']).to.equal("4.17.7");
+  });
+  
+  it('CreateJsonPackage should inject config version', () => {
+    let config = {
+      version: "1.0.1"
+    }
+    let result = CreateJsonPackage("sample", config);
+    expect(result.version).to.equal("1.0.1");
   });
   
   it('CreateJsonPackage should inject config description', () => {
@@ -126,7 +142,7 @@ describe('CreateCommand', () => {
       description: "test description"
     }
     let result = CreateJsonPackage("sample", config);
-    expect(result.description).to.equal("test description")
+    expect(result.description).to.equal("test description");
   });
 
 });

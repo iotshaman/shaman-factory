@@ -39,7 +39,7 @@ export class ListenCommand implements ICommand {
       let path = _path.join(process.cwd(), this.path);
       if (_path.isAbsolute(this.path)) path = this.path;
       console.log(`Compiling website at location '${path}'...`);
-      _cmd.exec(`${this.npm} start`, {cwd: path}, function(ex, _stdout, stderr) {
+      _cmd.exec(`node index.js --prod`, {cwd: path}, function(ex, _stdout, stderr) {
         if (ex) return err(ex);
         if (stderr) console.log(stderr);
         console.log('Compilation complete.');

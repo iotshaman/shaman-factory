@@ -9,7 +9,7 @@
 
 ## Quick Start
 
-Open a terminal and navigate to the folder where you wish to create your website. The, enter the following commands (replacing `my-website` with the name of your website):
+Open a terminal and navigate to the folder where you wish to create your website. Then, enter the following commands (replacing `my-website` with the name of your website):
 
 ```sh
 npm i -g shaman-factory
