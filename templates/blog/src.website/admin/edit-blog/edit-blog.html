@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>Edit Blog - {{model.title}}</title>
+    {{> partials/metadata.partial.html }}
+    {{> partials/fontawesome.partial.html }}
+    {{{bundles model.shaman.bundles}}}
+  </head>
+  <body>
+    {{> partials/admin-header.partial.html }}
+    <input id="filename" type="hidden" value="{{model.filename}}" />
+    <div class="container top" id="blog">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="header-text">
+            Edit Blog - {{model.title}}
+          </div>
+          <div class="header-buttons">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" 
+                id="btnBlogOptions" data-toggle="dropdown" 
+                aria-haspopup="true" aria-expanded="false">
+                Menu
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnBlogOptions">
+                <a id="btnExit" class="dropdown-item" href="javascript:void(0)">Exit</a>
+                <a id="btnSave" class="dropdown-item" href="javascript:void(0)">Save</a>
+                <a id="btnPreview" class="dropdown-item" href="javascript:void(0)">Preview</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Title</label>
+                <input class="form-control fw" type="text" name="title" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Description</label>
+                <input class="form-control fw" type="text" name="description" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Author</label>
+                <input class="form-control fw" type="text" name="author" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Image</label>
+                <input class="form-control fw" type="text" name="image" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label>Content</label>
+                <textarea class="form-control fw" name="text"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

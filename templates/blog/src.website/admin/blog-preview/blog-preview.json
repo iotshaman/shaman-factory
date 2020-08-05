@@ -1,18 +1,18 @@
 {
-  "title": "Blog Panel - Shaman Factory Blog",
+  "title": "Blog Preview",
   "shaman": {
     "bundles": [
       {
-        "name": "blog-panel.styles.bundle",
+        "name": "blog-preview.scripts.bundle",
         "type": "css",
         "files": [
-          "styles/bootstrap-grid.css",
-          "styles/card.css",
-          "styles/main.css"
+          "styles/main.css",
+          "styles/prism.theme.css",
+          "styles/markdown.css"
         ]
       },
       {
-        "name": "blog-panel.scripts.bundle",
+        "name": "blog-preview.scripts.bundle",
         "type": "js",
         "files": [
           "scripts/admin.js",
@@ -21,7 +21,8 @@
           "scripts/backbone.js",
           "scripts/index.js",
           "admin/services/blog.service.js",
-          "admin/blog-panel.js"
+          "admin/blog-preview/blog-preview.js",
+          "scripts/prism.js"
         ]
       }
     ]

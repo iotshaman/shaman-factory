@@ -1,0 +1,40 @@
+{
+  "shaman": {
+    "dynamic": {
+      "path": "admin/edit-blog/",
+      "name": "filename"
+    },
+    "query": [{
+      "path": "blogs",
+      "dynamic": true,
+      "args": ["*"]
+    }],
+    "bundles": [
+      {
+        "name": "edit-blog.styles.bundle",
+        "type": "css",
+        "files": [
+          "styles/bootstrap.css",
+          "styles/card.css",
+          "styles/main.css"
+        ]
+      },
+      {
+        "name": "edit-blog.scripts.bundle",
+        "type": "js",
+        "files": [
+          "scripts/underscore.js",
+          "scripts/admin.js",
+          "scripts/jquery.js",
+          "scripts/popper.js",
+          "scripts/bootstrap.js",
+          "scripts/underscore.js",
+          "scripts/backbone.js",
+          "scripts/index.js",
+          "admin/edit-blog/edit-blog.js",
+          "admin/services/blog.service.js"
+        ]
+      }
+    ]
+  }
+}

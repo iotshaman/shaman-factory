@@ -21,6 +21,9 @@ export class BlogController extends ControllerBase {
     this.router = Router();
     this.router
       .get('/', this.getAllBlogs)
+      .get('/:filename', this.getBlog)
+      .put('/', this.addBlog)
+      .post('/', this.updateBlog)
 
     this.app.use('/api/blog', this.router);
   }
@@ -28,6 +31,24 @@ export class BlogController extends ControllerBase {
   getAllBlogs = (_req: Request, res: Response, next: any) => {
     this.blogService.getAllBlogs()
       .then(blogs => res.json(blogs))
+      .catch((ex: Error) => next(new RouteError(ex.message, 400)));
+  }
+
+  getBlog = (req: Request, res: Response, next: any) => {
+    this.blogService.getBlog(req.params['filename'])
+      .then(blog => res.json(blog))
+      .catch((ex: Error) => next(new RouteError(ex.message, 400)));
+  }
+
+  addBlog = (req: Request, res: Response, next: any) => {
+    this.blogService.addBlog(req.body)
+      .then(blog => res.json(blog))
+      .catch((ex: Error) => next(new RouteError(ex.message, 400)));
+  }
+
+  updateBlog = (req: Request, res: Response, next: any) => {
+    this.blogService.updateBlog(req.body)
+      .then(blog => res.json(blog))
       .catch((ex: Error) => next(new RouteError(ex.message, 400)));
   }
 
