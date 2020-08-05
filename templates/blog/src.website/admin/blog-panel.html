@@ -7,6 +7,17 @@
   </head>
   <body>
     {{> partials/admin-header.partial.html }}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">  
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <button class="btn btn-outline-success my-2 my-sm-0" 
+            data-toggle="modal" data-target="#addBlogModal">
+            <i class="fas fa-plus"></i> 
+            Add Blog
+          </button>
+        </li>
+      </ul>
+    </nav>
     <div class="container-fluid top">
       <div class="row" id="blogs">
         <!-- WILL BE REPLACED WITH BLOG CARDS -->
@@ -20,13 +31,43 @@
             <small>By <%= author %>, <%= displayDate %></small>
             <br />
             <p><%= description %></p>
-            <button class="primary"
-              onclick="location.href='/admin/edit-blog/<%= filename %>'">
+            <button class="btn btn-primary"
+              onclick="location.href='/admin/edit-blog/edit-blog.html?name=<%= filename %>'">
               Edit Blog
+            </button>
+            <button class="btn btn-danger" onclick="deleteBlog('<%= filename %>')">
+              Delete Blog
             </button>
           </div>
         </div>
       </div>          
     </script>
+    <div class="modal fade" id="addBlogModal" tabindex="-1" role="dialog" 
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Blog</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Blog Name</label>
+              <input class="form-control fw" type="text" name="blog-name" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" onclick="createBlog()">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

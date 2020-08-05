@@ -15,7 +15,11 @@
                 style="background-image: url({{this.image}})"></a>  
               <div class="content">
                 <h2>{{this.title}}</h2>
-                <small>By {{this.author}}, {{date this.date ''}}</small>
+                {{#if this.modifiedDate}}
+                <small>By {{this.author}}, {{date this.modifiedDate ''}}</small>
+                {{else}}
+                <small>By {{this.author}}, {{date this.createdDate ''}}</small>
+                {{/if}}
                 <br />
                 <p>{{truncate this.description 160}}</p>
               </div>

@@ -1,14 +1,5 @@
 {
   "shaman": {
-    "dynamic": {
-      "path": "admin/edit-blog/",
-      "name": "filename"
-    },
-    "query": [{
-      "path": "blogs",
-      "dynamic": true,
-      "args": ["*"]
-    }],
     "bundles": [
       {
         "name": "edit-blog.styles.bundle",

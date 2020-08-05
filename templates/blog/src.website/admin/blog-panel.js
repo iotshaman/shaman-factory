@@ -12,9 +12,29 @@ const BlogPanelView = Backbone.View.extend({
 });
 
 $(document).ready(function() {
+  loadBlogCards();
+});
+
+function loadBlogCards() {
   BlogService.GetAllBlogs().then(blogs => {
     let blogModels = blogs.map(blog => new BlogModel(blog));
     let collection = new BlogCollection(blogModels);
     new BlogPanelView({collection: collection});
   });
-});
+}
+
+function createBlog() {
+  let title = $('input[name="blog-name"]').val();
+  if (!title) {
+    alert('Please provide a title.');
+    return;
+  }
+  BlogService.AddBlog(title)
+    .then(rslt => location.href=`/admin/edit-blog/edit-blog.html?name=${rslt.filename}`)
+}
+
+function deleteBlog(filename) {
+  if (confirm("Are you sure you want to delete this blog?")) {
+    BlogService.DeleteBlog(filename).then(_ => loadBlogCards());
+  }  
+}

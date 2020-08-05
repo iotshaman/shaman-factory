@@ -4,9 +4,9 @@
     "query": [{
       "name": "recentBlogs",
       "path": "blogs",
-      "args": ["*"],
+      "args": ["published", true],
       "limit": 10,
-      "sort": { "key": "date", "descending": true }
+      "sort": { "key": "createdDate", "descending": true }
     }],
     "bundles": [
       {

@@ -9,17 +9,32 @@ export class Blog {
   author: string;
   text: string;
   html: string;
-  date: string;
-  displayDate: string;
   image: string;
   published: boolean;
+  createdDate: string;
+  modifiedDate: string;
+  displayDate: string;
 
-  constructor(obj: Blog = null) {
+  constructor(obj: any = null) {
     if (obj) Object.assign(this, obj);
-    this.setDisplayDate(this.date);
+    if (!this.description) this.description = '';
+    if (!this.author) this.author = 'N/A';
+    if (!this.text) this.text = '';
+    if (!this.html) this.html = '';
+    if (!this.image) this.image = '/images/shaman-factory.png';
+    if (!this.published) this.published = false;
+    this.setCreatedDate(this.createdDate);
+    this.setModifiedDate(this.modifiedDate);
   }
 
-  setDisplayDate(date: string): void {
+  setCreatedDate(date: string): void {
+    if (date) this.createdDate = date;
+    else this.createdDate = (new Date()).toISOString();
+    this.displayDate = _moment(date).format('MMMM Do YYYY');
+  }
+
+  setModifiedDate(date: string): void {
+    this.modifiedDate = date;
     if (!date) return;
     this.displayDate = _moment(date).format('MMMM Do YYYY');
   }

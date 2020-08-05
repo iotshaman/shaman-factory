@@ -24,6 +24,7 @@ export class BlogController extends ControllerBase {
       .get('/:filename', this.getBlog)
       .put('/', this.addBlog)
       .post('/', this.updateBlog)
+      .delete('/:filename', this.deleteBlog)
 
     this.app.use('/api/blog', this.router);
   }
@@ -41,7 +42,7 @@ export class BlogController extends ControllerBase {
   }
 
   addBlog = (req: Request, res: Response, next: any) => {
-    this.blogService.addBlog(req.body)
+    this.blogService.addBlog(req.body.title)
       .then(blog => res.json(blog))
       .catch((ex: Error) => next(new RouteError(ex.message, 400)));
   }
@@ -49,6 +50,12 @@ export class BlogController extends ControllerBase {
   updateBlog = (req: Request, res: Response, next: any) => {
     this.blogService.updateBlog(req.body)
       .then(blog => res.json(blog))
+      .catch((ex: Error) => next(new RouteError(ex.message, 400)));
+  }
+
+  deleteBlog = (req: Request, res: Response, next: any) => {
+    this.blogService.deleteBlog(req.params['filename'])
+      .then(_ => res.status(204).send())
       .catch((ex: Error) => next(new RouteError(ex.message, 400)));
   }
 

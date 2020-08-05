@@ -14,6 +14,16 @@ const BlogService = {
       .then(catchFetchError)
       .then(rslt => rslt.json())
   },
+  AddBlog: function(title) {
+    let options = { 
+      method: 'PUT', 
+      body: JSON.stringify({title}),
+      headers: BlogService.headers
+    }
+    return fetch(`${BlogService.apiBaseUri}/blog`, options)
+      .then(catchFetchError)
+      .then(rslt => rslt.json())
+  },
   UpdateBlog: function(blog) {
     let options = { 
       method: 'POST', 
@@ -23,5 +33,14 @@ const BlogService = {
     return fetch(`${BlogService.apiBaseUri}/blog`, options)
       .then(catchFetchError)
       .then(rslt => rslt.json())
-  }
+  },
+  DeleteBlog: function(filename) {
+    let options = { 
+      method: 'DELETE',
+      headers: BlogService.headers
+    }
+    return fetch(`${BlogService.apiBaseUri}/blog/${filename}`, options)
+      .then(catchFetchError)
+      .then(_ => (null))
+  },
 }

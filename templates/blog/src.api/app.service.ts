@@ -4,13 +4,15 @@ import { GenerateConfig } from "./config.factory";
 
 process.title = "blog-api";
 
-let config = GenerateConfig();
-Configure(config)
-  .then(IoC => {
-    let apiService = IoC.get<IApiService>(TYPES.ApiService);
-    return apiService.startApplication();
-  })
-  .catch(ex => {
-    console.dir(ex);
-    process.exit(1);
-  });
+export function AppService(website) {
+  let config = GenerateConfig();
+  Configure(config, website)
+    .then(IoC => {
+      let apiService = IoC.get<IApiService>(TYPES.ApiService);
+      return apiService.startApplication();
+    })
+    .catch(ex => {
+      console.dir(ex);
+      process.exit(1);
+    });
+}

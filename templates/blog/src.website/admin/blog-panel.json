@@ -6,7 +6,7 @@
         "name": "blog-panel.styles.bundle",
         "type": "css",
         "files": [
-          "styles/bootstrap-grid.css",
+          "styles/bootstrap.css",
           "styles/card.css",
           "styles/main.css"
         ]
@@ -17,6 +17,8 @@
         "files": [
           "scripts/admin.js",
           "scripts/jquery.js",
+          "scripts/popper.js",
+          "scripts/bootstrap.js",
           "scripts/underscore.js",
           "scripts/backbone.js",
           "scripts/index.js",

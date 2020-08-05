@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import * as _path from 'path';
 import { Container } from "inversify";
+import { Website } from 'shaman-website-compiler';
 import { WebsiteContext } from "../models/website.context";
 import { IAppConfig } from "../models/app.config";
 import { ILogger, Logger } from "../logger";
@@ -10,8 +11,8 @@ import { IAuthService, AuthService } from "../services/auth.service";
 
 export const IoC = new Container();
 
-export function Configure(config: IAppConfig): Promise<Container> {
-  return configureServices(config)
+export function Configure(config: IAppConfig, website: Website): Promise<Container> {
+  return configureServices(config, website)
     .then(_ => configureDatabase(config));
 }
 
@@ -22,8 +23,9 @@ function configureDatabase(config: IAppConfig): Promise<Container> {
   return websiteContext.initialize().then(_ => IoC);
 }
 
-function configureServices(config: IAppConfig): Promise<Container> {
+function configureServices(config: IAppConfig, website: Website): Promise<Container> {
   IoC.bind<IAppConfig>(TYPES.AppConfig).toConstantValue(config);
+  IoC.bind<Website>(TYPES.Website).toConstantValue(website);
   IoC.bind<ILogger>(TYPES.Logger).to(Logger);
   IoC.bind<IApiService>(TYPES.ApiService).to(ApiService);
   IoC.bind<IAuthService>(TYPES.AuthService).to(AuthService);
@@ -33,6 +35,7 @@ function configureServices(config: IAppConfig): Promise<Container> {
 
 const TYPES = {
   AppConfig: "AppConfig",
+  Website: "Website",
   Logger: "Logger",
   WebsiteContext: "WebsiteContext",
   ApiService: "ApiService",

@@ -42,7 +42,13 @@ const BlogView = Backbone.View.extend({
 $(document).ready(function() {
   let model = new BlogModel();
   new BlogView({model});
-  BlogService.GetBlog($('#filename').val()).then(blog => {
+
+  var params = getQueryParams();
+  if (!params.name) {
+    alert('Blog name not provided.');
+    return;
+  }
+  BlogService.GetBlog(params.name).then(blog => {
     model.set(blog);
   });
 });
