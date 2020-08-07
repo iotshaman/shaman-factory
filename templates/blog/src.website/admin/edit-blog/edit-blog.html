@@ -1,18 +1,19 @@
 <html>
   <head>
-    <title>Edit Blog - {{model.title}}</title>
+    <title>Edit Blog</title>
     {{> partials/metadata.partial.html }}
     {{> partials/fontawesome.partial.html }}
     {{{bundles model.shaman.bundles}}}
   </head>
   <body>
     {{> partials/admin-header.partial.html }}
+    {{> partials/sidebar.partial.html }}
     <input id="filename" type="hidden" value="{{model.filename}}" />
     <div class="container top" id="blog">
       <div class="panel">
         <div class="panel-header">
           <div class="header-text">
-            Edit Blog - {{model.title}}
+            Edit Blog - <span id="blog_title"></span>
           </div>
           <div class="header-buttons">
             <div class="dropdown">
@@ -47,14 +48,23 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>Author</label>
-                <input class="form-control fw" type="text" name="author" />
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
                 <label>Image</label>
                 <input class="form-control fw" type="text" name="image" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Tags</label>
+                <input class="form-control fw" type="text" name="tags" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Status</label>
+                <select id="sl_status" class="form-control fw" name="status">
+                  <option value="false">Not Published</option>
+                  <option value="true">Published</option>
+                </select>
               </div>
             </div>
           </div>

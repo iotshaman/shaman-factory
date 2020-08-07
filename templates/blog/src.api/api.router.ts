@@ -5,6 +5,7 @@ import { ILogger } from './logger';
 import { HealthCheckController } from './controllers/health/health-check.controller';
 import { BlogController } from './controllers/blog/blog.controller';
 import { LoginController } from './controllers/login/login.controller';
+import { UserController } from './controllers/user/user.controller';
 
 export class ApiRouter {
 
@@ -26,6 +27,7 @@ export class ApiRouter {
     this.controllers.push(new HealthCheckController(this.app));
     this.controllers.push(new LoginController(this.app));
     this.controllers.push(new BlogController(this.app));
+    this.controllers.push(new UserController(this.app));
   }
 
   private loadErrorHandlers = () => {

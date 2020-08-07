@@ -19,3 +19,21 @@ The default template is a really simple, bare-bones template that showcases some
 - Includes 2 [partial files](https://github.com/iotshaman/shaman-website-compiler#handlebars-partials) that can be reused in any template page.
 - The index.html page includes 2 [files bundles](https://github.com/iotshaman/shaman-website-compiler#bundles), which are combined into 1 file by the compiler, making your website faster and improves SEO score. The exported style bundle is also used in the blog.html file.
 - The default template is configured to be in development mode by default. If you use this template to build a production website, make sure to change the "production" value to "true" in your *website.json* configuration file. 
+
+### Blog Template
+
+```sh
+factory create [name] blog
+```
+
+The blog template is a full-featured website to fascilitate one thing, and one thing only, and that is creating and publishing blog content. There are two user interface components to this system (public / private), as well as one back-end API component. The blog template is created from the default template, and add additional features.
+
+#### User Interface
+- The public facing component of the user interface contains a splash-page with blog data listed in cards. For each blog there is also a full HTML page, which can be accessed by clicking the blog card.
+- There is also a private facing component to the user interface, which requires users to login. The default email address is 'contact@iotshaman.com' and the default password is 'test'. You can change the default user in the json-repo database file, but will need to use the admin panel interface to change passwords.
+- Once you have logged into the private interface section, you can use the site navigation menu (click button in top-right) to navigate to either the blog management page, or the user management page.
+- When blog content is updated in the private section, the website will be re-compiled.
+
+#### API Server
+- The API server is built using Typescript and is responsible for handling requests to manage blog / user content. 
+- All requests to the API require an access token, which is generated when a user logs in. The access token will expire after 2 days and will require the user to re-login. 

@@ -6,11 +6,11 @@ import { IoC, TYPES } from '../composition/app.composition';
 import { IAppConfig } from '../models/app.config';
 import { WebsiteContext } from '../models/website.context';
 import { User } from '../models/user';
+import { AccessToken } from '../models/access-token';
 
 export interface IAuthService {
   login: (email: string, password: string) => Promise<string>;
-  addUser: (email: string, password: string) => Promise<void>;
-  verifyToken: (accessToken: string) => boolean;
+  verifyToken: (accessToken: string) => AccessToken;
 }
 
 @injectable()
@@ -34,22 +34,15 @@ export class AuthService implements IAuthService {
     });
   }
 
-  addUser = (email: string, password: string): Promise<void> => {
-    let newUser = new User();
-    newUser.email = email;
-    newUser.passwordHash = _bcrypt.hashSync(password, _bcrypt.genSaltSync(8), null);
-    this.context.models.users.add(email, newUser);
-    return this.context.saveChanges();
-  }
-
-  verifyToken = (accessToken: string): boolean => {
-    verify(accessToken, this.config.jwtSecret);
-    return true;
+  verifyToken = (accessToken: string): AccessToken => {
+    let token = verify(accessToken, this.config.jwtSecret);
+    return new AccessToken(token);
   }
 
   private getAccessToken = (user: User): string => {
     let token = {
-      email: user.email
+      email: user.email,
+      name: user.name
     }
     return sign(token, this.config.jwtSecret);
   }

@@ -53,52 +53,14 @@ header .site-buttons button {
 header .site-buttons button:hover {
   opacity: .8;
 }
-
-/* FORMS */
-.form-group label {
-  font-weight: bold;
-}
-.form-group input.form-control {
-  font-size: 14px;
-  color: #333;
-  background: #fff;
-  padding: .429em;
-  margin-bottom: 20px;
-  border: 1px solid #a6a6a6;
-  font-family: "Open Sans","Helvetica Neue",sans-serif;
-  transition: border-color .2s;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-.form-group textarea {
-  min-height: 400px;
-}
-
-/* PANEL */
-.panel {
-  border: 1px solid #333;
-  margin-bottom: 35px;
-}
-.panel .panel-header {
-  background: #333333;
-  color: white;
-  font-size: 1.4em;
-}
-.panel .panel-header .header-text {
-  display: inline-block;
-  padding: 20px 10px;
-}
-.panel .panel-header .header-buttons {
+header .navigation-menu {
   float: right;
-  padding: 10px 10px;
 }
-.panel .panel-header .header-buttons .dropdown {
-  padding: 5px;
+header .navigation-menu .header-button {
+  padding: 18px 25px;
 }
-.panel .panel-body {
-  background: white;
-  padding: 20px 15px;
+header .navigation-menu .header-button i {
+  font-size: 1.5em;
 }
 
 /* BUTTONS */

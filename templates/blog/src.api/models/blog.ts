@@ -11,6 +11,7 @@ export class Blog {
   html: string;
   image: string;
   published: boolean;
+  tags: string;
   createdDate: string;
   modifiedDate: string;
   displayDate: string;
@@ -23,6 +24,7 @@ export class Blog {
     if (!this.html) this.html = '';
     if (!this.image) this.image = '/images/shaman-factory.png';
     if (!this.published) this.published = false;
+    if (!this.tags) this.tags = '';
     this.setCreatedDate(this.createdDate);
     this.setModifiedDate(this.modifiedDate);
   }

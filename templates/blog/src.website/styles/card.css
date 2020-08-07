@@ -57,6 +57,7 @@
 .card .content p {
   font-family: Merriweather,Georgia,"Times New Roman",serif;
   font-weight: 300;
+  margin-top: 15px;
 }
 @media(max-width: 1599px) {
   .card a.cover {

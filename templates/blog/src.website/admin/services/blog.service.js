@@ -1,16 +1,19 @@
 const BlogService = {
-  apiBaseUri: 'http://192.168.0.33:3001/api',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
   GetAllBlogs: function() {
-    return fetch(`${BlogService.apiBaseUri}/blog`)
+    let options = {
+      method: 'GET',
+      headers: AdminService.GetHeaders()
+    }
+    return fetch(`${AdminService.apiBaseUri}/blog`, options)
       .then(catchFetchError)
       .then(rslt => rslt.json());
   },
   GetBlog: function(filename) {
-    return fetch(`${BlogService.apiBaseUri}/blog/${filename}`)
+    let options = {
+      method: 'GET',
+      headers: AdminService.GetHeaders()
+    }
+    return fetch(`${AdminService.apiBaseUri}/blog/${filename}`, options)
       .then(catchFetchError)
       .then(rslt => rslt.json())
   },
@@ -18,9 +21,9 @@ const BlogService = {
     let options = { 
       method: 'PUT', 
       body: JSON.stringify({title}),
-      headers: BlogService.headers
+      headers: AdminService.GetHeaders()
     }
-    return fetch(`${BlogService.apiBaseUri}/blog`, options)
+    return fetch(`${AdminService.apiBaseUri}/blog`, options)
       .then(catchFetchError)
       .then(rslt => rslt.json())
   },
@@ -28,18 +31,18 @@ const BlogService = {
     let options = { 
       method: 'POST', 
       body: JSON.stringify(blog),
-      headers: BlogService.headers
+      headers: AdminService.GetHeaders()
     }
-    return fetch(`${BlogService.apiBaseUri}/blog`, options)
+    return fetch(`${AdminService.apiBaseUri}/blog`, options)
       .then(catchFetchError)
       .then(rslt => rslt.json())
   },
   DeleteBlog: function(filename) {
     let options = { 
       method: 'DELETE',
-      headers: BlogService.headers
+      headers: AdminService.GetHeaders()
     }
-    return fetch(`${BlogService.apiBaseUri}/blog/${filename}`, options)
+    return fetch(`${AdminService.apiBaseUri}/blog/${filename}`, options)
       .then(catchFetchError)
       .then(_ => (null))
   },

@@ -35,7 +35,7 @@ export class ApiService implements IApiService {
     this.app.use(cors({
       credentials: true, 
       methods: 'GET,POST,PUT,DELETE',
-      allowedHeaders: 'Content-Type,Data-Type,x-drive-uuid,x-folder-path',
+      allowedHeaders: 'Content-Type,Data-Type,Authorization',
     }));
     this.router = new ApiRouter(this.app);
   }
@@ -44,7 +44,7 @@ export class ApiService implements IApiService {
     return new Promise((res) => {
       if (this.serverStarted) return res();
       this.app.listen(this.config.port, () => {
-        this.logger.log(`Express server listening on port ${this.config.port}`);
+        this.logger.log(`Content server listening on port ${this.config.port}`);
         this.serverStarted = true;
         res();
       })

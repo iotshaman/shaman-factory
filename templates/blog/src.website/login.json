@@ -8,7 +8,8 @@
         "files": [
           "styles/bootstrap-grid.css",
           "styles/login.css",
-          "styles/main.css"
+          "styles/main.css",
+          "styles/admin.css"
         ]
       },
       {

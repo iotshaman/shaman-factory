@@ -5,16 +5,20 @@ const BlogView = Backbone.View.extend({
     'input': 'onInput',
     'click #btnExit': 'exit',
     'click #btnSave': 'save',
-    'click #btnPreview': 'preview'
+    'click #btnPreview': 'preview',
+    'change #sl_status': 'onChangeStatus'
   },
   initialize: function() {
     this.model.on('change', this.render, this);
   },
   render: function() {
+    let published = this.model.get('published');
+    $('#blog_title').html(this.model.get('title'));
     $('input[name="title"]').val(this.model.get('title'));
     $('input[name="description"]').val(this.model.get('description'));
-    $('input[name="author"]').val(this.model.get('author'));
+    $('select[name="status"]').val(published ? 'true' : 'false');
     $('input[name="image"]').val(this.model.get('image'));
+    $('input[name="tags"]').val(this.model.get('tags'));
     $('textarea[name="text"]').val(this.model.get('text'));
   },
   onInput: function(e) {
@@ -36,6 +40,11 @@ const BlogView = Backbone.View.extend({
     let filename = this.model.get('filename');
     let previewUrl = `/admin/blog-preview/blog-preview.html?name=${filename}`;
     window.open(previewUrl, true);
+  },
+  onChangeStatus: function(e) {
+    var val = $('select[name="status"]').val();
+    let published = val == 'true' ? true : false;
+    this.model.set({published}, {silent: true});
   }
 });
 

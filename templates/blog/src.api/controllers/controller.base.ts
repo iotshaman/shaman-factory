@@ -1,4 +1,4 @@
-import { Request, Response, Application, Router } from "express";
+import { Request, Response } from "express";
 import { injectable } from "inversify";
 import { IAuthService } from "../services/auth.service";
 import { IoC, TYPES } from "../composition/app.composition";
@@ -13,15 +13,23 @@ export class ControllerBase {
     this.authService = IoC.get<IAuthService>(TYPES.AuthService);
   }
 
-  protected authorize = (req: Request, res: Response, next: any): void => {
-    let token: string = <string>req.headers['authorization'];
-    if (!token) return this.notAuthorized("Auth token not provided", res);
-    if (!this.authService.verifyToken(token)) return this.notAuthorized("Invalid token", res);
+  protected authorize = (req: Request, _res: Response, next: any): void => {
+    let token: string = req.get('Authorization');
+    if (!token) return this.notAuthorized("Auth token not provided", next);
+    if (token.substring(0, 6) != "Bearer") 
+      return this.notAuthorized("Invalid authorization type", next);
+    try {
+      token = token.substring(7);
+      let accessToken = this.authService.verifyToken(token);
+      req['_token'] = accessToken;
+    } catch(_ex) {
+      return this.notAuthorized("Invalid token", next);
+    }
     next();
   }
 
-  private notAuthorized = (msg: string, res: Response) => {
-    res.status(401).send(msg);
+  private notAuthorized = (msg: string, next: any) => {
+    next(new RouteError(msg, 401))
   }
 
 }

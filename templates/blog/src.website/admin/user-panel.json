@@ -1,8 +1,9 @@
 {
+  "title": "User Panel - Shaman Factory Blog",
   "shaman": {
     "bundles": [
       {
-        "name": "edit-blog.styles.bundle",
+        "name": "user-panel.styles.bundle",
         "type": "css",
         "files": [
           "styles/bootstrap.css",
@@ -12,10 +13,9 @@
         ]
       },
       {
-        "name": "edit-blog.scripts.bundle",
+        "name": "user-panel.scripts.bundle",
         "type": "js",
         "files": [
-          "scripts/underscore.js",
           "scripts/admin.js",
           "scripts/jquery.js",
           "scripts/popper.js",
@@ -23,9 +23,9 @@
           "scripts/underscore.js",
           "scripts/backbone.js",
           "scripts/index.js",
-          "admin/edit-blog/edit-blog.js",
+          "admin/user-panel.js",
           "admin/services/admin-service.js",
-          "admin/services/blog.service.js"
+          "admin/services/user.service.js"
         ]
       }
     ]

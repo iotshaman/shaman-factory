@@ -6,9 +6,11 @@
         "name": "blog-preview.scripts.bundle",
         "type": "css",
         "files": [
+          "styles/bootstrap.css",
           "styles/main.css",
           "styles/prism.theme.css",
-          "styles/markdown.css"
+          "styles/markdown.css",
+          "styles/admin.css"
         ]
       },
       {
@@ -17,10 +19,13 @@
         "files": [
           "scripts/admin.js",
           "scripts/jquery.js",
+          "scripts/popper.js",
+          "scripts/bootstrap.js",
           "scripts/underscore.js",
           "scripts/backbone.js",
           "scripts/index.js",
           "admin/services/blog.service.js",
+          "admin/services/admin-service.js",
           "admin/blog-preview/blog-preview.js",
           "scripts/prism.js"
         ]

@@ -8,7 +8,8 @@
         "files": [
           "styles/bootstrap.css",
           "styles/card.css",
-          "styles/main.css"
+          "styles/main.css",
+          "styles/admin.css"
         ]
       },
       {
@@ -22,8 +23,9 @@
           "scripts/underscore.js",
           "scripts/backbone.js",
           "scripts/index.js",
-          "admin/services/blog.service.js",
-          "admin/blog-panel.js"
+          "admin/blog-panel.js",
+          "admin/services/admin-service.js",
+          "admin/services/blog.service.js"
         ]
       }
     ]

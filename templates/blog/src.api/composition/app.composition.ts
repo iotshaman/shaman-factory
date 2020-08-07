@@ -8,6 +8,7 @@ import { ILogger, Logger } from "../logger";
 import { IApiService, ApiService } from "../api.service";
 import { IBlogService, BlogService } from "../services/blog.service";
 import { IAuthService, AuthService } from "../services/auth.service";
+import { IUserService, UserService } from "../services/user.service";
 
 export const IoC = new Container();
 
@@ -30,6 +31,7 @@ function configureServices(config: IAppConfig, website: Website): Promise<Contai
   IoC.bind<IApiService>(TYPES.ApiService).to(ApiService);
   IoC.bind<IAuthService>(TYPES.AuthService).to(AuthService);
   IoC.bind<IBlogService>(TYPES.BlogService).to(BlogService);
+  IoC.bind<IUserService>(TYPES.UserService).to(UserService);
   return Promise.resolve(IoC);
 }
 
@@ -41,7 +43,8 @@ const TYPES = {
   ApiService: "ApiService",
   ApiRouter: "ApiRouter",
   AuthService: "AuthService",
-  BlogService: "BlogService"
+  BlogService: "BlogService",
+  UserService: "UserService"
 };
 
 export { TYPES };

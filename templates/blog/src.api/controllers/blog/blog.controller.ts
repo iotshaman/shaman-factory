@@ -20,6 +20,7 @@ export class BlogController extends ControllerBase {
   private configure = () => {
     this.router = Router();
     this.router
+      .use(this.authorize)
       .get('/', this.getAllBlogs)
       .get('/:filename', this.getBlog)
       .put('/', this.addBlog)
@@ -42,7 +43,8 @@ export class BlogController extends ControllerBase {
   }
 
   addBlog = (req: Request, res: Response, next: any) => {
-    this.blogService.addBlog(req.body.title)
+    let author = req['_token'].name;
+    this.blogService.addBlog(req.body.title, author)
       .then(blog => res.json(blog))
       .catch((ex: Error) => next(new RouteError(ex.message, 400)));
   }
