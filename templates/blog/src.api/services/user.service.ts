@@ -37,6 +37,7 @@ export class UserService implements IUserService {
     newUser.email = email;
     newUser.name = name;
     newUser.passwordHash = _bcrypt.hashSync(password, _bcrypt.genSaltSync(8), null);
+    newUser.temporaryPass = true;
     this.context.models.users.add(email, newUser);
     return this.context.saveChanges()
       .then(_ => this.context.models.users.find(email));

@@ -1,3 +1,4 @@
+import * as _moment from 'moment';
 import { Request, Response } from "express";
 import { injectable } from "inversify";
 import { IAuthService } from "../services/auth.service";
@@ -7,7 +8,7 @@ import { RouteError } from "../models/route-error";
 @injectable()
 export class ControllerBase {
 
-  private authService: IAuthService;
+  protected authService: IAuthService;
 
   constructor() {
     this.authService = IoC.get<IAuthService>(TYPES.AuthService);
@@ -21,6 +22,9 @@ export class ControllerBase {
     try {
       token = token.substring(7);
       let accessToken = this.authService.verifyToken(token);
+      if (_moment().utc().isAfter(_moment(accessToken.expires))) {
+        return next(new RouteError("Access token expired", 403));
+      }
       req['_token'] = accessToken;
     } catch(_ex) {
       return this.notAuthorized("Invalid token", next);
