@@ -1,6 +1,6 @@
 {
   "name": "shaman-factory",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Build high quality websites with minimal effort. Just start designing!",
   "main": "dist/index.js",
   "typings": "public_api.d.ts",
@@ -58,7 +58,8 @@
       "**/*.js",
       "**/models/*.ts",
       "**/composition/*.ts",
-      "**/data/*.ts"
+      "**/data/*.ts",
+      "**/templates/*"
     ],
     "reporter": [
       "html",
