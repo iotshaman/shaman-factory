@@ -1,6 +1,6 @@
 ## Shaman Factory - IoT Shaman
 
-![Build Status](https://travis-ci.org/iotshaman/shaman-factory.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/iotshaman/shaman-factory/badge.svg?branch=master)](https://coveralls.io/github/iotshaman/shaman-factory?branch=master)
+![npm badge](https://img.shields.io/npm/v/shaman-factory.svg) ![Build Status](https://travis-ci.org/iotshaman/shaman-factory.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/iotshaman/shaman-factory/badge.svg?branch=master)](https://coveralls.io/github/iotshaman/shaman-factory?branch=master)
 
 ### Build high quality websites with minimal effort. Just start designing!
 
