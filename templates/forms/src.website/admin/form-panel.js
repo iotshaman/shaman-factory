@@ -33,7 +33,7 @@ function createForm() {
   }
   $('#addFormModal').modal('hide');
   FormService.AddForm(name, desc)
-    .then(rslt => location.href=`/admin/forms/edit-form.html?name=${rslt.name}`);
+    .then(rslt => location.href=`/admin/forms/edit-form.html?uuid=${rslt.uuid}`);
 }
 
 function deleteForm(name) {

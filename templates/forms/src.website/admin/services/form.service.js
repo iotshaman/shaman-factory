@@ -8,12 +8,12 @@ const FormService = {
       .then(catchFetchError)
       .then(rslt => rslt.json());
   },
-  GetForm: function(name) {
+  GetForm: function(uuid) {
     let options = {
       method: 'GET',
       headers: AdminService.GetHeaders()
     }
-    return fetch(`${apiBaseUri}/form/${name}`, options)
+    return fetch(`${apiBaseUri}/form/${uuid}`, options)
       .then(catchFetchError)
       .then(rslt => rslt.json())
   },
@@ -37,13 +37,41 @@ const FormService = {
       .then(catchFetchError)
       .then(rslt => rslt.json())
   },
-  DeleteForm: function(name) {
+  DeleteForm: function(uuid) {
     let options = { 
       method: 'DELETE',
       headers: AdminService.GetHeaders()
     }
-    return fetch(`${apiBaseUri}/form/${name}`, options)
+    return fetch(`${apiBaseUri}/form/${uuid}`, options)
       .then(catchFetchError)
       .then(_ => (null))
   },
+  GetAllFormSubmissions: function() {
+    let options = {
+      method: 'GET',
+      headers: AdminService.GetHeaders()
+    }
+    return fetch(`${apiBaseUri}/form/submissions`, options)
+      .then(catchFetchError)
+      .then(rslt => rslt.json());
+  },
+  GetFormSubmission: function(uuid) {
+    let options = {
+      method: 'GET',
+      headers: AdminService.GetHeaders()
+    }
+    return fetch(`${apiBaseUri}/form/submissions/${uuid}`, options)
+      .then(catchFetchError)
+      .then(rslt => rslt.json());
+  },
+  SubmitForm: function(form) {
+    let options = { 
+      method: 'POST', 
+      body: JSON.stringify(form),
+      headers: AdminService.GetHeaders()
+    }
+    return fetch(`${apiBaseUri}/form/submit`, options)
+      .then(catchFetchError)
+      .then(rslt => rslt.json())
+  }
 }

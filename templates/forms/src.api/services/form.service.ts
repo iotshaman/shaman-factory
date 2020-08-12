@@ -1,16 +1,21 @@
 import * as _bcrypt from 'bcryptjs';
+import { v4 } from 'uuid';
 import { injectable } from 'inversify';
 import { Website } from 'shaman-website-compiler';
 import { IoC, TYPES } from "../composition/app.composition";
 import { WebsiteContext } from '../models/website.context';
 import { Form } from '../models/form';
+import { FormSubmission } from '../models/form-submission';
 
 export interface IFormService {
   getAllForms: () => Promise<Form[]>;
-  getForm: (name: string) => Promise<Form>;
+  getForm: (uuid: string) => Promise<Form>;
   addForm: (uuid: string, name: string, description: string) => Promise<Form>;
   updateForm: (form: Form) => Promise<Form>;
-  deleteForm: (name: string) => Promise<void>;
+  deleteForm: (uuid: string) => Promise<void>;
+  getAllFormSubmissions: () => Promise<FormSubmission[]>;
+  getFormSubmission: (uuid: string) => Promise<FormSubmission>;
+  submitForm: (form: FormSubmission) => Promise<void>;
 }
 
 @injectable()
@@ -30,9 +35,9 @@ export class FormService implements IFormService {
     );
   }
 
-  getForm = (name: string): Promise<Form> => {
+  getForm = (uuid: string): Promise<Form> => {
     return Promise.resolve(
-      this.context.models.forms.find(name)
+      this.context.models.forms.find(uuid)
     )
   }
 
@@ -43,30 +48,45 @@ export class FormService implements IFormService {
     form.description = description;
     form.inputs = [];
     form.actions = [];
-    this.context.models.forms.add(name, form);
+    this.context.models.forms.add(uuid, form);
     return this.context.saveChanges()
-      .then(_ => this.context.models.forms.find(name));
+      .then(_ => this.context.models.forms.find(uuid));
   }
 
   updateForm = (form: Form): Promise<Form> => {
     return new Promise((res, ex) => {
-      this.context.models.forms.upsert(form.name, form)
+      this.context.models.forms.upsert(form.uuid, form)
       this.context.saveChanges()
         .then(_ => this.updateFormTemplates())
-        .then(_ => res(this.context.models.forms.find(form.name)))
+        .then(_ => res(this.context.models.forms.find(form.uuid)))
         .catch(err => ex(err));
     })
   }
 
-  deleteForm = (name: string): Promise<void> => {
-    return Promise.resolve(this.context.models.forms.delete(name))
-      .then(_ => this.context.saveChanges());
+  deleteForm = (uuid: string): Promise<void> => {
+    return Promise.resolve(this.context.models.forms.delete(uuid))
+      .then(_ => this.context.saveChanges())
+      .then(_ => this.updateFormTemplates());
   }
 
-  private updateFormTemplates = () => {
+  getAllFormSubmissions = (): Promise<FormSubmission[]> => {
+    return Promise.resolve(this.context.models.submissions.filter(f => !!f));
+  }
+
+  getFormSubmission = (uuid: string): Promise<FormSubmission> => {
+    return Promise.resolve(this.context.models.submissions.find(uuid));
+  }
+
+  submitForm = (form: FormSubmission): Promise<void> => {
+    form.uuid = v4();
+    return Promise.resolve(this.context.models.submissions.add(form.uuid, form))
+      .then(_ => this.context.saveChanges())
+  }
+
+  private updateFormTemplates = (): Promise<void> => {
     let templates = ['src.website/index.html'];
     let operations = templates.map(t => this.website.fileChanged(t));
-    return Promise.all(operations);
+    return Promise.all(operations).then(_ => (null));
   }
 
 }

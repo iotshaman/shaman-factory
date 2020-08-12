@@ -1,9 +1,11 @@
 const AdminService = {
   GetHeaders: function() {
-    return {
+    let header = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+      'Content-Type': 'application/json'
     }
+    let token = localStorage.getItem('accessToken');
+    if (token) header['Authorization'] = `Bearer ${token}`;
+    return header;
   }
 }

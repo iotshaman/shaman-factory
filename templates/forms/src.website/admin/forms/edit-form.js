@@ -1,12 +1,12 @@
 let formView;
 $(document).ready(function() {
   let params = getQueryParams();
-  if (!params.name) {
-    alert('Form name not provided.');
+  if (!params.uuid) {
+    alert('Form uuid not provided.');
     return;
   }
-  $('#form_name').val(params.name);
-  FormService.GetForm(params.name).then(form => {
+  $('#form_uuid').val(params.uuid);
+  FormService.GetForm(params.uuid).then(form => {
     formView = new FormView({model: new FormModel(form)})
   });
 });
@@ -17,6 +17,7 @@ const FormView = Backbone.View.extend({
   events: {
     'click #btnExit': 'exit',
     'click #btnAddFormInput': 'onClickAddFormInput',
+    'click #btnManageActions': 'onClickManageActions',
     'click .form-input': 'onClickEditFormInput'
   },
   initialize: function() {
@@ -72,6 +73,13 @@ const FormView = Backbone.View.extend({
     });
     if (this.addFormInputView) this.addFormInputView.dispose();
     this.addFormInputView = new AddFormInputView({model});
+  },
+  manageActionsView: null,
+  onClickManageActions: function() {
+    let actions = this.model.get('actions');
+    let model = new FormActionsModel({actions});
+    if (this.manageActionsView) this.manageActionsView.dispose();
+    this.manageActionsView = new ManageActionsView({model});
   }
 });
 
@@ -100,6 +108,8 @@ const AddFormInputView = Backbone.View.extend({
     type == 'input' ? $('#select_options').hide() : $('#select_options').show();
     let options = this.model.get('options');
     options.forEach(option => this._updateOptionList(option));
+    if (this.model.get('uuid')) $('#addFormInputModalLabel').html('Edit Form Input');
+    else $('#addFormInputModalLabel').html('Add Form Input')
   },
   onInput: function(e) {
     const name = $(e.target).attr('name');
@@ -124,10 +134,10 @@ const AddFormInputView = Backbone.View.extend({
     !uuid ? this.addFormInput() : this.editFormInput()
   },
   addFormInput: function() {
-    let name = $('#form_name').val();
+    let uuid = $('#form_uuid').val();
     let model = this.model.toJSON();
     model.uuid = uuidv4();
-    FormService.GetForm(name)
+    FormService.GetForm(uuid)
       .then(form => {
         form.inputs.push(model);
         return FormService.UpdateForm(form);
@@ -136,9 +146,9 @@ const AddFormInputView = Backbone.View.extend({
       .then(_ => $('#addFormInputModal').modal('hide'))
   },
   editFormInput: function() {
-    let name = $('#form_name').val();
+    let uuid = $('#form_uuid').val();
     let model = this.model.toJSON();
-    FormService.GetForm(name)
+    FormService.GetForm(uuid)
       .then(form => {
         let index = form.inputs.findIndex(i => i.uuid == model.uuid)
         form.inputs[index] = model;
@@ -149,9 +159,9 @@ const AddFormInputView = Backbone.View.extend({
   },
   deleteInput: function() {
     if (confirm('Are you sure you want to delete this input?')) {
-      let name = $('#form_name').val();
+      let uuid = $('#form_uuid').val();
       let model = this.model.toJSON();
-      FormService.GetForm(name)
+      FormService.GetForm(uuid)
         .then(form => {
           form.inputs = form.inputs.filter(i => i.uuid != model.uuid);
           return FormService.UpdateForm(form);
@@ -161,3 +171,42 @@ const AddFormInputView = Backbone.View.extend({
     }
   }
 });
+
+const FormActionsModel = Backbone.Model.extend({});
+const ManageActionsView = Backbone.View.extend({
+  el: '#manageActionsModel',
+  events: {
+    'click .btn-primary': 'saveChanges'
+  }, 
+  initialize: function() {
+    $(this.$el).modal('show');
+    this.render();
+  },
+  render: function() {
+    let actions = this.model.get('actions');
+    $('input[type="checkbox"]').prop("checked", false);
+    actions.forEach(action => {
+      $(`input[name="${action}"]`).prop("checked", true);
+    })
+  },
+  saveChanges: function() {
+    let actions = this._getActions();
+    let uuid = $('#form_uuid').val();
+    FormService.GetForm(uuid)
+      .then(form => {
+        form.actions = actions;
+        return FormService.UpdateForm(form);
+      })
+      .then(form => formView.reload(form))
+      .then(_ => $(this.$el).modal('hide'))
+  },
+  _getActions: function() {
+    let actions = [];
+    $('input[type="checkbox"]').each((_, cbx) => {
+      let elem = $(cbx);
+      let checked = elem.prop("checked");
+      if (checked) actions.push(elem.attr('name'));
+    });
+    return actions;
+  }
+})

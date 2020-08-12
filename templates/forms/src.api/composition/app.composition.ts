@@ -9,12 +9,16 @@ import { IApiService, ApiService } from "../api.service";
 import { IAuthService, AuthService } from "../services/auth.service";
 import { IUserService, UserService } from "../services/user.service";
 import { IFormService, FormService } from "../services/form.service";
+import { IFormAction } from "../services/form-actions/form-action";
+import { CreateTextFileAction } from "../services/form-actions/create-text-file.action";
+import { IFormActionService, FormActionService } from "../services/form-action.service";
 
 export const IoC = new Container();
 
 export function Configure(config: IAppConfig, website: Website): Promise<Container> {
   return configureServices(config, website)
-    .then(_ => configureDatabase(config));
+    .then(_ => configureDatabase(config))
+    .then(_ => configureFormActions())
 }
 
 function configureDatabase(config: IAppConfig): Promise<Container> {
@@ -32,6 +36,12 @@ function configureServices(config: IAppConfig, website: Website): Promise<Contai
   IoC.bind<IAuthService>(TYPES.AuthService).to(AuthService);
   IoC.bind<IUserService>(TYPES.UserService).to(UserService);
   IoC.bind<IFormService>(TYPES.FormService).to(FormService);
+  IoC.bind<IFormActionService>(TYPES.FormActionService).to(FormActionService);
+  return Promise.resolve(IoC);
+}
+
+function configureFormActions(): Promise<Container> {
+  IoC.bind<IFormAction>(TYPES.FormAction).to(CreateTextFileAction);
   return Promise.resolve(IoC);
 }
 
@@ -44,7 +54,9 @@ const TYPES = {
   ApiRouter: "ApiRouter",
   AuthService: "AuthService",
   UserService: "UserService",
-  FormService: "FormService"
+  FormService: "FormService",
+  FormActionService: "FormActionService",
+  FormAction: "FormAction"
 };
 
 export { TYPES };

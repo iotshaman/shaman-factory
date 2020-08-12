@@ -12,7 +12,7 @@
   ],
   "forms":[
     {
-      "key":"Sample Form",
+      "key":"725b21af-886d-424b-94c7-928bdbdbd92f",
       "value":{
         "uuid": "725b21af-886d-424b-94c7-928bdbdbd92f",
         "name":"Sample Form",
@@ -67,9 +67,10 @@
           }
         ],
         "actions":[
-
+          "create-text-file"
         ]
       }
     }
-  ]
+  ],
+  "submissions": []
 }

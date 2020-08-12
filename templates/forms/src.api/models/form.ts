@@ -3,7 +3,7 @@ export class Form {
   name: string;
   description: string;
   inputs: FormRow[];
-  actions: FormAction[];
+  actions: string[];
 }
 
 export class FormRow {
@@ -13,8 +13,4 @@ export class FormRow {
   size: string;
   type: string;
   options: string[];
-}
-
-export class FormAction {
-
 }
