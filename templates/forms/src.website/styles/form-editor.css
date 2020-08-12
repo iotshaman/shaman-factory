@@ -1,0 +1,20 @@
+.form-input {
+  padding-top: 10px;
+  cursor: pointer;
+}
+.form-input input,
+.form-input label,
+.form-input select {
+  cursor: pointer;
+}
+.form-input:hover {
+  background: #f5f6f7;
+}
+.pencil-hover {
+  display: none;
+  position: absolute;
+  right: 20px;
+}
+.form-input:hover .pencil-hover {
+  display: block;
+}

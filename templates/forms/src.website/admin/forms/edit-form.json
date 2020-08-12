@@ -1,0 +1,35 @@
+{
+  "shaman": {
+    "bundles": [
+      {
+        "name": "edit-form.styles.bundle",
+        "type": "css",
+        "files": [
+          "styles/bootstrap.css",
+          "styles/card.css",
+          "styles/main.css",
+          "styles/admin.css",
+          "styles/form-editor.css"
+        ]
+      },
+      {
+        "name": "edit-form.scripts.bundle",
+        "type": "js",
+        "files": [
+          "scripts/underscore.js",
+          "scripts/admin.js",
+          "scripts/jquery.js",
+          "scripts/popper.js",
+          "scripts/bootstrap.js",
+          "scripts/underscore.js",
+          "scripts/backbone.js",
+          "scripts/backbone-extensions.js",
+          "scripts/index.js",
+          "admin/forms/edit-form.js",
+          "admin/services/admin-service.js",
+          "admin/services/form.service.js"
+        ]
+      }
+    ]
+  }
+}

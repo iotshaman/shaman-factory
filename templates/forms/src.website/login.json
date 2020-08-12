@@ -1,0 +1,26 @@
+{
+  "title": "Login - Shaman Factory Blog",
+  "shaman": {
+    "bundles": [
+      {
+        "name": "login.styles.bundle",
+        "type": "css",
+        "files": [
+          "styles/bootstrap.css",
+          "styles/login.css",
+          "styles/main.css",
+          "styles/admin.css"
+        ]
+      },
+      {
+        "name": "login.scripts.bundle",
+        "type": "js",
+        "files": [
+          "scripts/jquery.js",
+          "scripts/index.js",
+          "scripts/login.js"
+        ]
+      }
+    ]
+  }
+}
