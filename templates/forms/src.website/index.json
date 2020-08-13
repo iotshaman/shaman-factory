@@ -1,12 +1,18 @@
 {
-  "title": "Sample Title",
+  "title": "Form Builder - Shaman Factory",
   "shaman": {
+    "query": [{
+      "name": "allForms",
+      "path": "forms",
+      "args": ["*"],
+      "sort": { "key": "createdDate", "descending": true }
+    }],
     "bundles": [
       {
         "name": "index.styles.bundle",
         "type": "css",
         "files": [
-          "styles/bootstrap-grid.css",
+          "styles/bootstrap.css",
           "styles/card.css",
           "styles/main.css"
         ]
@@ -15,7 +21,6 @@
         "name": "index.scripts.bundle",
         "type": "js",
         "files": [
-          "scripts/jquery.js",
           "scripts/index.js"
         ]
       }

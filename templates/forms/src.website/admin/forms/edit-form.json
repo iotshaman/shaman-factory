@@ -8,6 +8,7 @@
           "styles/bootstrap.css",
           "styles/card.css",
           "styles/main.css",
+          "styles/panel.css",
           "styles/admin.css",
           "styles/form-editor.css"
         ]

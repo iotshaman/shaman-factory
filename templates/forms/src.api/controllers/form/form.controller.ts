@@ -30,6 +30,7 @@ export class FormController extends ControllerBase {
       .put('/', this.authorize, this.addForm)
       .post('/', this.authorize, this.updateForm)
       .post('/submit', this.submitForm)
+      .post('/action', this.processFormAction)
       .delete('/:uuid', this.authorize, this.deleteForm)
 
     this.app.use('/api/form', this.router);
@@ -80,7 +81,7 @@ export class FormController extends ControllerBase {
 
   submitForm = (req: Request, res: Response, next: any) => {
     this.formService.submitForm(req.body)
-      .then(_ => res.status(204).send())
+      .then(form => res.json(form))
       .catch((ex: Error) => next(new RouteError(ex.message, 400)));
   }
 

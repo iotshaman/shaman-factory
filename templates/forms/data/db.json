@@ -6,7 +6,7 @@
         "email":"contact@iotshaman.com",
         "name":"Kyle Brown",
         "passwordHash":"$2a$08$wuawCXHSyJbs7UgE/oE8dOvZ1ek2nojcFDMZhfqBmTmvOrRFZpzb2",
-        "primary":true
+        "primary": true
       }
     }
   ],
@@ -15,6 +15,7 @@
       "key":"725b21af-886d-424b-94c7-928bdbdbd92f",
       "value":{
         "uuid": "725b21af-886d-424b-94c7-928bdbdbd92f",
+        "route":"725b21af-886d-424b-94c7-928bdbdbd92f.html",
         "name":"Sample Form",
         "description":"A simple form implementation with a single action",
         "inputs":[
@@ -67,7 +68,7 @@
           }
         ],
         "actions":[
-          "create-text-file"
+          "create-receipt"
         ]
       }
     }

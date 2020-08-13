@@ -10,7 +10,7 @@ import { IAuthService, AuthService } from "../services/auth.service";
 import { IUserService, UserService } from "../services/user.service";
 import { IFormService, FormService } from "../services/form.service";
 import { IFormAction } from "../services/form-actions/form-action";
-import { CreateTextFileAction } from "../services/form-actions/create-text-file.action";
+import { CreateReceiptAction } from "../services/form-actions/create-receipt.action";
 import { IFormActionService, FormActionService } from "../services/form-action.service";
 
 export const IoC = new Container();
@@ -41,7 +41,7 @@ function configureServices(config: IAppConfig, website: Website): Promise<Contai
 }
 
 function configureFormActions(): Promise<Container> {
-  IoC.bind<IFormAction>(TYPES.FormAction).to(CreateTextFileAction);
+  IoC.bind<IFormAction>(TYPES.FormAction).to(CreateReceiptAction);
   return Promise.resolve(IoC);
 }
 

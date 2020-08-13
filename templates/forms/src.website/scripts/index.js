@@ -1,4 +1,4 @@
-const apiBaseUri = 'http://192.168.0.34:3001/api';
+const apiBaseUri = 'http://localhost:3001/api';
 const defaultHeaders = {
   'Accept': 'application/json',
   'Content-Type': 'application/json'

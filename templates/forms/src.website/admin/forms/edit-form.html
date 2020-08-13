@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Edit Blog</title>
+    <title>Edit Form</title>
     {{> partials/metadata.partial.html }}
     {{> partials/fontawesome.partial.html }}
     {{{bundles model.shaman.bundles}}}
@@ -12,20 +12,27 @@
     <div class="container top" id="form">
       <div class="panel">
         <div class="panel-header">
-          <div class="header-text">
-            Edit Form - <span id="display_name"></span>
-          </div>
-          <div class="header-buttons">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" 
-                id="btnFormOptions" data-toggle="dropdown" 
-                aria-haspopup="true" aria-expanded="false">
-                Menu
-              </button>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnFormOptions">
-                <a id="btnAddFormInput" class="dropdown-item" href="javascript:void(0)">Add Input</a>
-                <a id="btnManageActions" class="dropdown-item" href="javascript:void(0)">Actions</a>
-                <a id="btnExit" class="dropdown-item" href="javascript:void(0)">Exit</a>
+          <div class="row">
+            <div class="col-9">
+              <div class="header-text">
+                Edit Form - <span id="display_name"></span>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="header-buttons">
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" 
+                    id="btnFormOptions" data-toggle="dropdown" 
+                    aria-haspopup="true" aria-expanded="false">
+                    Menu
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnFormOptions">
+                    <a id="btnAddFormInput" class="dropdown-item" href="javascript:void(0)">Add Input</a>
+                    <a id="btnManageActions" class="dropdown-item" href="javascript:void(0)">Actions</a>
+                    <a id="btnViewForm" class="dropdown-item" href="javascript:void(0)">View Form</a>
+                    <a id="btnExit" class="dropdown-item" href="javascript:void(0)">Exit</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -129,9 +136,9 @@
             </p>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" 
-                id="cbxCreateTextFile" name="create-text-file">
-              <label class="form-check-label" for="cbxCreateTextFile">
-                Create Text File
+                id="cbxCreateReceipt" name="create-receipt">
+              <label class="form-check-label" for="cbxCreateReceipt">
+                Create Receipt
               </label>
             </div>
           </div>

@@ -7,7 +7,7 @@
     "name": "JsonRepoAdapter",
     "configuration": {
       "dataPath": "./data/db.json",
-      "models": ["users"]
+      "models": ["forms"]
     }
   }
 }

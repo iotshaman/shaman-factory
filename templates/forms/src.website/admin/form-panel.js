@@ -36,8 +36,8 @@ function createForm() {
     .then(rslt => location.href=`/admin/forms/edit-form.html?uuid=${rslt.uuid}`);
 }
 
-function deleteForm(name) {
+function deleteForm(uuid) {
   if (confirm('Are you sure you want to delete this form?')) {
-    
+    FormService.DeleteForm(uuid).then(_ => loadFormCards());
   }
 }

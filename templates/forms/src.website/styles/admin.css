@@ -28,32 +28,6 @@
   font-size: 1.5em;
 }
 
-/* PANEL */
-.panel {
-  border: 1px solid #333;
-  margin-bottom: 35px;
-}
-.panel .panel-header {
-  background: #333333;
-  color: white;
-  font-size: 1.4em;
-}
-.panel .panel-header .header-text {
-  display: inline-block;
-  padding: 20px 10px;
-}
-.panel .panel-header .header-buttons {
-  float: right;
-  padding: 10px 10px;
-}
-.panel .panel-header .header-buttons .dropdown {
-  padding: 5px;
-}
-.panel .panel-body {
-  background: white;
-  padding: 20px 15px;
-}
-
 /* FORMS */
 .form-group label {
   font-weight: bold;

@@ -18,6 +18,7 @@ const FormView = Backbone.View.extend({
     'click #btnExit': 'exit',
     'click #btnAddFormInput': 'onClickAddFormInput',
     'click #btnManageActions': 'onClickManageActions',
+    'click #btnViewForm': 'onClickViewForm',
     'click .form-input': 'onClickEditFormInput'
   },
   initialize: function() {
@@ -80,6 +81,10 @@ const FormView = Backbone.View.extend({
     let model = new FormActionsModel({actions});
     if (this.manageActionsView) this.manageActionsView.dispose();
     this.manageActionsView = new ManageActionsView({model});
+  },
+  onClickViewForm: function() {
+    let route = this.model.get('route');
+    window.open(`/form/${route}`, '_blank');
   }
 });
 

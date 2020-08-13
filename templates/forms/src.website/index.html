@@ -2,13 +2,28 @@
   <head>
     <title>{{model.title}}</title>
     {{> partials/metadata.partial.html }}
+    {{> partials/fontawesome.partial.html }}
     {{{bundles model.shaman.bundles}}}
   </head>
   <body>
     {{> partials/header.partial.html }}
     <div class="container-fluid top">
       <div class="row">
-        
+        {{#each query.allForms}}
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card">
+              <div class="content">
+                <h2>{{this.name}}</h2>
+                <p>{{this.description}}</p>
+                <br />
+                <button class="btn btn-primary"
+                  onclick="location.href='/form/{{this.route}}'">
+                  Complete Form
+                </button>
+              </div>
+            </div>
+          </div>
+        {{/each}}
       </div>
     </div>
   </body>
