@@ -65,20 +65,28 @@ export class FormService implements IFormService {
   }
 
   getAllFormSubmissions = (): Promise<FormSubmission[]> => {
-    return Promise.resolve(this.context.models.submissions.filter(f => !!f));
+    return new Promise(res => {
+      let submissions = this.context.models.submissions.filter(f => !!f);
+      res(submissions.sort((a, b) => { return a.date > b.date ? 1 : -1 }));
+    })
   }
 
   getFormSubmission = (uuid: string): Promise<FormSubmission> => {
-    return Promise.resolve(this.context.models.submissions.find(uuid));
+    return new Promise((res, err) => {
+      let submission = this.context.models.submissions.find(uuid);
+      this.context.models.submissions.update(uuid, s => { s.received = true; return s; });
+      this.context.saveChanges().then(_ => res(submission)).catch(ex => err(ex));
+    });
   }
 
   submitForm = (form: FormSubmission): Promise<FormSubmission> => {
-    let submission = new FormSubmission(form.formUuid, form.values);
-    return Promise.resolve(
+    return new Promise((res, err) => {
+      let submission = new FormSubmission(form.formUuid, form.values);
+      let source = this.context.models.forms.find(form.formUuid);
+      submission.formName = source.name;
       this.context.models.submissions.add(submission.uuid, submission)
-    )
-    .then(_ => this.context.saveChanges())
-    .then(_ => (submission));
+      this.context.saveChanges().then(_ => res(submission)).catch(ex => err(ex));
+    });
   }
 
   private updateFormTemplates = (): Promise<void> => {

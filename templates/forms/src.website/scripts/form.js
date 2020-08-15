@@ -10,11 +10,13 @@ function onClickSubmitForm() {
 function getFormValues() {
   let values = [];
   $(".form-group").each(function(_, group) {
+    let label = $("label", group).html();
     let elem = $(".form-control", group);
     let uuid = elem.attr('data-uuid');
     let value = elem.val();
     values.push({
       inputUuid: uuid,
+      label: label,
       value: value
     });
   });

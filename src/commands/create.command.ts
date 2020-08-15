@@ -68,7 +68,7 @@ export function CreateJsonPackage(name: string, config: any): any {
   if (!config.scripts) config.scripts = { start: "node index.js" };
   if (!config.dependencies) config.dependencies = {};
   if (!config.devDependencies) config.devDependencies = {};
-  config.dependencies['shaman-website-compiler'] = "^4.0.10"
+  config.dependencies['shaman-website-compiler'] = "^4.0.13"
   return {
     name: name,
     version: config.version || "1.0.0",

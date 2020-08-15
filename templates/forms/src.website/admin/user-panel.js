@@ -1,3 +1,7 @@
+$(document).ready(function() {
+  loadUserCards();
+});
+
 const UserModel = Backbone.Model.extend({});
 const UserCollection = Backbone.Collection.extend({ model: UserModel });
 const UserPanelView = Backbone.View.extend({
@@ -9,10 +13,6 @@ const UserPanelView = Backbone.View.extend({
       this.$el.append(template(model.attributes))
     });
   }
-});
-
-$(document).ready(function() {
-  loadUserCards();
 });
 
 function loadUserCards() {

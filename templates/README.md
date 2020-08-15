@@ -53,3 +53,27 @@ The blog template is a full-featured website to fascilitate one thing, and one t
 #### API Server
 - The API server is built using Typescript and is responsible for handling requests to manage blog / user content. 
 - All requests to the API require an access token, which is generated when a user logs in. The access token will expire after 2 days and will require the user to re-login. 
+
+### Forms Template
+
+```sh
+factory create [name] forms
+```
+
+The forms template is a full-featured website that allows admin users to create and manage forms. Site visitors will be able to view, fill out and submit these forms. When visitors submit forms 'actions' will be processed (see below), and the submission will be stored in the database file. Completed forms are available to view in the admin panel.
+
+#### User Interface
+
+- The public facing component of the user interface contains a splash-page with the available forms listed in cards. For each form there is also a full HTML page, which can be accessed by clicking the form card.
+- There is also a private facing component to the user interface, which requires users to login. The default email address is ‘contact@iotshaman.com’ and the default password is ‘test’. You can change the default user in the json-repo database file, but will need to use the admin panel interface to change passwords.
+- Once you have logged into the private interface section, you can use the site navigation menu (click button in top-right) to navigate to either the form management page, the user management page, or the form submissions page.
+- When new forms are added or updated in the admin panel, the website will be recompiled.
+
+#### API Server
+
+- The API server is built using Typescript and is responsible for handling requests to manage blog / user content. 
+- All requests to the API require an access token, which is generated when a user logs in. The access token will expire after 2 days and will require the user to re-login. 
+
+#### Actions
+
+Actions are special handlers, created in the API server, that perform operations (create receipt, send email, download file, etc.) when a form is submitted. Every form can have zero-to-many actions. As of the time this README was edited, there is only one built in action, which creates a tracking id receipt for the user who submitted the form.
