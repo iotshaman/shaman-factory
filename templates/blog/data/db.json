@@ -6,7 +6,8 @@
         "email":"contact@iotshaman.com",
         "name": "Kyle Brown",
         "passwordHash":"$2a$08$wuawCXHSyJbs7UgE/oE8dOvZ1ek2nojcFDMZhfqBmTmvOrRFZpzb2",
-        "primary": true
+        "primary": true,
+        "temporaryPass": true
       }
     }
   ],

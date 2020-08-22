@@ -1,6 +1,6 @@
 {
   "name": "shaman-factory",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Build high quality websites with minimal effort. Just start designing!",
   "main": "dist/index.js",
   "typings": "public_api.d.ts",
