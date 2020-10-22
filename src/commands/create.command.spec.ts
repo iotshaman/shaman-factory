@@ -30,7 +30,7 @@ describe('CreateCommand', () => {
   });
 
   it('run should throw if invalid template provided', (done) => {
-    sandbox.stub(_fsx, 'readdir').returns(Promise.resolve(["default"]));
+    sandbox.stub(_fsx, 'readdir').returns(<any>Promise.resolve(["default"]));
     let subject = new CreateCommand();
     subject.run("sample", "invalid").catch(ex => {
       expect(ex.message).to.equal("Invalid template 'invalid'.");
@@ -39,7 +39,7 @@ describe('CreateCommand', () => {
   });
 
   it('run should throw if folder already exists', (done) => {
-    sandbox.stub(_fsx, 'readdir').returns(Promise.resolve(["default"]));
+    sandbox.stub(_fsx, 'readdir').returns(<any>Promise.resolve(["default"]));
     sandbox.stub(_fsx, 'pathExists').returns(<any>Promise.resolve(true));
     let subject = new CreateCommand();
     subject.run("sample").catch(ex => {
@@ -49,7 +49,7 @@ describe('CreateCommand', () => {
   });
 
   it('run should copy files', (done) => {
-    sandbox.stub(_fsx, 'readdir').returns(Promise.resolve(["default"]));
+    sandbox.stub(_fsx, 'readdir').returns(<any>Promise.resolve(["default"]));
     sandbox.stub(_fsx, 'pathExists').returns(<any>Promise.resolve(false));
     sandbox.stub(_fsx, 'ensureDir').returns(<any>Promise.resolve());
     sandbox.stub(_fsx, 'writeFile').returns(<any>Promise.resolve());
@@ -63,7 +63,7 @@ describe('CreateCommand', () => {
   });
 
   it('run should create package.json file', (done) => {
-    sandbox.stub(_fsx, 'readdir').returns(Promise.resolve(["default"]));
+    sandbox.stub(_fsx, 'readdir').returns(<any>Promise.resolve(["default"]));
     let pathExists = sandbox.stub(_fsx, 'pathExists');
     pathExists.onCall(0).returns(<any>Promise.resolve(false));
     pathExists.onCall(1).returns(<any>Promise.resolve(true));
@@ -80,7 +80,7 @@ describe('CreateCommand', () => {
   });
 
   it('run should throw if exec returns exception', (done) => {
-    sandbox.stub(_fsx, 'readdir').returns(Promise.resolve(["default"]));
+    sandbox.stub(_fsx, 'readdir').returns(<any>Promise.resolve(["default"]));
     sandbox.stub(_fsx, 'pathExists').returns(<any>Promise.resolve(false));
     sandbox.stub(_fsx, 'ensureDir').returns(<any>Promise.resolve());
     sandbox.stub(_fsx, 'copy').returns(<any>Promise.resolve());
@@ -91,7 +91,7 @@ describe('CreateCommand', () => {
   });
 
   it('run should NOT throw if stderr has value', (done) => {
-    sandbox.stub(_fsx, 'readdir').returns(Promise.resolve(["default"]));
+    sandbox.stub(_fsx, 'readdir').returns(<any>Promise.resolve(["default"]));
     sandbox.stub(_fsx, 'pathExists').returns(<any>Promise.resolve(false));
     sandbox.stub(_fsx, 'ensureDir').returns(<any>Promise.resolve());
     sandbox.stub(_fsx, 'copy').returns(<any>Promise.resolve());
