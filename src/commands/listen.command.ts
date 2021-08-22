@@ -35,7 +35,7 @@ export class ListenCommand implements ICommand {
   }
 
   private compileWebsite = () => {
-    return new Promise((res, err) => {
+    return new Promise<void>((res, err) => {
       let path = _path.join(process.cwd(), this.path);
       if (_path.isAbsolute(this.path)) path = this.path;
       console.log(`Compiling website at location '${path}'...`);
