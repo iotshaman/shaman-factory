@@ -1,13 +1,14 @@
-# Shaman CLI Recipes
+# Shaman Factory Recipes
 
-When using the [generate command]([../README.md#generate-command](https://github.com/iotshaman/shaman-cli/tree/main#generate-command)), a recipe can be used as a model for the created solution file. The default recipe is as follows:
+When using the [generate command]([../README.md#generate-command](https://github.com/iotshaman/shaman-factory/tree/main#generate-command)), a recipe can be used as a model for the created solution file. The default recipe is as follows:
 
 ```json
+{
     "recipe": {
         "projects": [{
                 "name": "sample-website",
                 "environment": "node",
-                "type": "client",
+                "template": "node-shaman-website",
                 "path": "client",
                 "runtimeDependencies": [
                     "sample-server"
@@ -16,13 +17,13 @@ When using the [generate command]([../README.md#generate-command](https://github
             {
                 "name": "sample-database",
                 "environment": "node",
-                "type": "database",
+                "template": "node-shaman-database",
                 "path": "database"
             },
             {
                 "name": "sample-library",
                 "environment": "node",
-                "type": "library",
+                "template": "node-typescript-library",
                 "path": "library",
                 "include": [
                     "sample-database"
@@ -31,7 +32,7 @@ When using the [generate command]([../README.md#generate-command](https://github
             {
                 "name": "sample-server",
                 "environment": "node",
-                "type": "server",
+                "template": "node-express-server",
                 "path": "server",
                 "include": [
                     "sample-database",
@@ -45,4 +46,5 @@ When using the [generate command]([../README.md#generate-command](https://github
             "sourceProject": "sample-database"
         }]
     }
+}
 ```
