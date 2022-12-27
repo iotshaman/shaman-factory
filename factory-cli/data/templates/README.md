@@ -13,13 +13,13 @@ Certain environments support multiple languages; for example, the "dotnet" envir
 Below is a catalog of the different templates that are available, per-environment.
 
 ### Node JS Templates
-* [Server Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/node#server-template)
-* [Database Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/node#database-library-template)
-* [Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/node#library-template)
-* [HTML Client Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/node#html-client-template)
+* [Server Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#server-template)
+* [Database Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#database-library-template)
+* [Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#library-template)
+* [HTML Client Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#html-client-template)
 
 ### .NET Templates
-* [Server Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/dotnet#server-template)
-* [Database Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/dotnet#database-library-template)
-* [Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/dotnet#library-template)
-* [Command Line Utility Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/dotnet#command-line-utility-template)
+* [Server Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/dotnet#server-template)
+* [Database Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/dotnet#database-library-template)
+* [Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/dotnet#library-template)
+* [Command Line Utility Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/dotnet#command-line-utility-template)

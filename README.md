@@ -31,7 +31,7 @@ npm i -g shaman-factory
 
 ## Language Support
 
-At the time of writing this REAMDE file, Shaman Factory only supports 2 "environments": *node*, and *dotnet*. While the "node" (Node JS) environment only supports the Typescript language, the "dotnet" (.NET 5) environment will support several languages. Please refer to the [project templates](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates) documentation for more information about the available environments and languages. 
+At the time of writing this REAMDE file, Shaman Factory only supports 2 "environments": *node*, and *dotnet*. While the "node" (Node JS) environment only supports the Typescript language, the "dotnet" (.NET 5) environment will support several languages. Please refer to the [project templates](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates) documentation for more information about the available environments and languages. 
 
 *NOTE: We will be adding support for additional environments / languages in the future, so check in periodically to see what new languages are available.*
 
@@ -126,10 +126,10 @@ For example, if you have a node js solution that includes a website, library, da
 *Note: All paths should be relative to the solution file*
 
 ### Project Specs
-Some project types (for specific environments) allow you to provide "specs" to further customize the auto-generated source code. For more information regarding project specs, please refer to the [project templates](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates) documentation.
+Some project types (for specific environments) allow you to provide "specs" to further customize the auto-generated source code. For more information regarding project specs, please refer to the [project templates](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates) documentation.
 
 ### Transformations
-Some project types (for specific environments) allow you to perform "transformations" on the auto-generated source code, to create custom source code during initial scaffolding. For example, you can use a transformation to automatically write "data context" composition for a server project (that depends on a database library). For more information regarding project transformations, please refer to the [project templates](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates) documentation.
+Some project types (for specific environments) allow you to perform "transformations" on the auto-generated source code, to create custom source code during initial scaffolding. For example, you can use a transformation to automatically write "data context" composition for a server project (that depends on a database library). For more information regarding project transformations, please refer to the [project templates](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates) documentation.
 
 ## CLI Reference
 
@@ -154,7 +154,7 @@ sf scaffold [--filePath=FILEPATH]
 
 ### Generate Command
 
-The generate command creates a solution file and then runs the the [scaffold command](#scaffold-command). The generate command is interactive and will prompt the user to provide information that will determine how the solution file is created. The solution file will largely be modeled after the user provided recipe or templates. A pre-made [default recipe](https://github.com/iotshaman/shaman-factory/tree/v2/data/recipes#shaman-factory-recipes) is available. The generate command can also be used to add projects to an existing solution file. The syntax for the generate command is as follows:
+The generate command creates a solution file and then runs the the [scaffold command](#scaffold-command). The generate command is interactive and will prompt the user to provide information that will determine how the solution file is created. The solution file will largely be modeled after the user provided recipe or templates. A pre-made [default recipe](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/recipes#shaman-factory-recipes) is available. The generate command can also be used to add projects to an existing solution file. The syntax for the generate command is as follows:
 
 ```sh
 sf generate [-add] [--name=NAME] [--recipe=RECIPE] [--template=TEMPLATE] [--filePath=FILEPATH]
