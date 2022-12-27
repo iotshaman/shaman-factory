@@ -6,7 +6,7 @@ import { expect } from 'chai';
 import { createMock } from 'ts-auto-mock';
 import { ProjectTransformation, Solution } from '../../models/solution';
 import { CsharpComposeDataContextTransformation } from "./csharp-compose-datacontext.transform";
-import { ICsharpSourceService } from "../../services/source/csharp-source.service";
+import { IDotnetSourceService } from "../../services/source/csharp-source.service";
 
 describe('Csharp Compose DataContext Transformation', () => {
   
@@ -75,7 +75,7 @@ describe('Csharp Compose DataContext Transformation', () => {
     let transformation = new ProjectTransformation();
     transformation.targetProject = "Svr";
     transformation.sourceProject = "Db"
-    let typescriptSourceService = createMock<ICsharpSourceService>();
+    let typescriptSourceService = createMock<IDotnetSourceService>();
     typescriptSourceService.addDatabaseConnectionStringToAppsettingsJson = sandbox.stub().returns(Promise.resolve());
     let subject = new CsharpComposeDataContextTransformation();
     subject.sourceService = typescriptSourceService;
@@ -94,7 +94,7 @@ describe('Csharp Compose DataContext Transformation', () => {
     let transformation = new ProjectTransformation();
     transformation.targetProject = "Svr";
     transformation.sourceProject = "Db"
-    let typescriptSourceService = createMock<ICsharpSourceService>();
+    let typescriptSourceService = createMock<IDotnetSourceService>();
     typescriptSourceService.addConnectionStringToAppConfig = sandbox.stub().returns(Promise.resolve());
     let subject = new CsharpComposeDataContextTransformation();
     subject.sourceService = typescriptSourceService;
@@ -114,7 +114,7 @@ describe('Csharp Compose DataContext Transformation', () => {
     let transformation = new ProjectTransformation();
     transformation.targetProject = "Svr";
     transformation.sourceProject = "Db"
-    let typescriptSourceService = createMock<ICsharpSourceService>();
+    let typescriptSourceService = createMock<IDotnetSourceService>();
     typescriptSourceService.addDataContextComposition = sandbox.stub().returns(Promise.resolve());
     let subject = new CsharpComposeDataContextTransformation();
     subject.sourceService = typescriptSourceService;

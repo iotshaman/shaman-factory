@@ -4,7 +4,7 @@ import { SolutionProject } from "../../models/solution";
 import { FileService, IFileService } from '../file.service';
 import { CsharpSourceFactory } from '../../factories/source/csharp-source.factory';
 
-export interface ICsharpSourceService {
+export interface IDotnetSourceService {
   addDatabaseConnectionStringToAppsettingsJson: (solutionFolderPath: string, 
     project: SolutionProject, contextName: string) => Promise<void>;
   addConnectionStringToAppConfig: (solutionFolderPath: string, project: SolutionProject, 
@@ -13,7 +13,7 @@ export interface ICsharpSourceService {
     databaseProjectName: string, contextName: string) => Promise<void>;
 }
 
-export class CsharpSourceService implements ICsharpSourceService {
+export class CsharpSourceService implements IDotnetSourceService {
 
   fileService: IFileService = new FileService();
   sourceFactory: ISourceFactory = new CsharpSourceFactory();

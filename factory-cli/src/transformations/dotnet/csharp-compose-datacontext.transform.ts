@@ -1,6 +1,6 @@
 import { ProjectTransformation, Solution } from "../../models/solution";
 import { FileService, IFileService } from "../../services/file.service";
-import { ICsharpSourceService, CsharpSourceService } from "../../services/source/csharp-source.service";
+import { IDotnetSourceService, CsharpSourceService } from "../../services/source/csharp-source.service";
 import { ITransformation } from "../transformation";
 
 export class CsharpComposeDataContextTransformation implements ITransformation {
@@ -9,7 +9,7 @@ export class CsharpComposeDataContextTransformation implements ITransformation {
   get environment(): string { return "dotnet"; }
   get language(): string { return "csharp"; }
   fileService: IFileService = new FileService();
-  sourceService: ICsharpSourceService = new CsharpSourceService();
+  sourceService: IDotnetSourceService = new CsharpSourceService();
 
   transform = (transformation: ProjectTransformation, solution: Solution, solutionFolderPath: string): Promise<void> => {
     const project = solution.projects.find(p => p.name == transformation.targetProject);
