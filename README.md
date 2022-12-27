@@ -31,7 +31,7 @@ npm i -g shaman-factory
 
 ## Language Support
 
-At the time of writing this REAMDE file, Shaman Factory only supports 2 "environments": *node*, and *dotnet*. While the "node" (Node JS) environment only supports the Typescript language, the "dotnet" (.NET 5) environment will support several languages. Please refer to the [project templates](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates) documentation for more information about the available environments and languages. 
+At the time of writing this REAMDE file, Shaman Factory only supports 2 "environments": *node*, and *dotnet*. While the "node" (Node JS) environment only supports the Typescript language, the "dotnet" (.NET 6) environment will support several languages. Please refer to the [project templates](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates) documentation for more information about the available environments and languages. 
 
 *NOTE: We will be adding support for additional environments / languages in the future, so check in periodically to see what new languages are available.*
 

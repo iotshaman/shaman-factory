@@ -1,6 +1,6 @@
 # Shaman Factory Recipes
 
-When using the [generate command]([../README.md#generate-command](https://github.com/iotshaman/shaman-factory/tree/v2#generate-command)), a recipe can be used as a model for the created solution file. The default recipe is as follows:
+When using the [generate command](https://github.com/iotshaman/shaman-factory/tree/v2#generate-command), a recipe can be used as a model for the created solution file. The default recipe is as follows:
 
 ```json
 {
