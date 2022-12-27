@@ -142,7 +142,7 @@ sf [command] [...arguments]
 **[command]:** Available values: *scaffold, install, build, run, serve, publish, --version*  
 **[...arguments]:** A list of arguments that vary, depending on the command provided.  
 
-### Scaffold  Command
+### Scaffold Command
 
 The scaffold command requires the existence of a solution file, and will iterate over the available projects and scaffold them all. The syntax for the scaffold command is as follows:
 
