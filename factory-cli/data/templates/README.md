@@ -1,5 +1,5 @@
-# Shaman CLI Templates
-Shaman CLI templates are the building blocks of the scaffold commands. Every template is specific to an environment (node, dotnet, deno, etc.); at the time of writing this README, the only two environments that are supported in Shaman CLI are "node" (NodeJS + Typescript) and "dotnet" (.NET Core + c#), but future versions will include support for other environments / languages. Please note that while each template is based on an environment, you can have a solution that supports projects of multiple environment types (a "polyglot" solution). 
+# Shaman Factory Templates
+Shaman Factory templates are the building blocks of the scaffold commands. Every template is specific to an environment (node, dotnet, deno, etc.); at the time of writing this README, the only two environments that are supported in Shaman Factory are "node" (NodeJS + Typescript) and "dotnet" (.NET Core + c#), but future versions will include support for other environments / languages. Please note that while each template is based on an environment, you can have a solution that supports projects of multiple environment types (a "polyglot" solution). 
 
 Most templates include README documentation that describes how to fully leverage the scaffolding. After scaffolding a new solution, take a quick look at the individual project's README files to see how to properly modify / maintain. 
 
@@ -13,13 +13,13 @@ Certain environments support multiple languages; for example, the "dotnet" envir
 Below is a catalog of the different templates that are available, per-environment.
 
 ### Node JS Templates
-* [Server Template](https://github.com/iotshaman/shaman-cli/tree/main/templates/node#server-template)
-* [Database Library Template](https://github.com/iotshaman/shaman-cli/tree/main/templates/node#database-library-template)
-* [Library Template](https://github.com/iotshaman/shaman-cli/tree/main/templates/node#library-template)
-* [HTML Client Template](https://github.com/iotshaman/shaman-cli/tree/main/templates/node#html-client-template)
+* [Server Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/node#server-template)
+* [Database Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/node#database-library-template)
+* [Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/node#library-template)
+* [HTML Client Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/node#html-client-template)
 
 ### .NET Templates
-* [Server Template](https://github.com/iotshaman/shaman-cli/tree/main/templates/dotnet#server-template)
-* [Database Library Template](https://github.com/iotshaman/shaman-cli/tree/main/templates/dotnet#database-library-template)
-* [Library Template](https://github.com/iotshaman/shaman-cli/tree/main/templates/dotnet#library-template)
-* [Command Line Utility Template](https://github.com/iotshaman/shaman-cli/tree/main/templates/dotnet#command-line-utility-template)
+* [Server Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/dotnet#server-template)
+* [Database Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/dotnet#database-library-template)
+* [Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/dotnet#library-template)
+* [Command Line Utility Template](https://github.com/iotshaman/shaman-factory/tree/v2/data/templates/dotnet#command-line-utility-template)
