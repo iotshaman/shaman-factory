@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>{{model.title}}</title>
+    {{> partials/metadata.partial.html }}
+    {{{style 'index.styles.bundle.css'}}}
+  </head>
+  <body>
+    {{> partials/header.partial.html }}
+    <div class="container-fluid top">
+      <h1>{{model.title}}</h1>
+      <h2>{{model.description}}</h2>
+      {{{model.text}}}
+    </div>
+  </body>
+</html>

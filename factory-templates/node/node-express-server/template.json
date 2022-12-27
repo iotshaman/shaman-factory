@@ -1,0 +1,17 @@
+{
+  "name": "node-express-server",
+  "files": [
+    ".gitignore",
+    ".mocharc.json",
+    ".tsnode.js",
+    "package-lock.json",
+    "package.json",
+    "README.md",
+    "shaman.scaffold.js",
+    "tsconfig.json"
+  ],
+  "folders": [
+    "app",
+    "src"
+  ]
+}

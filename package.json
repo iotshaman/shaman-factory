@@ -1,0 +1,9 @@
+{
+  "name": "shaman-factory-solution",
+  "version": "1.0.0",
+  "description": "CLI to perform common tasks, like scaffolding source code.",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Kyle Brown",
+  "license": "UNLICENSED"
+}

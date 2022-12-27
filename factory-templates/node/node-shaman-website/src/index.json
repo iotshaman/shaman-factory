@@ -1,0 +1,32 @@
+{
+  "route": "",
+  "title": "Sample Title",
+  "shaman": {
+    "query": [{
+      "name": "recentBlogs",
+      "path": "blogs",
+      "args": ["*"],
+      "limit": 10,
+      "sort": { "key": "date", "descending": true }
+    }],
+    "bundles": [
+      {
+        "name": "index.styles.bundle",
+        "type": "css",
+        "files": [
+          "styles/bootstrap-grid.css",
+          "styles/card.css",
+          "styles/main.css"
+        ]
+      },
+      {
+        "name": "index.scripts.bundle",
+        "type": "js",
+        "files": [
+          "scripts/jquery.js",
+          "scripts/index.js"
+        ]
+      }
+    ]
+  }
+}

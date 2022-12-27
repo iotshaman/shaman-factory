@@ -1,0 +1,30 @@
+{
+  "blogs":[
+     {
+        "key":"sample-blog-1.html",
+        "value":{
+           "filename":"sample-blog-1.html",
+           "name": "sample-blog-1",
+           "title": "Sample Blog #1",
+           "description": "This is a placeholder for the real description of the blog. This should be about 140 - 160 characters and have as many keywords as possible to indicate content.",
+           "author": "Kyle Brown",
+           "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel tellus laoreet, dictum ante ut, pellentesque lorem. Suspendisse a erat laoreet, efficitur turpis fermentum, porta leo. Pellentesque tincidunt enim sit amet lacus viverra scelerisque a eu ligula. Praesent aliquam sed dui at tempor. Vivamus vulputate ultrices sem, sit amet accumsan nisl. Proin sed pretium dolor, nec venenatis magna. Morbi hendrerit blandit magna id pellentesque. Duis est justo, luctus eu posuere vitae, consectetur non diam. Aliquam et libero sed nibh rutrum feugiat. Mauris molestie sed libero lacinia varius. Maecenas risus enim, efficitur a lorem vitae, molestie vehicula ligula. Sed fermentum metus nisi, non bibendum sem varius vel. Fusce elementum lacus vitae augue laoreet laoreet. Sed pulvinar mollis quam eu fringilla.</p><p>Sed facilisis aliquam nunc sodales iaculis. Suspendisse tellus metus, ornare a arcu vel, dignissim placerat metus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse efficitur iaculis rhoncus. Cras sed est a nulla ornare tempor eu sit amet lorem. Sed convallis accumsan felis. Cras egestas mauris vel nunc cursus, a mattis lorem rhoncus. Donec id faucibus orci. Duis suscipit lectus consequat, tincidunt dolor at, bibendum massa. Fusce aliquam turpis quam, vel dapibus ante tincidunt eget. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;</p><p>Aliquam suscipit ipsum cursus consequat laoreet. Sed rutrum eros nunc, in tempor tortor ullamcorper vitae. Curabitur dictum arcu sit amet eros feugiat, ac aliquet diam tincidunt. Fusce ultrices neque in metus pharetra, vel consectetur erat dignissim. In nec purus facilisis, sagittis turpis quis, maximus nunc. Mauris tristique semper vestibulum. Aenean at purus ligula. Pellentesque vitae tempus nisl. Donec posuere turpis in vehicula imperdiet. In hac habitasse platea dictumst. Praesent tempus et lectus sed luctus.</p>",
+           "date": "2020-07-13T23:21:46.647Z",
+           "image": "/images/shaman-factory.png"
+        }
+     },
+     {
+        "key":"sample-blog-2.html",
+        "value":{
+           "filename":"sample-blog-2.html",
+           "name": "sample-blog-2",
+           "title": "Sample Blog #2",
+           "description": "This is a placeholder for the real description of the blog. This should be about 140 - 160 characters and have as many keywords as possible to indicate content.",
+           "author": "Kyle Brown",
+           "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel tellus laoreet, dictum ante ut, pellentesque lorem. Suspendisse a erat laoreet, efficitur turpis fermentum, porta leo. Pellentesque tincidunt enim sit amet lacus viverra scelerisque a eu ligula. Praesent aliquam sed dui at tempor. Vivamus vulputate ultrices sem, sit amet accumsan nisl. Proin sed pretium dolor, nec venenatis magna. Morbi hendrerit blandit magna id pellentesque. Duis est justo, luctus eu posuere vitae, consectetur non diam. Aliquam et libero sed nibh rutrum feugiat. Mauris molestie sed libero lacinia varius. Maecenas risus enim, efficitur a lorem vitae, molestie vehicula ligula. Sed fermentum metus nisi, non bibendum sem varius vel. Fusce elementum lacus vitae augue laoreet laoreet. Sed pulvinar mollis quam eu fringilla.</p><p>Sed facilisis aliquam nunc sodales iaculis. Suspendisse tellus metus, ornare a arcu vel, dignissim placerat metus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse efficitur iaculis rhoncus. Cras sed est a nulla ornare tempor eu sit amet lorem. Sed convallis accumsan felis. Cras egestas mauris vel nunc cursus, a mattis lorem rhoncus. Donec id faucibus orci. Duis suscipit lectus consequat, tincidunt dolor at, bibendum massa. Fusce aliquam turpis quam, vel dapibus ante tincidunt eget. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;</p><p>Aliquam suscipit ipsum cursus consequat laoreet. Sed rutrum eros nunc, in tempor tortor ullamcorper vitae. Curabitur dictum arcu sit amet eros feugiat, ac aliquet diam tincidunt. Fusce ultrices neque in metus pharetra, vel consectetur erat dignissim. In nec purus facilisis, sagittis turpis quis, maximus nunc. Mauris tristique semper vestibulum. Aenean at purus ligula. Pellentesque vitae tempus nisl. Donec posuere turpis in vehicula imperdiet. In hac habitasse platea dictumst. Praesent tempus et lectus sed luctus.</p>",
+           "date": "2020-07-14T23:21:46.647Z",
+           "image": "/images/shaman-factory.png"
+        }
+     }
+  ]
+}

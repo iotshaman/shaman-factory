@@ -1,0 +1,13 @@
+{
+  "name": "dotnet-csharp-library",
+  "files": [
+    ".gitignore",
+    "Class1.cs",
+    "dotnet-csharp-library.csproj",
+    "README.md",
+    "shaman.scaffold.js"
+  ],
+  "folders": [
+    
+  ]
+}
