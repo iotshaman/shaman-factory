@@ -23,7 +23,7 @@ describe('Recipe Service', () => {
         let fileServiceMock = createMock<IFileService>();
         fileServiceMock.pathExists = sandbox.stub().returns(Promise.resolve(false));
         subject.fileService = fileServiceMock;
-        subject.dataFolder = [__dirname];
+        subject.recipeFolder = [__dirname];
         subject.getRecipe('test-recipe')
             .then(_ => { throw new Error("Expected rejected promise, but promise completed.") })
             .catch((ex: Error) => {
@@ -56,7 +56,7 @@ describe('Recipe Service', () => {
             }
         }));
         subject.fileService = fileServiceMock;
-        subject.dataFolder = [__dirname];
+        subject.recipeFolder = [__dirname];
         subject.getRecipe('test-recipe').then(_ => done());
     });
 
