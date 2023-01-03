@@ -1,0 +1,17 @@
+{
+  "name": "node-typescript-cli",
+  "files": [
+    ".gitignore",
+    ".mocharc.json",
+    ".tsnode.js",
+    "package-lock.json",
+    "package.json",
+    "public_api.d.ts",
+    "README.md",
+    "shaman.scaffold.js",
+    "tsconfig.json"
+  ],
+  "folders": [
+    "src"
+  ]
+}

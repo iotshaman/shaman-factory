@@ -60,6 +60,13 @@
       "type": "cli",
       "path": "dotnet/dotnet-csharp-cli",
       "language": "csharp"
+    },
+    {
+      "name": "NodeTypescriptCli",
+      "environment": "node",
+      "template": "node-typescript-cli",
+      "type": "cli",
+      "path": "node/node-typescript-cli"
     }
   ]
 }

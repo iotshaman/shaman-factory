@@ -59,6 +59,13 @@
       "version": "2.0.0",
       "file": "dotnet/dotnet-csharp-cli-v2.0.0.zip",
       "language": "csharp"
+    },
+    {
+      "name": "node-typescript-cli",
+      "environment": "node",
+      "type": "cli",
+      "version": "2.0.0",
+      "file": "node/node-typescript-cli-v2.0.0.zip"
     }
   ]
 }
