@@ -214,7 +214,8 @@ The syntax for the serve command is as follows:
 sf serve [--project=PROJECT]
 ```
 
-**[project]:** The name of the project for which you would like to serve. The provided project value must match a project name in your solution file. Note: any project names listed as "runtime dependencies" will be started first, and runtime dependencies can be nested.
+**[project]:** The name of the project for which you would like to serve. The provided project value must match a project name in your solution file. Note: any project names listed as "runtime dependencies" will be started first, and runtime dependencies can be nested.  
+**[filePath]:** (Optional) relative path to the shaman.json file (including file name). If no value is provided, the default value is the current working directory.
 
 *Note: In order for the serve command to work, the specified project (any and runtime dependencies) must have a 'start' script (in package.json).*
 
