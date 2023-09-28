@@ -96,7 +96,7 @@ For example, if you have a node js solution that includes a website, library, da
     {
       "name": "sample-library",
       "environment": "node",
-      "template": "node-typescriptlibrary",
+      "template": "node-typescript-library",
       "path": "library",
       "include": [
         "sample-database"
