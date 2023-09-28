@@ -25,7 +25,7 @@ export class TemplateService extends HttpService implements ITemplateService {
     let path = _path.join(...this.dataFolder, 'templates.json');
     return this.fileService.readJson<{ templates: Template[] }>(path).then(data => {
       let template = data.templates.find(t => t.environment == environment && t.name == templateName);
-      if (!template) throw new Error(`Project type not found: ${environment}-${templateName}`);
+      if (!template) throw new Error(`Project type not found: ${environment} ${templateName}`);
       return template;
     });
   }

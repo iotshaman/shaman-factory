@@ -29,7 +29,7 @@ describe('Template Service', () => {
     subject.getTemplate("node", "library")
       .then(_ => { throw new Error("Expected rejected promise, but promise completed.") })
       .catch((ex: Error) => {
-        expect(ex.message).to.equal("Project type not found: node-library");
+        expect(ex.message).to.equal("Project type not found: node library");
         done();
       });
   });
