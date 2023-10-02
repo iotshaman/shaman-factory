@@ -53,6 +53,7 @@ describe('Generate Command Prompts', () => {
         }));
         subject.interaction = interactionMock;
         let testRecipe: Recipe = {
+            name: 'test-recipe',
             projects: [{
                 name: 'test-server',
                 environment: 'node',
@@ -66,6 +67,7 @@ describe('Generate Command Prompts', () => {
             }]
         }
         let expected: Recipe = {
+            name: 'test-recipe',
             projects: [{
                 name: 'test-server-rename',
                 environment: 'node',

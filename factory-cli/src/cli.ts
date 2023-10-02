@@ -3,6 +3,7 @@ import { BuildCommand, GenerateCommand, InstallCommand, PublishCommand, ServeCom
 import { ICommand } from "./commands/command";
 import { EchoCommand } from "./commands/default/echo.command";
 import { NoopCommand } from "./commands/default/noop.command";
+import { ListCommand } from "./commands/list/list.command";
 import { RunCommand } from "./commands/run/run.command";
 import { ScaffoldCommand } from "./commands/scaffold/scaffold.command";
 
@@ -16,7 +17,8 @@ const commands: ICommand[] = [
   new ScaffoldCommand(),
   new ServeCommand(),
   new PublishCommand(),
-  new GenerateCommand()
+  new GenerateCommand(),
+  new ListCommand()
 ];
 
 export function Invoke(argv: string[]): Promise<void> {

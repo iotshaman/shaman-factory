@@ -11,3 +11,8 @@ export interface IEnvironmentCommand {
   run: (project?: SolutionProject) => Promise<void>;
   waitForChildProcesses?: Promise<void>;
 }
+
+export interface IListCommand {
+  flag: string;
+  run: () => Promise<void>;
+}

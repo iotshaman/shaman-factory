@@ -20,10 +20,8 @@ describe('Recipe Service', () => {
 
     it('getRecipe should throw if recipe not found', (done) => {
         let subject = new RecipeService();
-        let fileServiceMock = createMock<IFileService>();
-        fileServiceMock.pathExists = sandbox.stub().returns(Promise.resolve(false));
-        subject.fileService = fileServiceMock;
         subject.recipeFolder = [__dirname];
+        subject.getAllRecipes = sandbox.stub().returns(Promise.resolve([]));
         subject.getRecipe('test-recipe')
             .then(_ => { throw new Error("Expected rejected promise, but promise completed.") })
             .catch((ex: Error) => {
@@ -34,30 +32,22 @@ describe('Recipe Service', () => {
 
     it('getRecipe should return resolved promise', (done) => {
         let subject = new RecipeService();
-        let fileServiceMock = createMock<IFileService>();
-        fileServiceMock.pathExists = sandbox.stub().returns(Promise.resolve(true));
-        fileServiceMock.readJson = sandbox.stub().returns(Promise.resolve({
-            recipe: {
-                projects: [{
-                    name: "sample-database", environment: "node",
-                    type: "database", path: "database"
-                },
-                {
-                    name: "sample-server", environment: "node",
-                    type: "server", path: "server",
-                    include: ["sample-database", "sample-library"]
-                }
-                ],
-                transform: [{
-                    targetProject: "sample-server",
-                    transformation: "compose:datacontext",
-                    sourceProject: "sample-database"
-                }]
+        subject.getAllRecipes = sandbox.stub().returns(Promise.resolve([
+            {
+                name: 'test-recipe',
+                projects: []
             }
-        }));
-        subject.fileService = fileServiceMock;
+        ]));
         subject.recipeFolder = [__dirname];
         subject.getRecipe('test-recipe').then(_ => done());
     });
 
+    it('getAllRecipes should return resolved promise', (done) => {
+        let subject = new RecipeService();
+        let fileServiceMock = createMock<IFileService>();
+        fileServiceMock.readJson = sandbox.stub().returns(Promise.resolve({ recipes: [] }));
+        subject.fileService = fileServiceMock;
+        subject.recipeFolder = [__dirname];
+        subject.getAllRecipes().then(_ => done());
+    });
 });

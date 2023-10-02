@@ -12,11 +12,17 @@ export class RecipeService implements IRecipeService {
     recipeFolder: string[] = [__dirname, '..', '..', 'data', 'recipes'];
 
     getRecipe = (recipeName: string): Promise<Recipe> => {
-        let path = _path.join(...this.recipeFolder, `${recipeName}.json`);
-        return this.fileService.pathExists(path)
-            .then(rslt => { if (!rslt) return Promise.reject(new Error(`Recipe not found: '${recipeName}'`)); })
-            .then(_ => this.fileService.readJson<{ recipe: Recipe }>(path))
-            .then(recipe => recipe.recipe);
+        return this.getAllRecipes()
+            .then(recipes => recipes.find(r => r.name == recipeName))
+            .then(recipe => {
+                if (!recipe) return Promise.reject(new Error(`Recipe not found: '${recipeName}'`));
+                return recipe;
+            });
     };
+
+    getAllRecipes = (): Promise<Recipe[]> => {
+        return this.fileService.readJson<{ recipes: Recipe[] }>(_path.join(...this.recipeFolder, 'recipes.json'))
+            .then(recipes => recipes.recipes);
+    }
 
 }
