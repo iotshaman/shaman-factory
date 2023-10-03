@@ -13,7 +13,7 @@ export class RecipeService implements IRecipeService {
 
     getRecipe = (recipeName: string): Promise<Recipe> => {
         return this.getAllRecipes()
-            .then(recipes => recipes.find(r => r.name == recipeName))
+            .then(recipes => recipes.find(r => r.name === recipeName))
             .then(recipe => {
                 if (!recipe) return Promise.reject(new Error(`Recipe not found: '${recipeName}'`));
                 return recipe;
