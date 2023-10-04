@@ -22,6 +22,7 @@
 		"mysql": "~2.18.1",
 		"mysql-shaman": "1.0.8",
 		"reflect-metadata": "~0.1.13",
+		"shaman-api": "^2.0.3",
 		"winston": "~3.8.2"
 	},
 	"devDependencies": {
