@@ -261,6 +261,21 @@ To copy resource files add a publish instruction like the following:
 }
 ```
 
+### List Command
+
+The list command can be used to view a list of available templates and recipes.  
+
+The syntax for the list command is as follows:  
+  
+  ```sh
+  sf ls -templates
+  ```
+  to list templates, or...
+  ```sh
+  sf ls -recipes
+  ```
+  to list recipes.
+
 ### Version Command
 
 The version command can be invoked to determine what version of Shaman Factory is currently installed. 
