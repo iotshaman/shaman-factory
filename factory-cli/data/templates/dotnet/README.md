@@ -2,7 +2,7 @@
 To scaffold and run your code in a .NET (dotnet) environment, use the value "dotnet" for the "environment" property of your project definition (shaman.json file -> projects). The proceeding templates are available in the "dotnet" environment, and can "include" references (dependencies) to other projects of type "dotnet". 
 
 ## Requirements
-Before you can use the .NET environment during scaffolding, you will need to install .NET Core on your machine; please ensure your version is >= 6.0.1. Also, since dotnet projects will be added to a .NET solution file (.sln), you will be required to provide a top-level "name" value in your shaman.json file.
+Before you can use the .NET environment during scaffolding, you will need to install .NET Core on your machine; please ensure your version is >= 7.0.1. Also, since dotnet projects will be added to a .NET solution file (.sln), you will be required to provide a top-level "name" value in your shaman.json file.
 
 ## Languages
 The Shaman Factory "dotnet" environment currently only supports the c# language. However, we are planning to introduce additional .NET language support, including f# and VB.net, so we ask that you specify the "language" property for each .NET project in a solution. The currently available values are: *csharp*; the default value is: *csharp*.
@@ -43,7 +43,7 @@ To prevent issues with scaffolding, please make sure all .NET project definition
 ```
 
 ## Server Template
-The .NET server template is built on top of .NET 6 and comes pre-built with the following features:
+The .NET server template is built on top of .NET 7 and comes pre-built with the following features:
 
 1. Application Configuration
 2. Default CORS configuration
@@ -190,7 +190,7 @@ The library project does not yet have any specs defined.
 The library project does not yet have any transformations defined.
 
 ## Command Line Utility Template
-The .NET command line utility contains all the code scaffolding necessary to provide a simple command line interface. The project is built using .NET 6 and leverages .NET's built-in dependency injection capabilities. It comes pre-built with app configuration, a default control loop, a default menu command, and a sample echo command.
+The .NET command line utility contains all the code scaffolding necessary to provide a simple command line interface. The project is built using .NET 7 and leverages .NET's built-in dependency injection capabilities. It comes pre-built with app configuration, a default control loop, a default menu command, and a sample echo command.
 
 To create a project based on the .NET command line utility template, use the following project configuration:
 
