@@ -1,6 +1,6 @@
 export class CommandLineArguments {
     public command: string;
-    private args: {[key: string]: string} = {};
+    private args: { [key: string]: string } = {};
     private argRegex: RegExp = /-{2}[a-zA-Z]+=.+/;
 
     constructor(argv: string[]) {
@@ -13,7 +13,7 @@ export class CommandLineArguments {
             let splitArg: string[] = arg.split('=');
             let key: string = splitArg[0].slice(2);
             let value: string = splitArg[1];
-            this.args[key] = value; 
+            this.args[key] = value;
         });
     }
 
@@ -23,12 +23,16 @@ export class CommandLineArguments {
         return this.keyDefaults[key];
     }
 
-    getDefault = (key: string): string => {
+    public getDefault = (key: string): string => {
         return this.keyDefaults[key];
     }
 
     public getFlag = (key: string): boolean => {
         return this.flags[key];
+    }
+
+    public getAllActiveFlags = (): string[] => {
+        return Object.keys(this.flags).filter(f => this.flags[f]);
     }
 
     private keyDefaults = {
@@ -42,5 +46,7 @@ export class CommandLineArguments {
 
     private flags = {
         '-add': false,
+        '-templates': false,
+        '-recipes': false,
     }
 }

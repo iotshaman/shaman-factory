@@ -1,0 +1,77 @@
+{
+  "recipes": [
+    {
+      "name": "default-recipe",
+      "projects": [
+        {
+          "name": "sample-website",
+          "environment": "node",
+          "template": "node-shaman-website",
+          "path": "client",
+          "runtimeDependencies": [
+            "sample-server"
+          ]
+        },
+        {
+          "name": "sample-database",
+          "environment": "node",
+          "template": "node-shaman-database",
+          "path": "database"
+        },
+        {
+          "name": "sample-library",
+          "environment": "node",
+          "template": "node-typescript-library",
+          "path": "library",
+          "include": [
+            "sample-database"
+          ]
+        },
+        {
+          "name": "sample-server",
+          "environment": "node",
+          "template": "node-express-server",
+          "path": "server",
+          "include": [
+            "sample-database",
+            "sample-library"
+          ]
+        }
+      ],
+      "transform": [
+        {
+          "targetProject": "sample-server",
+          "transformation": "compose:datacontext",
+          "sourceProject": "sample-database"
+        }
+      ]
+    },
+    {
+      "name": "node-express-api-with-database",
+      "projects": [
+        {
+          "name": "sample-database",
+          "environment": "node",
+          "template": "node-shaman-database",
+          "path": "database"
+        },
+        {
+          "name": "sample-server",
+          "environment": "node",
+          "template": "node-express-server",
+          "path": "server",
+          "include": [
+            "sample-database"
+          ]
+        }
+      ],
+      "transform": [
+        {
+          "targetProject": "sample-server",
+          "transformation": "compose:datacontext",
+          "sourceProject": "sample-database"
+        }
+      ]
+    }
+  ]
+}

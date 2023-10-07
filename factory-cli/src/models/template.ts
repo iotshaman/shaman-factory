@@ -1,7 +1,7 @@
 export class Template {
   name: string;
   environment: string;
-  type_rename: string;
+  type: string;
   version: string;
   file: string;
   language?: string;

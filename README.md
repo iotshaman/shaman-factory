@@ -96,7 +96,7 @@ For example, if you have a node js solution that includes a website, library, da
     {
       "name": "sample-library",
       "environment": "node",
-      "template": "node-typescriptlibrary",
+      "template": "node-typescript-library",
       "path": "library",
       "include": [
         "sample-database"
@@ -214,7 +214,8 @@ The syntax for the serve command is as follows:
 sf serve [--project=PROJECT]
 ```
 
-**[project]:** The name of the project for which you would like to serve. The provided project value must match a project name in your solution file. Note: any project names listed as "runtime dependencies" will be started first, and runtime dependencies can be nested.
+**[project]:** The name of the project for which you would like to serve. The provided project value must match a project name in your solution file. Note: any project names listed as "runtime dependencies" will be started first, and runtime dependencies can be nested.  
+**[filePath]:** (Optional) relative path to the shaman.json file (including file name). If no value is provided, the default value is the current working directory.
 
 *Note: In order for the serve command to work, the specified project (any and runtime dependencies) must have a 'start' script (in package.json).*
 
@@ -259,6 +260,21 @@ To copy resource files add a publish instruction like the following:
   ...
 }
 ```
+
+### List Command
+
+The list command can be used to view a list of available templates and recipes.  
+
+The syntax for the list command is as follows:  
+  
+  ```sh
+  sf ls -templates
+  ```
+  to list templates, or...
+  ```sh
+  sf ls -recipes
+  ```
+  to list recipes.
 
 ### Version Command
 

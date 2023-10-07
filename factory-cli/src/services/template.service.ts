@@ -8,6 +8,7 @@ import { HttpService } from './http.service';
 export interface ITemplateService {
   getTemplate: (environment: string, templateName: string, language?: string) => Promise<Template>;
   getCustomTemplate: (environment: string, templateName: string, solution: TemplateAuthorization, language?: string) => Promise<Template>
+  getAllTemplates: () => Promise<Template[]>;
   unzipProjectTemplate: (template: Template, folderPath: string) => Promise<void>;
   unzipCustomProjectTemplate: (template: Template, folderPath: string) => Promise<void>;
 }
@@ -25,7 +26,7 @@ export class TemplateService extends HttpService implements ITemplateService {
     let path = _path.join(...this.dataFolder, 'templates.json');
     return this.fileService.readJson<{ templates: Template[] }>(path).then(data => {
       let template = data.templates.find(t => t.environment == environment && t.name == templateName);
-      if (!template) throw new Error(`Project type not found: ${environment}-${templateName}`);
+      if (!template) throw new Error(`Project type not found: ${environment} ${templateName}`);
       return template;
     });
   }
@@ -56,9 +57,15 @@ export class TemplateService extends HttpService implements ITemplateService {
       })
       .catch(_ => {
         return Promise.reject(new Error('Failed to download custom template. Please check your shaman.json file ' +
-        'and ensure your authorization information is correct and your token is not expired. ' +
-        'Also check that your project name and environment are correct.'));
+          'and ensure your authorization information is correct and your token is not expired. ' +
+          'Also check that your project name and environment are correct.'));
       });
+  }
+
+  getAllTemplates = (): Promise<Template[]> => {
+    let path = _path.join(...this.dataFolder, 'templates.json');
+    return this.fileService.readJson<{templates: Template[]}>(path)
+    .then(data => data.templates);
   }
 
   unzipProjectTemplate = (template: Template, folderPath: string): Promise<void> => {

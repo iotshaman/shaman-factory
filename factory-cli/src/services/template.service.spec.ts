@@ -29,7 +29,7 @@ describe('Template Service', () => {
     subject.getTemplate("node", "library")
       .then(_ => { throw new Error("Expected rejected promise, but promise completed.") })
       .catch((ex: Error) => {
-        expect(ex.message).to.equal("Project type not found: node-library");
+        expect(ex.message).to.equal("Project type not found: node library");
         done();
       });
   });
@@ -137,6 +137,14 @@ describe('Template Service', () => {
     subject.getCustomTemplate("dotnet", "library", templateAuthorization, "csharp").then(_ => done());
   });
 
+  it('getAllTemplates should return resolved promise', (done) => {
+    let subject = new TemplateService();
+    let fileServiceMock = createMock<IFileService>();
+    fileServiceMock.readJson = sandbox.stub().returns(Promise.resolve({ templates: [] }));
+    subject.fileService = fileServiceMock;
+    subject.dataFolder = [__dirname];
+    subject.getAllTemplates().then(_ => done());
+  });
 
   it('unzipProjectTemplate should return resolved promise', (done) => {
     let template = new Template();
