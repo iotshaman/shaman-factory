@@ -1,0 +1,16 @@
+{
+  "name": "dotnet-csharp-cli",
+  "files": [
+    ".gitignore",
+    "appsettings.json",
+    "dotnet-csharp-cli.csproj",
+    "Program.cs",
+    "README.md",
+    "shaman.scaffold.js"
+  ],
+  "folders": [
+    "Commands",
+    "Composition",
+    "Configuration"
+  ]
+}

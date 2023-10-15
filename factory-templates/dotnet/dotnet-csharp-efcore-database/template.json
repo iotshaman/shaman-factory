@@ -1,0 +1,14 @@
+{
+  "name": "dotnet-csharp-efcore-database",
+  "files": [
+    ".gitignore",
+    "dotnet-csharp-efcore-database.csproj",
+    "ISampleDataContext.cs",
+    "README.md",
+    "SampleDataContext.cs",
+    "shaman.scaffold.js"
+  ],
+  "folders": [
+    "Models"
+  ]
+}

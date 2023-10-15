@@ -1,0 +1,71 @@
+{
+  "templates": [
+    {
+      "name": "node-shaman-website",
+      "environment": "node",
+      "type": "client",
+      "version": "2.0.0",
+      "file": "node/node-shaman-website-v2.0.0.zip"
+    },
+    {
+      "name": "dotnet-csharp-efcore-database",
+      "environment": "dotnet",
+      "type": "database",
+      "version": "2.0.0",
+      "file": "dotnet/dotnet-csharp-efcore-database-v2.0.0.zip",
+      "language": "csharp"
+    },
+    {
+      "name": "node-shaman-database",
+      "environment": "node",
+      "type": "database",
+      "version": "2.0.0",
+      "file": "node/node-shaman-database-v2.0.0.zip"
+    },
+    {
+      "name": "dotnet-csharp-library",
+      "environment": "dotnet",
+      "type": "library",
+      "version": "2.0.0",
+      "file": "dotnet/dotnet-csharp-library-v2.0.0.zip",
+      "language": "csharp"
+    },
+    {
+      "name": "node-typescript-library",
+      "environment": "node",
+      "type": "library",
+      "version": "2.0.0",
+      "file": "node/node-typescript-library-v2.0.0.zip"
+    },
+    {
+      "name": "dotnet-csharp-web-api",
+      "environment": "dotnet",
+      "type": "server",
+      "version": "2.0.0",
+      "file": "dotnet/dotnet-csharp-web-api-v2.0.0.zip",
+      "language": "csharp"
+    },
+    {
+      "name": "node-express-server",
+      "environment": "node",
+      "type": "server",
+      "version": "2.0.0",
+      "file": "node/node-express-server-v2.0.0.zip"
+    },
+    {
+      "name": "dotnet-csharp-cli",
+      "environment": "dotnet",
+      "type": "cli",
+      "version": "2.0.0",
+      "file": "dotnet/dotnet-csharp-cli-v2.0.0.zip",
+      "language": "csharp"
+    },
+    {
+      "name": "node-typescript-cli",
+      "environment": "node",
+      "type": "cli",
+      "version": "2.0.0",
+      "file": "node/node-typescript-cli-v2.0.0.zip"
+    }
+  ]
+}

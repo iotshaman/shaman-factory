@@ -1,0 +1,17 @@
+{
+  "name": "node-shaman-website",
+  "files": [
+    ".gitignore",
+    "build.js",
+    "index.js",
+    "package-lock.json",
+    "package.json",
+    "README.md",
+    "shaman.scaffold.js",
+    "website.json"
+  ],
+  "folders": [
+    "data",
+    "src"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "node-shaman-database",
+  "files": [
+    ".gitignore",
+    "package-lock.json",
+    "package.json",
+    "README.md",
+    "shaman.scaffold.js",
+    "tsconfig.json"
+  ],
+  "folders": [
+    "sql",
+    "src"
+  ]
+}
