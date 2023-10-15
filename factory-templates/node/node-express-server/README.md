@@ -1,17 +1,17 @@
 # Typescript Server
-*This project was scaffolded using Shaman CLI*
+*This project was scaffolded using Shaman Factory*
 
 This typescript server project contains all the code scaffolding necessary to provide a RESTful API over HTTP. The server is built using ExpressJS, and leverages InversifyJS to handle dependency injection. It comes pre-built with app configuration, an HTTP request router, a service for reading / writing JSON files, and a health-check controller. Once you have built the project, you are ready to start the server. 
 
 ## Building the Project
 
-If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-cli#scaffold-solution-command) then you can use Shaman CLI to build this project. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
+If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-factory#scaffold-solution-command) then you can use Shaman Factory to build this project. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
 
 ```sh
-shaman build node
+sf build node
 ```
 
-If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-cli#scaffold-command) then you can use the npm command to build the project. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
+If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-factory#scaffold-command) then you can use the npm command to build the project. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
 
 ```sh
 npm run build
@@ -21,15 +21,15 @@ npm run build
 
 *Note: you will need to build the server project before starting the server*
 
-If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-cli#scaffold-solution-command) then you can use Shaman CLI to start the server. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
+If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-factory#scaffold-solution-command) then you can use Shaman Factory to start the server. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
 
 ```sh
-shaman run [project]
+sf run [project]
 ```
 
 **Important:** replace "[project]" with the name of your server project, as specified in your solution file.
 
-If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-cli#scaffold-command) then you can use the npm command to start the server. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
+If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-factory#scaffold-command) then you can use the npm command to start the server. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
 
 ```sh
 npm start
@@ -55,24 +55,25 @@ The last file in the list, `src/models/app.config.ts`, is the configuration mode
 
 ## Add a Controller
 
-To add a controller (something that handles HTTP requests), add a file somewhere in the root folder `src/controllers` and call it "name-of-controller.controller.ts". This controller should have a constructor that takes an express "Application" object, and the constructor should setup any necessary internal routing. Then, you need to add the controller to the IoC container (see ["Dependency Injection"](#/dependency-injection)), and finally add it to the controllers object in the "loadControllers" method in `src/api.router.ts`.
+To add a controller (something that handles HTTP requests), add a file somewhere in the root folder `src/controllers` and call it "name-of-controller.controller.ts". This controller should implement "ShamanExpressController" interface, which will enfore the existence of a 'configure' method that takes an express "Application" object, and this 'configure' method should setup any necessary HTTP internal routing. Then, you need to add the controller to the IoC container (see ["Dependency Injection"](#/dependency-injection)).
 
 
 For example, the following controller could be created to return a static list of users whenever requests to the URI `/api/users/all` are handled by the server:
 
 ```ts
+/* istanbul ignore file */
 import { Request, Response, Application, Router } from "express";
-import { inject, injectable } from "inversify";
-import { TYPES } from "../../composition/app.composition.types";
+import { injectable } from "inversify";
+import { ShamanExpressController } from "shaman-api";
 
 @injectable()
-export class UserController {
+export class UserController implements ShamanExpressController {
 
-  private router: Router;
+  name: string = 'user';
 
-  constructor(@inject(TYPES.ExpressApplication) app: Application) {
-    this.router = Router();
-    this.router
+  configure = (express: Application) => {
+    let router = Router();
+    router
       .get('/all', this.getStaticUsers)
 
     app.use('/api/users', this.router);
@@ -92,31 +93,13 @@ export class UserController {
 }
 ```
 
-Before we we can use this controller, we need to configure it in the IoC container, as well as the router. First, lets create a controller type, so dependency injection will know how to identify this controller. Open the file `src/composition/app.composition.ts` and add a new property to the "CONTROLLER_TYPES" object. For example:
-
-```ts
-const CONTROLLER_TYPES = {
-  HealthController: "HealthController",
-  UserController: "UserController"
-}
-```
-
 Next, we need to add the controller to the IoC container. Open the file `src/composition/app.composition.ts` and add the following to the end of the "configureRouter" method, before the return statement:
 
 ```ts
-container.bind<UserController>(CONTROLLER_TYPES.UserController).to(UserController);
+container.bind<UserController>(SHAMAN_API_TYPES.ApiController).to(UserController);
 ```
 
-The last step is to add the new controller to your router. Open the file `src/api.router` and add update the "loadControllers" method to look like this:
-
-```ts
-private loadControllers = (container: interfaces.Container): void => {
-  this.controllers = [
-    container.get<HealthController>(CONTROLLER_TYPES.HealthController),
-    container.get<UserController>(CONTROLLER_TYPES.UserController)
-  ]
-}
-```
+*NOTE:* by using the built in "SHAMAN_API_TYPES.ApiController" your controller will automatically be registered in the IaC container.
 
 You are now all setup, and your new controller is ready to go. Since you are leveraging [dependency injection](#/dependency-injection) your controller can easily be updated to include new dependencies (for example, a "UserService"). 
 
@@ -133,33 +116,37 @@ Dependency inject is an application composition technique, often associated with
 
 The main concept behind dependency injection is that application components should only focus on their primary intent, and making instances of dependencies is rarely the stated intent of a given class / object. For example, a `UserService` class should only focus on CRUD (Create/Read/Update/Delete) operations, and not worry about how to create an instance of a database context class. Instead, we should rely on the underlying framework to handle the *instantiation* of dependencies, and then provide these dependencies to any classes / objects that require them (hence, dependency injection). 
 
-This server project uses [InversifyJS](https://inversify.io/) to manage dependency injection. For an example of how dependency injection is implemented in this project, look at the below sample from the built-in health check controller:
+This server project uses [InversifyJS](https://inversify.io/) to manage dependency injection. For an example of how dependency injection is implemented in this project, look at the below below sample, exteded from the UserController we created in the previous step:
 
 ```ts
 import { Request, Response, Application, Router } from "express";
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../composition/app.composition.types";
+import { UserService } from "../../services/user.service";
 
 @injectable()
-export class HealthController {
+export class UserController implements ShamanExpressController {
 
-  private router: Router;
+  name: string = 'user';
 
-  constructor(@inject(TYPES.ExpressApplication) app: Application) {
-    this.router = Router();
-    this.router
-      .get('/', this.getStatus)
+  constructor(@inject(TYPES.UserService) userService: UserService) {}
 
-    app.use('/api/health', this.router);
+  configure = (express: Application) => {
+    let router = Router();
+    router
+      .get('/all', this.getAllUsers)
+
+    app.use('/api/users', this.router);
   }
 
-  // BELOW CODE HAS BEEN OMITTED
+  getAllUsers = (_req: Request, res: Response, _next: any) => {
+    return this.userService.getAllUsers();
+  }
 
 }
-
 ```
 
-Notice that the constructor requires an `Application` class instance be provided? This is not something that will be manually called, instead we will use an *inversion of control container (IoC container)* to automatically create instances of the health controller. The IoC container will be responsible for providing the `Application` class instance.
+Notice that the constructor requires a `UserService` class instance be provided? This is not something that will be manually called, instead we will use an *inversion of control container (IoC container)* to automatically create instances of the health controller. The IoC container will be responsible for providing the `UserService` class instance.
 
 To make a class available through depdendency injection, first make an interface, create a class that implements this interface, and add an `injectable()` decorator to the class. For example, here is a trivial interface + class with the proper decoration:
 
