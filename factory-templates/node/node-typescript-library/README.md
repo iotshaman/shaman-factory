@@ -1,17 +1,17 @@
 # Typescript Library
-*This project was scaffolded using Shaman CLI*
+*This project was scaffolded using Shaman Factory*
 
 This typescript library is intended to store shared code, and could be installed in other projects, or built and published to an npm repository. 
 
 ## Building the Project
 
-If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-cli#scaffold-solution-command) then you can use Shaman CLI to build this project. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
+If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-factory#scaffold-solution-command) then you can use Shaman Factory to build this project. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
 
 ```sh
-shaman build node
+sf build node
 ```
 
-If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-cli#scaffold-command) then you can use the npm command to build the project. Open a command line interface (CMD, bash, etc.) and navigate to the library project folder, then run the following command:
+If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-factory#scaffold-command) then you can use the npm command to build the project. Open a command line interface (CMD, bash, etc.) and navigate to the library project folder, then run the following command:
 
 ```sh
 npm run build

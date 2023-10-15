@@ -51,20 +51,20 @@ export class NodePublishCommand implements IEnvironmentCommand {
     let publishPkg = {
       name: name,
       version: "1.0.0",
-      description: "Published by Shaman CLI.",
-      author: "Shaman CLI",
+      description: "Published by Shaman Factory.",
+      author: "Shaman Factory",
       license: "UNLICENSED",
       scripts: {
-        restore: "shaman install node"
+        restore: "sf install node"
       },
       dependencies: {
-        "shaman-cli": "^1.0.18"
+        "shaman-factory": "^2.0.1"
       }
     }
     let executableProjects = projects.filter(p => !!p.specs?.executable);
     if (!!executableProjects.length) {
       let scripts = executableProjects.reduce((a, b) => {
-        a[b.name] = `shaman serve ${b.name}`;
+        a[b.name] = `sf serve ${b.name}`;
         return a;
       }, {});
       publishPkg.scripts = { ...publishPkg.scripts, ...scripts };

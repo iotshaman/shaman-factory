@@ -1,17 +1,17 @@
 # C# .NET Server
-*This project was scaffolded using Shaman CLI*
+*This project was scaffolded using Shaman Factory*
 
 This c# server project contains all the code scaffolding necessary to provide a RESTful API over HTTP. The server is built using .NET 6, and leverages .NET's built-in dependency injection capabilities. It comes pre-built with app configuration, Serilog (for log multiplexing), Swagger (Open API) "living" documentation, and a health-check controller. 
 
 ## Building the Project
 
-If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-cli#scaffold-solution-command) then you can use Shaman CLI to build this project. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
+If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-factory#scaffold-solution-command) then you can use Shaman Factory to build this project. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
 
 ```sh
-shaman build
+sf build
 ```
 
-If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-cli#scaffold-command) then you can use the dotnet command to build the project. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
+If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-factory#scaffold-command) then you can use the dotnet command to build the project. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
 
 ```sh
 dotnet build
@@ -21,15 +21,15 @@ dotnet build
 
 *Note: you will need to build the server project before starting the server*
 
-If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-cli#scaffold-solution-command) then you can use Shaman CLI to start the server. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
+If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-factory#scaffold-solution-command) then you can use Shaman Factory to start the server. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
 
 ```sh
-shaman run [project]
+sf run [project]
 ```
 
 **Important:** replace "[project]" with the name of your server project, as specified in your solution file.
 
-If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-cli#scaffold-command) then you can use the dotnet command to start the server. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
+If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-factory#scaffold-command) then you can use the dotnet command to start the server. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
 
 ```sh
 dotnet run
@@ -80,7 +80,7 @@ Dependency inject (DI) is an application composition technique, often associated
 
 The main concept behind dependency injection is that application components should only focus on their primary intent, and making instances of dependencies is rarely the stated intent of a given class / object. For example, a `UserService` class should only focus on CRUD (Create/Read/Update/Delete) operations, and not worry about how to create an instance of a database context class. Instead, we should rely on the underlying framework to handle the *instantiation* of dependencies, and then provide these dependencies to any classes / objects that require them (hence, dependency injection). 
 
-Dependency injection is included by default with all modern .NET environments (.NET Core, .NET 5 / 6). When you scaffold a c# server project using the Shaman CLI, a folder called `Composition` will be added to the server project, and a file called `ServiceCollectionExtensions.cs` will be created to handle DI composition. 
+Dependency injection is included by default with all modern .NET environments (.NET Core, .NET 5 / 6). When you scaffold a c# server project using the Shaman Factory, a folder called `Composition` will be added to the server project, and a file called `ServiceCollectionExtensions.cs` will be created to handle DI composition. 
 
 ### Make an Interface Available Through Dependency Injection
 To make something available through depdendency injection, first make an interface, then create a class that implements this interface. For example, here is a trivial interface + class:

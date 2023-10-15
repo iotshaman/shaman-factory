@@ -241,7 +241,7 @@ export interface IPublishInstruction {
 
 #### Publish Instructions
 
-**Copy Files**
+**Copy Files**\
 To copy resource files add a publish instruction like the following:
 
 ```json
@@ -264,7 +264,7 @@ To copy resource files add a publish instruction like the following:
 }
 ```
 
-**Update JSON**
+**Update JSON**\
 To update JSON values in a given project, add publish instruction like the following:
 ```json
 {
@@ -290,7 +290,7 @@ To update JSON values in a given project, add publish instruction like the follo
 
 *NOTE:* The "replace" object performs a shallow update, so you must deep-nest any replacement values. 
 
-**Create Directories**
+**Create Directories**\
 To create directories in your publish folder, add a publish instruction like the following:
 
 ```json
