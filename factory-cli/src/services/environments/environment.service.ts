@@ -42,7 +42,8 @@ export abstract class EnvironmentServiceBase implements IEnvironmentService {
         new Error("An error occurred while executing project scaffolding.")
       ));
     });
-    return scaffoldCommand.then(_ => this.fileService.deleteFile(_path.join(folderPath, 'shaman.scaffold.js')));
+    return scaffoldCommand.then(_ => this.fileService.deleteFile(_path.join(folderPath, 'shaman.scaffold.js')))
+      .then(_ => this.fileService.deleteFile(_path.join(folderPath, 'shaman.scaffold.json')))
   }
 
 }

@@ -6,7 +6,7 @@ import { IPublishInstructionService } from "./publish-instruction-service";
 
 export interface CopyFilePublishInstruction extends IPublishInstruction {
   instruction: string;
-  arguments: string[];
+  arguments: {from: string; to: string}[];
 }
 
 export class CopyFilePublishInstructionService implements IPublishInstructionService {
@@ -19,8 +19,8 @@ export class CopyFilePublishInstructionService implements IPublishInstructionSer
       .find((i: IPublishInstruction) => i.instruction == "copy");
 
     const copyFileTasks = instruction.arguments.map(file => {
-      let originPath = _path.join(cwd, project.path, file);
-      let outputPath = _path.join(cwd, 'bin', project.environment, project.path, file);
+      let originPath = _path.join(cwd, project.path, file.from);
+      let outputPath = _path.join(cwd, 'bin', project.environment, project.path, file.to);
       return this.fileService.ensureFolderExists(_path.dirname(outputPath), './')
         .then(_ => this.fileService.copyFile(originPath, outputPath))
     });
