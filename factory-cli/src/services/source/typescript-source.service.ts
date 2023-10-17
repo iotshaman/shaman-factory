@@ -5,10 +5,11 @@ import { SolutionProject } from "../../models/solution";
 import { FileService, IFileService } from '../file.service';
 
 export interface ITypescriptSourceService {
+  createAppConfigFromSampleConfig: (solutionFolderPath: string, project: SolutionProject) => Promise<void>;
   addMySqlAppConfigurationJson: (solutionFolderPath: string, project: SolutionProject) => Promise<void>;
   addMySqlAppConfigurationModel: (solutionFolderPath: string, project: SolutionProject) => Promise<void>;
   addDataContextCompositionType: (solutionFolderPath: string, project: SolutionProject, contextName: string) => Promise<void>;
-  addDataContextComposition: (solutionFolderPath: string, project: SolutionProject, 
+  addDataContextComposition: (solutionFolderPath: string, project: SolutionProject,
     databaseProjectName: string, contextName: string) => Promise<void>;
 }
 
@@ -16,6 +17,13 @@ export class TypescriptSourceService implements ITypescriptSourceService {
 
   fileService: IFileService = new FileService();
   sourceFactory: ISourceFactory = new TypescriptSourceFactory();
+
+  createAppConfigFromSampleConfig = (solutionFolderPath: string, project: SolutionProject): Promise<void> => {
+    const projectFolderPath = _path.join(solutionFolderPath, project.path);
+    const configFilePath = _path.join(projectFolderPath, 'app', 'config', 'app.config.json');
+    const sampleConfigFilePath = _path.join(projectFolderPath, 'app', 'config', 'app.config.sample.json');
+    return this.fileService.copyFile(sampleConfigFilePath, configFilePath);
+  }
 
   addMySqlAppConfigurationJson = (solutionFolderPath: string, project: SolutionProject): Promise<void> => {
     const projectFolderPath = _path.join(solutionFolderPath, project.path);
@@ -59,7 +67,7 @@ export class TypescriptSourceService implements ITypescriptSourceService {
       return this.fileService.writeFile(configFilePath, sourceFile.toString());
     });
   }
-  
+
   addDataContextCompositionType = (solutionFolderPath: string, project: SolutionProject, contextName: string): Promise<void> => {
     const projectFolderPath = _path.join(solutionFolderPath, project.path);
     const typesFilePath = _path.join(projectFolderPath, 'src', 'composition', 'app.composition.types.ts');
@@ -76,7 +84,7 @@ export class TypescriptSourceService implements ITypescriptSourceService {
     });
   }
 
-  addDataContextComposition = (solutionFolderPath: string, project: SolutionProject, 
+  addDataContextComposition = (solutionFolderPath: string, project: SolutionProject,
     databaseProjectName: string, contextName: string): Promise<void> => {
     const projectFolderPath = _path.join(solutionFolderPath, project.path);
     const compositionFilePath = _path.join(projectFolderPath, 'src', 'composition', 'app.composition.ts');
