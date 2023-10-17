@@ -69,6 +69,7 @@ export class GenerateCommand implements ICommand {
             })
             .then(_ => this.recipeService.getRecipe(this.args.recipeName))
             .then(recipe => this.prompts.askToRenameRecipeProjects(recipe))
+            .then(recipe => this.prompts.askToRenameDataContext(recipe))
             .then(updatedRecipe => this.generateShamanFile(updatedRecipe.projects, updatedRecipe.transform))
     }
 
