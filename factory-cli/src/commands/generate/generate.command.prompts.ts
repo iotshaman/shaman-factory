@@ -6,6 +6,7 @@ import { InteractiveCommands, Prompt } from "../interactive-commands";
 export interface IGenerateCommandPrompts {
     askForProjectDetails: (templateName: string) => Promise<SolutionProject>;
     askToRenameRecipeProjects: (recipe: Recipe) => Promise<Recipe>;
+    askToRenameDataContext: (recipe: Recipe) => Promise<Recipe>;
     askForTemplateName: () => Promise<string>;
     askForSolutionName: () => Promise<string>;
     askIfAddingAnotherProject: () => Promise<boolean>;
@@ -22,6 +23,7 @@ export class GenerateCommandPrompts implements IGenerateCommandPrompts {
             'environment': buildValidator(RegExp('^[\\w]+$')),
             'path': buildValidator(RegExp('^[\\w-./\\\\]+$')),
             'projectName': buildValidator(RegExp('^[\\w-]+$')),
+            'dataContext': buildValidator(RegExp('^$|^[\\w]+$')),
             'recipe': buildValidator(RegExp('^.*$')),
             'solutionName': buildValidator(RegExp('^(?!\s*$).+$')),
             'templateName': buildValidator(RegExp('^(?!\s*$).+$')),
@@ -60,6 +62,26 @@ export class GenerateCommandPrompts implements IGenerateCommandPrompts {
                         recipeJSON = recipeJSON.replace(replace, e[1]);
                     });
                     res(JSON.parse(recipeJSON));
+                })
+            });
+    }
+
+    askToRenameDataContext = (recipe: Recipe): Promise<Recipe> => {
+        let prompts = recipe.projects
+            .filter(p => { return p.template.includes('database') })
+            .map(p => {
+                return new Prompt(`Rename data context for '${p.name}' (press enter for default name): `, p.name, this.validators.dataContext)
+            });
+        if (!prompts.length) return Promise.resolve(recipe);
+        return this.interaction.interrogate(prompts)
+            .then(renameValues => {
+                return new Promise((res) => {
+                    Object.entries<string>(renameValues).forEach((e) => {
+                        if (!e[1]) return;
+                        let project = recipe.projects.find(p => p.name == e[0]);
+                        project.specs.contextName = e[1];
+                    });
+                    res(recipe);
                 })
             });
     }
