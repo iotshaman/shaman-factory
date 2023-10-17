@@ -34,7 +34,7 @@ describe('Copy File Instruction Service', () => {
       template: 'server',
       environment: 'node',
       path: 'sample',
-      specs: {publish: [{instruction: 'copy', arguments: ['file.txt']}]}
+      specs: {publish: [{instruction: 'copy', arguments: [{from: 'file.txt', to: 'file.txt'}]}]}
     };
     fileServiceMock.ensureFolderExists = sandbox.stub().returns(Promise.resolve());
     let subject = new CopyFilePublishInstructionService();
@@ -52,7 +52,7 @@ describe('Copy File Instruction Service', () => {
       template: 'server',
       environment: 'node',
       path: 'sample',
-      specs: {publish: [{instruction: 'copy', arguments: ['file.txt']}]}
+      specs: {publish: [{instruction: 'copy', arguments: [{from: 'file.txt', to: 'file.txt'}]}]}
     };
     fileServiceMock.copyFile = sandbox.stub().returns(Promise.resolve());
     let subject = new CopyFilePublishInstructionService();

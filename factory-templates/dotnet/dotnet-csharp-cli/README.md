@@ -1,17 +1,17 @@
 # C# .NET Command Line Utility
-*This project was scaffolded using Shaman CLI*
+*This project was scaffolded using Shaman Factory*
 
 This c# command line utility project contains all the code scaffolding necessary to provide a simple command line interface. The project is built using .NET 6, and leverages .NET's built-in dependency injection capabilities. It comes pre-built with app configuration, a default control loop, a default menu command, and a sample echo command.
 
 ## Building the Project
 
-If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-cli#scaffold-solution-command) then you can use Shaman CLI to build this project. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
+If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-factory#scaffold-solution-command) then you can use Shaman Factory to build this project. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
 
 ```sh
-shaman build
+sf build
 ```
 
-If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-cli#scaffold-command) then you can use the dotnet command to build the project. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
+If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-factory#scaffold-command) then you can use the dotnet command to build the project. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
 
 ```sh
 dotnet build
@@ -21,15 +21,15 @@ dotnet build
 
 *Note: you will need to build the CLI project before starting*
 
-If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-cli#scaffold-solution-command) then you can use Shaman CLI to start the CLI. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
+If you scaffolded this project as part of a ["solution"](https://www.npmjs.com/package/shaman-factory#scaffold-solution-command) then you can use Shaman Factory to start the CLI. Open a command line interface (CMD, bash, etc.) and navigate to your solution folder (where your shaman.json file is located), and run the following command:
 
 ```sh
-shaman run [project]
+sf run [project]
 ```
 
 **Important:** replace "[project]" with the name of your server project, as specified in your solution file.
 
-If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-cli#scaffold-command) then you can use the dotnet command to start the CLI. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
+If you scaffolded this project [manually](https://www.npmjs.com/package/shaman-factory#scaffold-command) then you can use the dotnet command to start the CLI. Open a command line interface (CMD, bash, etc.) and navigate to the server project folder, then run the following command:
 
 ```sh
 dotnet run

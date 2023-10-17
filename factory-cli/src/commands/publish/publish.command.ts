@@ -4,18 +4,22 @@ import { Solution } from '../../models/solution';
 import { IFileService, FileService } from '../../services/file.service';
 import { IPublishInstructionService } from './instructions/publish-instruction-service';
 import { IPublishInstruction } from './publish-instruction';
-import { CopyFilePublishInstructionService } from './instructions/copy-file.instruction';
 import { CommandLineArguments } from '../../command-line-arguments';
 import { PublishArguments } from './publish.arguments';
 import { NodePublishCommand } from './node/node-publish.command';
 import { DotnetPublishCommand } from './dotnet/dotnet-publish.command';
+import { CopyFilePublishInstructionService } from './instructions/copy-file.instruction';
+import { MkdirPublishInstructionService } from './instructions/mkdir.instruction';
+import { UpdateJsonPublishInstructionService } from './instructions/update-json.instruction';
 
 export class PublishCommand implements ICommand {
 
   get name(): string { return "publish" };
   environmentCommands: IEnvironmentCommand[] = [];
   publishInstructionsServices: IPublishInstructionService[] = [
-    new CopyFilePublishInstructionService()
+    new CopyFilePublishInstructionService(),
+    new MkdirPublishInstructionService(),
+    new UpdateJsonPublishInstructionService()
   ];
   fileService: IFileService = new FileService();
   childCommandFactory = (solutionFilePath: string): IEnvironmentCommand[] => {

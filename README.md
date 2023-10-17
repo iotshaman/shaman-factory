@@ -241,7 +241,7 @@ export interface IPublishInstruction {
 
 #### Publish Instructions
 
-**Copy Files**
+**Copy Files**\
 To copy resource files add a publish instruction like the following:
 
 ```json
@@ -252,7 +252,57 @@ To copy resource files add a publish instruction like the following:
       {
         "instruction": "copy",
         "arguments": [
-          "relative/path/from/project/root/foobar.txt"
+          {
+            "from": "relative/path/from/project/root/foobar.txt",
+            "to": "new/path/for/bin/folder/foobar.txt"
+          }
+        ]
+      }
+    ]
+  }
+  ...
+}
+```
+
+**Update JSON**\
+To update JSON values in a given project, add publish instruction like the following:
+```json
+{
+  ...
+  "specs": {
+    "publish": [
+      {
+        "instruction": "json",
+        "arguments": [
+          {
+            "path": "new/path/for/bin/folder/file.json",
+            "replace": {
+              "foo": "bar"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  ...
+}
+```
+
+*NOTE:* The "replace" object performs a shallow update, so you must deep-nest any replacement values. 
+
+**Create Directories**\
+To create directories in your publish folder, add a publish instruction like the following:
+
+```json
+{
+  ...
+  "specs": {
+    "publish": [
+      {
+        "instruction": "mkdir",
+        "arguments": [
+          "relative/path/from/project/root/folder1",
+          "relative/path/from/project/root/folder2"
         ]
       }
     ]
