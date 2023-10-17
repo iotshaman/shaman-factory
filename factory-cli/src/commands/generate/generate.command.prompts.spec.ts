@@ -86,6 +86,115 @@ describe('Generate Command Prompts', () => {
         });
     });
 
+    it('askToRenameDataContext should return a new recipe with renamed data context', (done) => {
+        let subject = new GenerateCommandPrompts;
+        let interactionMock = createMock<InteractiveCommands>();
+        interactionMock.interrogate = sandbox.stub().returns(Promise.resolve({
+            'test-database': 'TestDataContext'
+        }));
+        subject.interaction = interactionMock;
+        let testRecipe: Recipe = {
+            name: 'test-recipe',
+            projects: [{
+                name: 'test-database',
+                environment: 'node',
+                template: 'database',
+                path: 'database',
+                specs: {}
+            }]
+        };
+        let expected: Recipe = {
+            name: 'test-recipe',
+            projects: [{
+                name: 'test-database',
+                environment: 'node',
+                template: 'database',
+                path: 'database',
+                specs: {
+                    'contextName': 'TestDataContext'
+                }
+            }]
+        };
+        subject.askToRenameDataContext(testRecipe)
+            .then(actual => {
+                assert.deepEqual(actual, expected);
+                done();
+            })
+            .catch(err => done(new Error(err)));
+    });
+
+    it('askToRenameDataContext should return the input recipe if no database projects are found', (done) => {
+        let subject = new GenerateCommandPrompts;
+        let testRecipe: Recipe = {
+            name: 'test-recipe',
+            projects: [{
+                name: 'test-server',
+                environment: 'node',
+                template: 'server',
+                path: 'server'
+            }]
+        };
+        let expected: Recipe = { ...testRecipe };
+        subject.askToRenameDataContext(testRecipe)
+            .then(actual => {
+                assert.deepEqual(actual, expected);
+                done();
+            })
+            .catch(err => done(new Error(err)));
+    });
+
+    it('askToRenameDataContext should return the input recipe if an empty string is passed as the context name', (done) => {
+        let subject = new GenerateCommandPrompts;
+        let interactionMock = createMock<InteractiveCommands>();
+        interactionMock.interrogate = sandbox.stub().returns(Promise.resolve({
+            'test-database': ''
+        }));
+        subject.interaction = interactionMock;
+        let testRecipe: Recipe = {
+            name: 'test-recipe',
+            projects: [{
+                name: 'test-database',
+                environment: 'node',
+                template: 'database',
+                path: 'database',
+                specs: {}
+            }]
+        };
+        let expected: Recipe = { ...testRecipe };
+        subject.askToRenameDataContext(testRecipe)
+            .then(actual => {
+                assert.deepEqual(actual, expected);
+                done();
+            })
+            .catch(err => done(new Error(err)));
+    });
+
+    it('askToRenameDataContext should return the input recipe if an empty string is passed as the context name', (done) => {
+        let subject = new GenerateCommandPrompts;
+        let interactionMock = createMock<InteractiveCommands>();
+        interactionMock.interrogate = sandbox.stub().returns(Promise.resolve({
+            'test-database': ''
+        }));
+        subject.interaction = interactionMock;
+        let testRecipe: Recipe = {
+            name: 'test-recipe',
+            projects: [{
+                name: 'test-database',
+                environment: 'node',
+                template: 'database',
+                path: 'database',
+                specs: {}
+            }]
+        };
+        let expected: Recipe = { ...testRecipe };
+        subject.askToRenameDataContext(testRecipe)
+            .then(actual => {
+                assert.deepEqual(actual, expected);
+                done();
+            })
+            .catch(err => done(new Error(err)));
+    });
+
     it('askForTemplateName should return value for template key', (done) => {
         let subject = new GenerateCommandPrompts();
         let interactionMock = createMock<InteractiveCommands>();

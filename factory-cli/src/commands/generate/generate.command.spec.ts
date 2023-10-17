@@ -195,7 +195,7 @@ describe('Generate Command', () => {
         subject.run(cla).then(_ => done());
     });
 
-    it('run should transformations in shaman.json if the selected recipe includes transformations', (done) => {
+    it('run should perform transformations in shaman.json if the selected recipe includes transformations', (done) => {
         let subject = new GenerateCommand();
         let cla = new CommandLineArguments(['', '', 'generate']);
         let fileServiceMock = createMock<IFileService>();
@@ -219,7 +219,29 @@ describe('Generate Command', () => {
                 name: "renamed-sample-database",
                 environment: "node",
                 type: "database",
-                path: "database"
+                path: "database",
+                specs: { }
+            }],
+            transform: [
+                {
+                    targetProject: "renamed-sample-server",
+                    transformation: "compose:datacontext",
+                    sourceProject: "renamed-sample-database"
+                }
+            ]
+        }));
+        promptsMock.askToRenameDataContext = sandbox.stub().returns(Promise.resolve({
+            projects: [{
+                name: "renamed-sample-server",
+                environment: "node",
+                type: "server",
+                path: "server"
+            }, {
+                name: "renamed-sample-database",
+                environment: "node",
+                type: "database",
+                path: "database",
+                specs: { contextName: "SampleDataContext" }
             }],
             transform: [
                 {
