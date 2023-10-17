@@ -10,7 +10,7 @@ import { SolutionProject } from '../../models/solution';
 import { LineDetail, SourceFile } from '../../models/source-file';
 import { ISourceFactory } from '../../factories/source/source.factory';
 
-describe('Typescript Source Service', () => {
+describe('csharp Source Service', () => {
   
   chai.use(sinonChai);
   var sandbox: sinon.SinonSandbox;

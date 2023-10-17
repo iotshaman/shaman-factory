@@ -11,7 +11,7 @@ import { LineDetail, SourceFile } from '../../models/source-file';
 import { ISourceFactory } from '../../factories/source/source.factory';
 
 describe('Typescript Source Service', () => {
-  
+
   chai.use(sinonChai);
   var sandbox: sinon.SinonSandbox;
   const importHook = `//shaman: {"lifecycle": "transformation", "args": {"type": "import", "target": "*"}}`;
@@ -28,6 +28,23 @@ describe('Typescript Source Service', () => {
     sandbox.restore();
   });
 
+  it('should copy app.config.sample.json to app.config.json', (done) => {
+    let project = new SolutionProject();
+    project.path = "sample"
+    let fileServiceMock = createMock<IFileService>();
+    fileServiceMock.copyFile = sandbox.stub().returns(Promise.resolve());
+    let subject = new TypescriptSourceService();
+    subject.fileService = fileServiceMock;
+    subject.createAppConfigFromSampleConfig("./", project).then(_ => {
+      expect(fileServiceMock.copyFile).to.have.been.calledOnceWith(
+        "sample\\app\\config\\app.config.sample.json",
+        "sample\\app\\config\\app.config.json"
+      );
+      done();
+    })
+      .catch(ex => done(new Error(ex)));
+  });
+  
   it('addMySqlAppConfigurationJson should update 2 json files', (done) => {
     let project = new SolutionProject();
     project.path = "./sample"
@@ -62,7 +79,7 @@ describe('Typescript Source Service', () => {
     let project = new SolutionProject();
     project.path = "./sample"
     let sourceFile = new SourceFile();
-    sourceFile.lines = [new LineDetail({index: 0, indent: 0, content: importHook, lifecycleHook: true})]
+    sourceFile.lines = [new LineDetail({ index: 0, indent: 0, content: importHook, lifecycleHook: true })]
     let fileServiceMock = createMock<IFileService>();
     fileServiceMock.getSourceFile = sandbox.stub().returns(Promise.resolve(sourceFile));
     let subject = new TypescriptSourceService();
@@ -80,8 +97,8 @@ describe('Typescript Source Service', () => {
     project.path = "./sample"
     let sourceFile = new SourceFile();
     sourceFile.lines = [
-      new LineDetail({index: 0, indent: 0, content: importHook, lifecycleHook: true}),
-      new LineDetail({index: 1, indent: 0, content: configurationHook, lifecycleHook: true})
+      new LineDetail({ index: 0, indent: 0, content: importHook, lifecycleHook: true }),
+      new LineDetail({ index: 1, indent: 0, content: configurationHook, lifecycleHook: true })
     ]
     sandbox.stub(sourceFile, 'replaceLines').callsFake((_i, lineFactory) => lineFactory());
     let fileServiceMock = createMock<IFileService>();
@@ -119,7 +136,7 @@ describe('Typescript Source Service', () => {
     project.path = "./sample"
     let sourceFile = new SourceFile();
     sourceFile.lines = [
-      new LineDetail({index: 0, indent: 0, content: compositionTypesHook, lifecycleHook: true})
+      new LineDetail({ index: 0, indent: 0, content: compositionTypesHook, lifecycleHook: true })
     ]
     sandbox.stub(sourceFile, 'replaceLines').callsFake((_i, lineFactory) => lineFactory());
     let fileServiceMock = createMock<IFileService>();
@@ -155,7 +172,7 @@ describe('Typescript Source Service', () => {
     let project = new SolutionProject();
     project.path = "./sample"
     let sourceFile = new SourceFile();
-    sourceFile.lines = [new LineDetail({index: 0, indent: 0, content: importHook, lifecycleHook: true})]
+    sourceFile.lines = [new LineDetail({ index: 0, indent: 0, content: importHook, lifecycleHook: true })]
     let fileServiceMock = createMock<IFileService>();
     fileServiceMock.getSourceFile = sandbox.stub().returns(Promise.resolve(sourceFile));
     let subject = new TypescriptSourceService();
@@ -173,8 +190,8 @@ describe('Typescript Source Service', () => {
     project.path = "./sample"
     let sourceFile = new SourceFile();
     sourceFile.lines = [
-      new LineDetail({index: 0, indent: 0, content: importHook, lifecycleHook: true}),
-      new LineDetail({index: 1, indent: 0, content: compositionHook, lifecycleHook: true})
+      new LineDetail({ index: 0, indent: 0, content: importHook, lifecycleHook: true }),
+      new LineDetail({ index: 1, indent: 0, content: compositionHook, lifecycleHook: true })
     ]
     sandbox.stub(sourceFile, 'replaceLines').callsFake((_i, lineFactory) => lineFactory());
     let fileServiceMock = createMock<IFileService>();
