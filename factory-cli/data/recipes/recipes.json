@@ -16,7 +16,8 @@
           "name": "sample-database",
           "environment": "node",
           "template": "node-shaman-database",
-          "path": "database"
+          "path": "database",
+          "specs": {}
         },
         {
           "name": "sample-library",
@@ -53,7 +54,8 @@
           "name": "sample-database",
           "environment": "node",
           "template": "node-shaman-database",
-          "path": "database"
+          "path": "database",
+          "specs": {}
         },
         {
           "name": "sample-server",
