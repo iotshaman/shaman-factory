@@ -16,11 +16,11 @@
       "language": "csharp"
     },
     {
-      "name": "node-shaman-database",
+      "name": "node-shaman-database-mysql",
       "environment": "node",
       "type": "database",
       "version": "2.0.0",
-      "file": "node/node-shaman-database-v2.0.0.zip"
+      "file": "node/node-shaman-database-mysql-v2.0.0.zip"
     },
     {
       "name": "dotnet-csharp-library",

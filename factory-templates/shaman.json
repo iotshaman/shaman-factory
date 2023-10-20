@@ -19,9 +19,9 @@
     {
       "name": "NodeShamanDatabase",
       "environment": "node",
-      "template": "node-shaman-database",
+      "template": "node-shaman-database-mysql",
       "type": "database",
-      "path": "node/node-shaman-database"
+      "path": "node/node-shaman-database-mysql"
     },
     {
       "name": "DotnetCsharpLibrary",

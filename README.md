@@ -90,7 +90,7 @@ For example, if you have a node js solution that includes a website, library, da
     {
       "name": "sample-database",
       "environment": "node",
-      "template": "node-shaman-database",
+      "template": "node-shaman-database-mysql",
       "path": "database"
     },
     {

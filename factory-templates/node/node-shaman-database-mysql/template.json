@@ -1,5 +1,5 @@
 {
-  "name": "node-shaman-database",
+  "name": "node-shaman-database-mysql",
   "files": [
     ".gitignore",
     "package-lock.json",

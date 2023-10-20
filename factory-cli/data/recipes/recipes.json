@@ -15,7 +15,7 @@
         {
           "name": "sample-database",
           "environment": "node",
-          "template": "node-shaman-database",
+          "template": "node-shaman-database-mysql",
           "path": "database",
           "specs": {}
         },
@@ -53,7 +53,7 @@
         {
           "name": "sample-database",
           "environment": "node",
-          "template": "node-shaman-database",
+          "template": "node-shaman-database-mysql",
           "path": "database",
           "specs": {}
         },

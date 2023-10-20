@@ -16,7 +16,7 @@ When using the [generate command](https://github.com/iotshaman/shaman-factory/tr
     {
       "name": "sample-database",
       "environment": "node",
-      "template": "node-shaman-database",
+      "template": "node-shaman-database-mysql",
       "path": "database"
     },
     {

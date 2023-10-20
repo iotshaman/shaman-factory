@@ -56,7 +56,7 @@ If you have both a server project and a database project included in your soluti
     {
       "name": "sample-database",
       "environment": "node",
-      "template": "node-shaman-database",
+      "template": "node-shaman-database-mysql",
       "path": "database",
       "specs": {
         "contextName": "MyDataContext"
@@ -100,7 +100,7 @@ To create a project based on the NodeJS database library template, use the follo
     {
       "name": "[name of your database library project]",
       "environment": "node",
-      "template": "node-shaman-database",
+      "template": "node-shaman-database-mysql",
       "path": "[where you want to store your code]",
       "include": [ //optional
         "some-dependent-project",
