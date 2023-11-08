@@ -56,8 +56,8 @@
       "name": "node-express-server",
       "environment": "node",
       "type": "server",
-      "version": "2.1.0",
-      "file": "node/node-express-server-v2.1.0.zip"
+      "version": "2.0.1",
+      "file": "node/node-express-server-v2.0.1.zip"
     },
     {
       "name": "dotnet-csharp-cli",
