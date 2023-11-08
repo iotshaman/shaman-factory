@@ -6,7 +6,6 @@ import { IEnvironmentService } from '../../../services/environments/environment.
 import { ITemplateService, TemplateService } from '../../../services/template.service';
 import { DotnetEnvironmentService } from '../../../services/environments/dotnet-environment.service';
 import { IEnvironmentCommand } from '../../command';
-import { get } from 'http';
 
 export class DotnetScaffoldCommand implements IEnvironmentCommand {
 
