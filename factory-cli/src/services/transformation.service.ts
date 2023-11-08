@@ -1,7 +1,6 @@
 import { Solution } from "../models/solution";
 import { CsharpComposeDataContextTransformation } from "../transformations/dotnet/csharp-compose-datacontext.transform";
-import { NodeComposeMysqlDataContextTransformation } from "../transformations/node/node-compose-datacontext-mysql.transform";
-import { NodeComposeSqliteDataContextTransformation } from "../transformations/node/node-compose-datacontext-sqlite.transform";
+import { NodeComposeDataContextTransformation } from "../transformations/node/node-compose-datacontext.transform";
 import { ITransformation } from "../transformations/transformation";
 
 export interface ITransformationService {
@@ -12,8 +11,7 @@ export class TransformationService implements ITransformationService {
 
   /* istanbul ignore next */
   transformations: ITransformation[] = [
-    new NodeComposeMysqlDataContextTransformation(),
-    new NodeComposeSqliteDataContextTransformation(),
+    new NodeComposeDataContextTransformation(),
     new CsharpComposeDataContextTransformation()
   ]
 
