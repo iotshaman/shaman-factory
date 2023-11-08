@@ -1,6 +1,7 @@
 import { Solution } from "../models/solution";
 import { CsharpComposeDataContextTransformation } from "../transformations/dotnet/csharp-compose-datacontext.transform";
-import { NodeComposeDataContextTransformation } from "../transformations/node/node-compose-datacontext.transform";
+import { NodeComposeMysqlDataContextTransformation } from "../transformations/node/node-compose-datacontext-mysql.transform";
+import { NodeComposeSqliteDataContextTransformation } from "../transformations/node/node-compose-datacontext-sqlite.transform";
 import { ITransformation } from "../transformations/transformation";
 
 export interface ITransformationService {
@@ -11,7 +12,8 @@ export class TransformationService implements ITransformationService {
 
   /* istanbul ignore next */
   transformations: ITransformation[] = [
-    new NodeComposeDataContextTransformation(),
+    new NodeComposeMysqlDataContextTransformation(),
+    new NodeComposeSqliteDataContextTransformation(),
     new CsharpComposeDataContextTransformation()
   ]
 
@@ -24,7 +26,7 @@ export class TransformationService implements ITransformationService {
         let sourceProject = solution.projects.find(p => p.name == b.sourceProject);
         if (!sourceProject) throw new Error(`Invalid source project in transformation: ${b.transformation} -> ${b.sourceProject}`);
       }
-      const transformations = !targetProject.language ? this.transformations : 
+      const transformations = !targetProject.language ? this.transformations :
         this.transformations.filter(t => t.language == targetProject.language);
       let transformation = transformations.find(
         t => t.name == b.transformation && t.environment == targetProject.environment

@@ -41,7 +41,7 @@ describe('Typescript Source Service', () => {
     })
       .catch(ex => done(new Error(ex)));
   });
-  
+
   it('addMySqlAppConfigurationJson should update 2 json files', (done) => {
     let project = new SolutionProject();
     project.path = "./sample"
@@ -112,6 +112,83 @@ describe('Typescript Source Service', () => {
     })
   });
 
+  it('addSqliteAppConfigurationJson should update 2 json files', (done) => {
+    let project = new SolutionProject();
+    project.path = "./sample"
+    let fileServiceMock = createMock<IFileService>();
+    fileServiceMock.readJson = sandbox.stub().returns(Promise.resolve({}));
+    fileServiceMock.writeJson = sandbox.stub().returns(Promise.resolve());
+    let subject = new TypescriptSourceService();
+    subject.fileService = fileServiceMock;
+    subject.addSqliteAppConfigurationJson("./", project).then(_ => {
+      expect(fileServiceMock.writeJson).to.have.been.calledTwice;
+      done();
+    });
+  });
+
+
+
+
+  it('addSqliteAppConfigurationModel should throw error if no import hook found', (done) => {
+    let project = new SolutionProject();
+    project.path = "./sample"
+    let sourceFile = new SourceFile();
+    let fileServiceMock = createMock<IFileService>();
+    fileServiceMock.getSourceFile = sandbox.stub().returns(Promise.resolve(sourceFile));
+    let subject = new TypescriptSourceService();
+    subject.fileService = fileServiceMock;
+    subject.addSqliteAppConfigurationModel("./", project)
+      .then(_ => { throw new Error("Expected rejected promise, but promise completed.") })
+      .catch(ex => {
+        expect(ex.message).to.equal("No import hook found in app config.");
+        done();
+      });
+  });
+
+  it('addSqliteAppConfigurationModel should throw error if no configuration hook found', (done) => {
+    let project = new SolutionProject();
+    project.path = "./sample"
+    let sourceFile = new SourceFile();
+    sourceFile.lines = [new LineDetail({ index: 0, indent: 0, content: importHook, lifecycleHook: true })]
+    let fileServiceMock = createMock<IFileService>();
+    fileServiceMock.getSourceFile = sandbox.stub().returns(Promise.resolve(sourceFile));
+    let subject = new TypescriptSourceService();
+    subject.fileService = fileServiceMock;
+    subject.addSqliteAppConfigurationModel("./", project)
+      .then(_ => { throw new Error("Expected rejected promise, but promise completed.") })
+      .catch(ex => {
+        expect(ex.message).to.equal("No configuration hook found in app config.");
+        done();
+      });
+  });
+
+  it('addSqliteAppConfigurationModel should call replaceLines twice', (done) => {
+    let project = new SolutionProject();
+    project.path = "./sample"
+    let sourceFile = new SourceFile();
+    sourceFile.lines = [
+      new LineDetail({ index: 0, indent: 0, content: importHook, lifecycleHook: true }),
+      new LineDetail({ index: 1, indent: 0, content: configurationHook, lifecycleHook: true })
+    ]
+    sandbox.stub(sourceFile, 'replaceLines').callsFake((_i, lineFactory) => lineFactory());
+    let fileServiceMock = createMock<IFileService>();
+    fileServiceMock.getSourceFile = sandbox.stub().returns(Promise.resolve(sourceFile));
+    let sourceFactoryMock = createMock<ISourceFactory>();
+    sourceFactoryMock.buildImportStatement = sandbox.stub().returns([]);
+    sourceFactoryMock.buildClassProperty = sandbox.stub().returns([]);
+    let subject = new TypescriptSourceService();
+    subject.fileService = fileServiceMock;
+    subject.sourceFactory = sourceFactoryMock;
+    subject.addSqliteAppConfigurationModel("./", project).then(_ => {
+      expect(sourceFile.replaceLines).to.have.been.calledTwice;
+      done();
+    })
+  });
+
+
+
+
+
   it('addDataContextCompositionType should throw if no composition types hook found', (done) => {
     let project = new SolutionProject();
     project.path = "./sample"
@@ -157,7 +234,7 @@ describe('Typescript Source Service', () => {
     fileServiceMock.getSourceFile = sandbox.stub().returns(Promise.resolve(sourceFile));
     let subject = new TypescriptSourceService();
     subject.fileService = fileServiceMock;
-    subject.addDataContextComposition("./", project, "sample-database", "MyContext")
+    subject.addDataContextComposition("./", project, "sample-database", "MyContext", "sampleConfig")
       .then(_ => { throw new Error("Expected rejected promise, but promise completed.") })
       .catch(ex => {
         expect(ex.message).to.equal("No import hook found in composition file.");
@@ -174,7 +251,7 @@ describe('Typescript Source Service', () => {
     fileServiceMock.getSourceFile = sandbox.stub().returns(Promise.resolve(sourceFile));
     let subject = new TypescriptSourceService();
     subject.fileService = fileServiceMock;
-    subject.addDataContextComposition("./", project, "sample-database", "MyContext")
+    subject.addDataContextComposition("./", project, "sample-database", "MyContext", "sampleConfig")
       .then(_ => { throw new Error("Expected rejected promise, but promise completed.") })
       .catch(ex => {
         expect(ex.message).to.equal("No data context composition hook found in composition file.");
@@ -199,7 +276,7 @@ describe('Typescript Source Service', () => {
     let subject = new TypescriptSourceService();
     subject.fileService = fileServiceMock;
     subject.sourceFactory = sourceFactoryMock;
-    subject.addDataContextComposition("./", project, "sample-database", "MyContext").then(_ => {
+    subject.addDataContextComposition("./", project, "sample-database", "MyContext", "sampleConfig").then(_ => {
       expect(sourceFile.replaceLines).to.have.been.calledTwice;
       done();
     })
