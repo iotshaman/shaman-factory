@@ -27,12 +27,8 @@ export class NodeScaffoldCommand implements IEnvironmentCommand {
     console.log(`Scaffolding node ${templateName}.`);
     return this.environmentService.checkNamingConvention(name)
       .then(_ => {
-        if (project.custom) return this.templateService.getCustomTemplate("node", templateName, this.solution.auth);
-        else return this.templateService.getTemplate("node", templateName);
-      })
-      .then(template => {
-        if (project.custom) return this.templateService.unzipCustomProjectTemplate(template, folderPath);
-        else return this.templateService.unzipProjectTemplate(template, folderPath);
+        if (project.custom) return this.getAndUnzipCustomTemplate(templateName, folderPath);
+        else return this.getAndUnzipTemplate(templateName, folderPath);
       })
       .then(_ => this.environmentService.updateProjectDefinition(folderPath, name, this.solution))
       .then(_ => this.environmentService.addProjectScaffoldFile(folderPath, name, this.solution))
@@ -41,5 +37,15 @@ export class NodeScaffoldCommand implements IEnvironmentCommand {
       .then(_ => {
         console.log("Scaffolding complete.");
       })
+  }
+
+  private getAndUnzipTemplate = (templateName: string, folderPath: string): Promise<void> => {
+    return this.templateService.getTemplate("node", templateName)
+      .then(template => this.templateService.unzipProjectTemplate(template, folderPath));
+  }
+
+  private getAndUnzipCustomTemplate = (templateName: string, folderPath: string): Promise<void> => {
+    return this.templateService.getCustomTemplate("node", templateName, this.solution.auth)
+      .then(template => this.templateService.unzipCustomProjectTemplate(template, folderPath));
   }
 }
