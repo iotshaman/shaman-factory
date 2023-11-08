@@ -14,7 +14,8 @@ Below is a catalog of the different templates that are available, per-environmen
 
 ### Node JS Templates
 * [Server Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#server-template)
-* [Database Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#database-library-template)
+* [MySQL Database Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#mysql-database-library-template)
+* [SQLite Database Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#sqlite-database-library-template)
 * [Library Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#library-template)
 * [HTML Client Template](https://github.com/iotshaman/shaman-factory/tree/v2/factory-cli/data/templates/node#html-client-template)
 
