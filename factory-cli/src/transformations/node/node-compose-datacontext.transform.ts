@@ -18,7 +18,7 @@ export class NodeComposeDataContextTransformation implements ITransformation {
     if (!databaseProject) return Promise.reject(new Error(`Invalid source project in transformation: '${transformation.sourceProject}'.`));
     let databaseType = databaseProject.specs?.databaseType;
     if (!databaseType) return Promise.reject(new Error("Database type not specified in database project specs."));
-    const contextName = databaseProject.specs?.contextName ?? "SampleDatabaseContext";
+    const contextName = databaseProject.specs.contextName ?? "SampleDatabaseContext";
     return this.sourceService.createAppConfigFromSampleConfig(solutionFolderPath, project)
       .then(_ => this.sourceService.addAppConfigurationJson(solutionFolderPath, project, databaseType))
       .then(_ => this.sourceService.addAppConfigurationModel(solutionFolderPath, project, databaseType))
