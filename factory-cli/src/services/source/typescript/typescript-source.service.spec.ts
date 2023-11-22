@@ -49,7 +49,7 @@ describe('Typescript Source Service', () => {
     appConfigMock.configType = "noop";
     appConfigMock.addAppConfigurationJson = sandbox.stub().returns(Promise.resolve());
     let subject = new TypescriptSourceService();
-    subject.appConfigurationServiceFactory = [appConfigMock];
+    subject.appConfigurationServiceArray = [appConfigMock];
     subject.addAppConfigurationJson("./", project, "noop").then(_ => {
       expect(appConfigMock.addAppConfigurationJson).to.have.been.called;
       done();
@@ -64,7 +64,7 @@ describe('Typescript Source Service', () => {
     appConfigMock.configType = "noop";
     appConfigMock.addAppConfigurationModel = sandbox.stub().returns(Promise.resolve());
     let subject = new TypescriptSourceService();
-    subject.appConfigurationServiceFactory = [appConfigMock];
+    subject.appConfigurationServiceArray = [appConfigMock];
     subject.addAppConfigurationModel("./", project, "noop").then(_ => {
       expect(appConfigMock.addAppConfigurationModel).to.have.been.called;
       done();
@@ -116,7 +116,7 @@ describe('Typescript Source Service', () => {
     let fileServiceMock = createMock<IFileService>();
     fileServiceMock.getSourceFile = sandbox.stub().returns(Promise.resolve(sourceFile));
     let subject = new TypescriptSourceService();
-    subject.appConfigurationServiceFactory = [
+    subject.appConfigurationServiceArray = [
       new NoopAppConfigurationService()
     ];
     subject.fileService = fileServiceMock;
@@ -136,7 +136,7 @@ describe('Typescript Source Service', () => {
     let fileServiceMock = createMock<IFileService>();
     fileServiceMock.getSourceFile = sandbox.stub().returns(Promise.resolve(sourceFile));
     let subject = new TypescriptSourceService();
-    subject.appConfigurationServiceFactory = [
+    subject.appConfigurationServiceArray = [
       new NoopAppConfigurationService()
     ];
     subject.fileService = fileServiceMock;
@@ -163,7 +163,7 @@ describe('Typescript Source Service', () => {
     sourceFactoryMock.buildImportStatement = sandbox.stub().returns([]);
     sourceFactoryMock.buildClassProperty = sandbox.stub().returns([]);
     let subject = new TypescriptSourceService();
-    subject.appConfigurationServiceFactory = [
+    subject.appConfigurationServiceArray = [
       new NoopAppConfigurationService()
     ];
     subject.fileService = fileServiceMock;
