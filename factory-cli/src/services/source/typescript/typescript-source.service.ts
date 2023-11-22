@@ -20,7 +20,7 @@ export class TypescriptSourceService implements ITypescriptSourceService {
 
   fileService: IFileService = new FileService();
   sourceFactory: ISourceFactory = new TypescriptSourceFactory();
-  appConfigurationServiceFactory: IAppConfiguration[] = [
+  appConfigurationServiceArray: IAppConfiguration[] = [
     new MysqlAppConfigurationService(),
     new SqliteAppConfigurationService()
   ]
@@ -33,12 +33,12 @@ export class TypescriptSourceService implements ITypescriptSourceService {
   }
 
   addAppConfigurationJson = (solutionFolderPath: string, project: SolutionProject, databaseType: string): Promise<void> => {
-    const configService = this.appConfigurationServiceFactory.find(s => s.configType == databaseType);
+    const configService = this.appConfigurationServiceArray.find(s => s.configType == databaseType);
     return configService.addAppConfigurationJson(solutionFolderPath, project);
   }
 
   addAppConfigurationModel = (solutionFolderPath: string, project: SolutionProject, databaseType: string): Promise<void> => {
-    const configService = this.appConfigurationServiceFactory.find(s => s.configType == databaseType);
+    const configService = this.appConfigurationServiceArray.find(s => s.configType == databaseType);
     return configService.addAppConfigurationModel(solutionFolderPath, project);
   }
 
@@ -60,7 +60,7 @@ export class TypescriptSourceService implements ITypescriptSourceService {
 
   addDataContextComposition = (solutionFolderPath: string, project: SolutionProject,
     databaseProjectName: string, contextName: string, databaseType: string): Promise<void> => {
-    const configService = this.appConfigurationServiceFactory.find(s => s.configType == databaseType);
+    const configService = this.appConfigurationServiceArray.find(s => s.configType == databaseType);
     const configName = configService.getConfigName();
     const projectFolderPath = _path.join(solutionFolderPath, project.path);
     const compositionFilePath = _path.join(projectFolderPath, 'src', 'composition', 'app.composition.ts');
