@@ -6,7 +6,7 @@ import { expect } from 'chai';
 import { createMock } from 'ts-auto-mock';
 import { ProjectTransformation, Solution } from '../../models/solution';
 import { CsharpComposeDataContextTransformation } from "./csharp-compose-datacontext.transform";
-import { IDotnetSourceService } from "../../services/source/csharp-source.service";
+import { IDotnetSourceService } from "../../services/source/csharp/csharp-source.service";
 
 describe('Csharp Compose DataContext Transformation', () => {
   

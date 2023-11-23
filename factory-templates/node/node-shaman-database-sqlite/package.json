@@ -1,0 +1,19 @@
+{
+	"name": "sample-database",
+	"version": "1.0.2",
+	"description": "Scaffolded using shaman-factory.",
+	"main": "dist/index.js",
+	"private": true,
+	"scripts": {
+		"build": "tsc"
+	},
+	"author": "Shaman CLI",
+	"license": "UNLICENSED",
+	"dependencies": {
+		"sqlite-shaman": "^1.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "~16.6.0",
+		"typescript": "~4.9.4"
+	}
+}

@@ -1,6 +1,6 @@
 import { ProjectTransformation, Solution } from "../../models/solution";
 import { FileService, IFileService } from "../../services/file.service";
-import { IDotnetSourceService, CsharpSourceService } from "../../services/source/csharp-source.service";
+import { IDotnetSourceService, CsharpSourceService } from "../../services/source/csharp/csharp-source.service";
 import { ITransformation } from "../transformation";
 
 export class CsharpComposeDataContextTransformation implements ITransformation {

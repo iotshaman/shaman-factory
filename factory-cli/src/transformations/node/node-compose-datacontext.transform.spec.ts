@@ -1,15 +1,15 @@
-import 'mocha';
 import * as chai from 'chai';
+import { expect } from 'chai';
+import 'mocha';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
-import { expect } from 'chai';
 import { createMock } from 'ts-auto-mock';
 import { ProjectTransformation, Solution } from '../../models/solution';
-import { NodeComposeDataContextTransformation } from "./node-compose-datacontext.transform";
-import { ITypescriptSourceService } from "../../services/source/typescript-source.service";
+import { ITypescriptSourceService } from "../../services/source/typescript/typescript-source.service";
+import { NodeComposeDataContextTransformation } from './node-compose-datacontext.transform';
 
 describe('Node Compose DataContext Transformation', () => {
-  
+
   chai.use(sinonChai);
   var sandbox: sinon.SinonSandbox;
 
@@ -53,7 +53,7 @@ describe('Node Compose DataContext Transformation', () => {
 
   it('transform should throw if invalid source project found', (done) => {
     let solution = new Solution();
-    solution.projects = [{name: 'svr', environment: "node", template: "server", path: "./svr"}];
+    solution.projects = [{ name: 'svr', environment: "node", template: "server", path: "./svr" }];
     let transformation = new ProjectTransformation();
     transformation.targetProject = "svr";
     transformation.sourceProject = "invalid"
@@ -66,49 +66,75 @@ describe('Node Compose DataContext Transformation', () => {
       });
   });
 
-  it('transform should call addMySqlAppConfigurationJson', (done) => {
+  it('transform should throw if database type not specified in database project specs', (done) => {
     let solution = new Solution();
     solution.projects = [
-      {name: 'svr', environment: "node", template: "server", path: "./svr"},
-      {name: 'db', environment: "node", template: "database", path: "./db"}
+      { name: 'svr', environment: "node", template: "server", path: "./svr" },
+      { name: 'db', environment: "node", template: "database", path: "./db" }
     ];
     let transformation = new ProjectTransformation();
     transformation.targetProject = "svr";
     transformation.sourceProject = "db"
     let typescriptSourceService = createMock<ITypescriptSourceService>();
-    typescriptSourceService.addMySqlAppConfigurationJson = sandbox.stub().returns(Promise.resolve());
+    typescriptSourceService.addDataContextCompositionType = sandbox.stub().returns(Promise.resolve());
     let subject = new NodeComposeDataContextTransformation();
     subject.sourceService = typescriptSourceService;
-    subject.transform(transformation, solution, "./").then(_ => {
-      expect(typescriptSourceService.addMySqlAppConfigurationJson).to.have.been.called;
-      done();
-    });
+    subject.transform(transformation, solution, "./")
+      .then(_ => {
+        done(new Error("Expected rejected promise, but promise completed."))
+      })
+      .catch(ex => {
+        expect(ex.message).to.equal("Database type not specified in database project specs.");
+        done();
+      })
   });
 
-  it('transform should call addMySqlAppConfigurationModel', (done) => {
+  it('transform should call addAppConfigurationJson', (done) => {
     let solution = new Solution();
     solution.projects = [
       {name: 'svr', environment: "node", template: "server", path: "./svr"},
-      {name: 'db', environment: "node", template: "database", path: "./db"}
+      {name: 'db', environment: "node", template: "database", path: "./db", specs: { databaseType: 'noop' }}
     ];
     let transformation = new ProjectTransformation();
     transformation.targetProject = "svr";
     transformation.sourceProject = "db"
     let typescriptSourceService = createMock<ITypescriptSourceService>();
-    typescriptSourceService.addMySqlAppConfigurationModel = sandbox.stub().returns(Promise.resolve());
+    typescriptSourceService.addAppConfigurationJson = sandbox.stub().returns(Promise.resolve());
     let subject = new NodeComposeDataContextTransformation();
     subject.sourceService = typescriptSourceService;
     subject.transform(transformation, solution, "./").then(_ => {
-      expect(typescriptSourceService.addMySqlAppConfigurationModel).to.have.been.called;
+      expect(typescriptSourceService.addAppConfigurationJson).to.have.been.called;
       done();
-    });
+    })
+    .catch(ex => done(ex));
   });
+
+  it('transform should call addAppConfigurationModel', (done) => {
+    let solution = new Solution();
+    solution.projects = [
+      {name: 'svr', environment: "node", template: "server", path: "./svr"},
+      {name: 'db', environment: "node", template: "database", path: "./db", specs: { databaseType: 'noop' }}
+    ];
+    let transformation = new ProjectTransformation();
+    transformation.targetProject = "svr";
+    transformation.sourceProject = "db"
+    let typescriptSourceService = createMock<ITypescriptSourceService>();
+    typescriptSourceService.addAppConfigurationModel = sandbox.stub().returns(Promise.resolve());
+    let subject = new NodeComposeDataContextTransformation();
+    subject.sourceService = typescriptSourceService;
+    subject.transform(transformation, solution, "./").then(_ => {
+      expect(typescriptSourceService.addAppConfigurationModel).to.have.been.called;
+      done();
+    })
+    .catch(ex => done(ex));
+  });
+
 
   it('transform should call addDataContextCompositionType', (done) => {
     let solution = new Solution();
     solution.projects = [
-      {name: 'svr', environment: "node", template: "server", path: "./svr"},
-      {name: 'db', environment: "node", template: "database", path: "./db"}
+      { name: 'svr', environment: "node", template: "server", path: "./svr" },
+      { name: 'db', environment: "node", template: "database", path: "./db", specs: { databaseType: "mysql" } }
     ];
     let transformation = new ProjectTransformation();
     transformation.targetProject = "svr";
@@ -123,11 +149,47 @@ describe('Node Compose DataContext Transformation', () => {
     });
   });
 
+  it('transform should use the contextName provided in the project specs if provided', (done) => {
+    let solution = new Solution();
+    solution.projects = [
+      { name: 'svr', environment: "node", template: "server", path: "./svr" },
+      { name: 'db', environment: "node", template: "database", path: "./db", specs: { contextName: "MyContext", databaseType: "mysql" } }
+    ];
+    let transformation = new ProjectTransformation();
+    transformation.targetProject = "svr";
+    transformation.sourceProject = "db"
+    let typescriptSourceService = createMock<ITypescriptSourceService>();
+    typescriptSourceService.addDataContextCompositionType = sandbox.stub().callsFake((_path, _project, contextName) => {
+      expect(contextName).to.equal("MyContext")
+    })
+    let subject = new NodeComposeDataContextTransformation();
+    subject.sourceService = typescriptSourceService;
+    subject.transform(transformation, solution, "./").then(_ => done());
+  });
+
+  it('transform should use the default contextName if one is not provided in the project specs', (done) => {
+    let solution = new Solution();
+    solution.projects = [
+      { name: 'svr', environment: "node", template: "server", path: "./svr" },
+      { name: 'db', environment: "node", template: "database", path: "./db", specs: { databaseType: "mysql" } }
+    ];
+    let transformation = new ProjectTransformation();
+    transformation.targetProject = "svr";
+    transformation.sourceProject = "db"
+    let typescriptSourceService = createMock<ITypescriptSourceService>();
+    typescriptSourceService.addDataContextCompositionType = sandbox.stub().callsFake((_path, _project, contextName) => {
+      expect(contextName).to.equal("SampleDatabaseContext")
+    })
+    let subject = new NodeComposeDataContextTransformation();
+    subject.sourceService = typescriptSourceService;
+    subject.transform(transformation, solution, "./").then(_ => done());
+  });
+
   it('transform should call addDataContextComposition', (done) => {
     let solution = new Solution();
     solution.projects = [
-      {name: 'svr', environment: "node", template: "server", path: "./svr"},
-      {name: 'db', environment: "node", template: "database", path: "./db"}
+      { name: 'svr', environment: "node", template: "server", path: "./svr" },
+      { name: 'db', environment: "node", template: "database", path: "./db", specs: { databaseType: "mysql" } }
     ];
     let transformation = new ProjectTransformation();
     transformation.targetProject = "svr";
@@ -140,24 +202,6 @@ describe('Node Compose DataContext Transformation', () => {
       expect(typescriptSourceService.addDataContextComposition).to.have.been.called;
       done();
     });
-  });
-
-  it('transform should call addDataContextCompositionType', (done) => {
-    let solution = new Solution();
-    solution.projects = [
-      {name: 'svr', environment: "node", template: "server", path: "./svr"},
-      {name: 'db', environment: "node", template: "database", path: "./db", specs: {contextName: "MyContext"}}
-    ];
-    let transformation = new ProjectTransformation();
-    transformation.targetProject = "svr";
-    transformation.sourceProject = "db"
-    let typescriptSourceService = createMock<ITypescriptSourceService>();
-    typescriptSourceService.addDataContextCompositionType = sandbox.stub().callsFake((_path, _prject, contextName) => {
-      expect(contextName).to.equal("MyContext")
-    })
-    let subject = new NodeComposeDataContextTransformation();
-    subject.sourceService = typescriptSourceService;
-    subject.transform(transformation, solution, "./").then(_ => done());
   });
 
 });

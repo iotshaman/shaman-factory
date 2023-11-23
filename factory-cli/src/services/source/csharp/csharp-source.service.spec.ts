@@ -4,11 +4,11 @@ import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 import { expect } from 'chai';
 import { createMock } from 'ts-auto-mock';
-import { IFileService } from '../file.service';
+import { IFileService } from '../../file.service';
 import { CsharpSourceService } from './csharp-source.service';
-import { SolutionProject } from '../../models/solution';
-import { LineDetail, SourceFile } from '../../models/source-file';
-import { ISourceFactory } from '../../factories/source/source.factory';
+import { SolutionProject } from '../../../models/solution';
+import { LineDetail, SourceFile } from '../../../models/source-file';
+import { ISourceFactory } from '../../../factories/source/source.factory';
 
 describe('Csharp Source Service', () => {
   
@@ -16,7 +16,6 @@ describe('Csharp Source Service', () => {
   var sandbox: sinon.SinonSandbox;
   const importHook = `//shaman: {"lifecycle": "transformation", "args": {"type": "import", "target": "*"}}`;
   const configurationHook = `//shaman: {"lifecycle": "transformation", "args": {"type": "config", "target": "*"}}`;
-  const compositionTypesHook = `//shaman: {"lifecycle": "transformation", "args": {"type": "compose", "target": "TYPES"}}`;
   const compositionHook = `//shaman: {"lifecycle": "transformation", "args": {"type": "compose", "target": "datacontext"}}`;
 
   beforeEach(() => {

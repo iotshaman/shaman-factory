@@ -1,22 +1,29 @@
 import * as _path from 'path';
-import { TypescriptSourceFactory } from "../../factories/source/typescript-source.factory";
-import { ISourceFactory } from "../../factories/source/source.factory";
-import { SolutionProject } from "../../models/solution";
-import { FileService, IFileService } from '../file.service';
+import { ISourceFactory } from "../../../factories/source/source.factory";
+import { TypescriptSourceFactory } from "../../../factories/source/typescript-source.factory";
+import { SolutionProject } from "../../../models/solution";
+import { FileService, IFileService } from '../../file.service';
+import { IAppConfiguration } from './app-configuration/app-configuration.interface';
+import { MysqlAppConfigurationService } from './app-configuration/mysql-app-configuration.service';
+import { SqliteAppConfigurationService } from './app-configuration/sqlite-app-configuration.service';
 
 export interface ITypescriptSourceService {
   createAppConfigFromSampleConfig: (solutionFolderPath: string, project: SolutionProject) => Promise<void>;
-  addMySqlAppConfigurationJson: (solutionFolderPath: string, project: SolutionProject) => Promise<void>;
-  addMySqlAppConfigurationModel: (solutionFolderPath: string, project: SolutionProject) => Promise<void>;
+  addAppConfigurationJson: (solutionFolderPath: string, project: SolutionProject, databaseType: string) => Promise<void>;
+  addAppConfigurationModel: (solutionFolderPath: string, project: SolutionProject, databaseType: string) => Promise<void>;
   addDataContextCompositionType: (solutionFolderPath: string, project: SolutionProject, contextName: string) => Promise<void>;
   addDataContextComposition: (solutionFolderPath: string, project: SolutionProject,
-    databaseProjectName: string, contextName: string) => Promise<void>;
+    databaseProjectName: string, contextName: string, configName: string) => Promise<void>;
 }
 
 export class TypescriptSourceService implements ITypescriptSourceService {
 
   fileService: IFileService = new FileService();
   sourceFactory: ISourceFactory = new TypescriptSourceFactory();
+  appConfigurationServiceArray: IAppConfiguration[] = [
+    new MysqlAppConfigurationService(),
+    new SqliteAppConfigurationService()
+  ]
 
   createAppConfigFromSampleConfig = (solutionFolderPath: string, project: SolutionProject): Promise<void> => {
     const projectFolderPath = _path.join(solutionFolderPath, project.path);
@@ -25,47 +32,14 @@ export class TypescriptSourceService implements ITypescriptSourceService {
     return this.fileService.copyFile(sampleConfigFilePath, configFilePath);
   }
 
-  addMySqlAppConfigurationJson = (solutionFolderPath: string, project: SolutionProject): Promise<void> => {
-    const projectFolderPath = _path.join(solutionFolderPath, project.path);
-    const configFilePath = _path.join(projectFolderPath, 'app', 'config', 'app.config.json');
-    const sampleConfigFilePath = _path.join(projectFolderPath, 'app', 'config', 'app.config.sample.json');
-    const mysqlConfig: any = {
-      connectionLimit: 10,
-      host: "",
-      user: "",
-      password: "",
-      database: "",
-      waitForConnections: false
-    }
-    const updateConfigFileTask = this.fileService.readJson<any>(configFilePath).then(config => {
-      config.mysqlConfig = mysqlConfig;
-      return this.fileService.writeJson(configFilePath, config);
-    });
-    const updateSampleConfigFileTask = this.fileService.readJson<any>(sampleConfigFilePath).then(config => {
-      config.mysqlConfig = mysqlConfig;
-      return this.fileService.writeJson(sampleConfigFilePath, config);
-    });
-    return Promise.all([updateConfigFileTask, updateSampleConfigFileTask]).then(_ => (null));
+  addAppConfigurationJson = (solutionFolderPath: string, project: SolutionProject, databaseType: string): Promise<void> => {
+    const configService = this.appConfigurationServiceArray.find(s => s.configType == databaseType);
+    return configService.addAppConfigurationJson(solutionFolderPath, project);
   }
 
-  addMySqlAppConfigurationModel = (solutionFolderPath: string, project: SolutionProject): Promise<void> => {
-    const projectFolderPath = _path.join(solutionFolderPath, project.path);
-    const configFilePath = _path.join(projectFolderPath, 'src', 'models', 'app.config.ts');
-    return this.fileService.getSourceFile(configFilePath).then(sourceFile => {
-      const importHook = sourceFile.transformationLines.find(l => l.lifecycleHookData.args.type == "import");
-      const configHook = sourceFile.transformationLines.find(l => l.lifecycleHookData.args.type == "config");
-      if (!importHook) throw new Error("No import hook found in app config.");
-      if (!configHook) throw new Error("No configuration hook found in app config.");
-      const importLineFactory = () => {
-        return this.sourceFactory.buildImportStatement(importHook, "mysql", ["PoolConfig"])
-      };
-      const buildAppConfigPropertyFactory = () => {
-        return this.sourceFactory.buildClassProperty(configHook, "mysqlConfig", "PoolConfig")
-      };
-      sourceFile.replaceLines(importHook.index, importLineFactory);
-      sourceFile.replaceLines(configHook.index, buildAppConfigPropertyFactory);
-      return this.fileService.writeFile(configFilePath, sourceFile.toString());
-    });
+  addAppConfigurationModel = (solutionFolderPath: string, project: SolutionProject, databaseType: string): Promise<void> => {
+    const configService = this.appConfigurationServiceArray.find(s => s.configType == databaseType);
+    return configService.addAppConfigurationModel(solutionFolderPath, project);
   }
 
   addDataContextCompositionType = (solutionFolderPath: string, project: SolutionProject, contextName: string): Promise<void> => {
@@ -85,7 +59,9 @@ export class TypescriptSourceService implements ITypescriptSourceService {
   }
 
   addDataContextComposition = (solutionFolderPath: string, project: SolutionProject,
-    databaseProjectName: string, contextName: string): Promise<void> => {
+    databaseProjectName: string, contextName: string, databaseType: string): Promise<void> => {
+    const configService = this.appConfigurationServiceArray.find(s => s.configType == databaseType);
+    const configName = configService.getConfigName();
     const projectFolderPath = _path.join(solutionFolderPath, project.path);
     const compositionFilePath = _path.join(projectFolderPath, 'src', 'composition', 'app.composition.ts');
     return this.fileService.getSourceFile(compositionFilePath).then(sourceFile => {
@@ -98,7 +74,7 @@ export class TypescriptSourceService implements ITypescriptSourceService {
       const importLineFactory = () => {
         return this.sourceFactory.buildImportStatement(importHook, databaseProjectName, [`I${contextName}`, contextName])
       };
-      const composeLineFactory = () => this.sourceFactory.buildDataContextComposition(compositionHook, contextName);
+      const composeLineFactory = () => this.sourceFactory.buildDataContextComposition(compositionHook, contextName, configName);
       sourceFile.replaceLines(importHook.index, importLineFactory);
       sourceFile.replaceLines(compositionHook.index, composeLineFactory);
       return this.fileService.writeFile(compositionFilePath, sourceFile.toString());

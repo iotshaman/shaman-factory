@@ -24,7 +24,7 @@ export class TransformationService implements ITransformationService {
         let sourceProject = solution.projects.find(p => p.name == b.sourceProject);
         if (!sourceProject) throw new Error(`Invalid source project in transformation: ${b.transformation} -> ${b.sourceProject}`);
       }
-      const transformations = !targetProject.language ? this.transformations : 
+      const transformations = !targetProject.language ? this.transformations :
         this.transformations.filter(t => t.language == targetProject.language);
       let transformation = transformations.find(
         t => t.name == b.transformation && t.environment == targetProject.environment

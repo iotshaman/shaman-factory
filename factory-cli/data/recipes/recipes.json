@@ -15,9 +15,12 @@
         {
           "name": "sample-database",
           "environment": "node",
-          "template": "node-shaman-database",
+          "template": "node-shaman-database-mysql",
           "path": "database",
-          "specs": {}
+          "specs": {
+            "contextName": "MySqlDataContext",
+            "databaseType": "mysql"
+          }
         },
         {
           "name": "sample-library",
@@ -53,9 +56,12 @@
         {
           "name": "sample-database",
           "environment": "node",
-          "template": "node-shaman-database",
+          "template": "node-shaman-database-mysql",
           "path": "database",
-          "specs": {}
+          "specs": {
+            "contextName": "MySqlDataContext",
+            "databaseType": "mysql"
+          }
         },
         {
           "name": "sample-server",

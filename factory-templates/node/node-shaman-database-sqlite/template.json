@@ -1,0 +1,14 @@
+{
+  "name": "node-shaman-database-sqlite",
+  "files": [
+    ".gitignore",
+    "package-lock.json",
+    "package.json",
+    "README.md",
+    "tsconfig.json"
+  ],
+  "folders": [
+    "sql",
+    "src"
+  ]
+}

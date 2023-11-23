@@ -16,11 +16,18 @@
       "language": "csharp"
     },
     {
-      "name": "node-shaman-database",
+      "name": "node-shaman-database-mysql",
       "environment": "node",
       "type": "database",
       "version": "2.0.0",
-      "file": "node/node-shaman-database-v2.0.0.zip"
+      "file": "node/node-shaman-database-mysql-v2.0.0.zip"
+    },
+    {
+      "name": "node-shaman-database-sqlite",
+      "environment": "node",
+      "type": "database",
+      "version": "2.0.0",
+      "file": "node/node-shaman-database-sqlite-v1.0.0.zip"
     },
     {
       "name": "dotnet-csharp-library",
@@ -49,8 +56,8 @@
       "name": "node-express-server",
       "environment": "node",
       "type": "server",
-      "version": "2.0.0",
-      "file": "node/node-express-server-v2.0.0.zip"
+      "version": "2.0.1",
+      "file": "node/node-express-server-v2.0.1.zip"
     },
     {
       "name": "dotnet-csharp-cli",

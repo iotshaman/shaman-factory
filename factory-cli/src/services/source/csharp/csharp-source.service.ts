@@ -1,8 +1,8 @@
 import * as _path from 'path';
-import { ISourceFactory } from "../../factories/source/source.factory";
-import { SolutionProject } from "../../models/solution";
-import { FileService, IFileService } from '../file.service';
-import { CsharpSourceFactory } from '../../factories/source/csharp-source.factory';
+import { ISourceFactory } from "../../../factories/source/source.factory";
+import { SolutionProject } from "../../../models/solution";
+import { FileService, IFileService } from '../../file.service';
+import { CsharpSourceFactory } from '../../../factories/source/csharp-source.factory';
 
 export interface IDotnetSourceService {
   addDatabaseConnectionStringToAppsettingsJson: (solutionFolderPath: string, 

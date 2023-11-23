@@ -5,5 +5,5 @@ export interface ISourceFactory {
   buildClassProperty: (line: LineDetail, propertyName: string, propertyType: string, accessModifier?: string) => LineDetail[];
   buildObjectPropertyAssignment: (line: LineDetail, propertyName: string, propertyValue: string, 
     operator?: string, suffix?: string) => LineDetail[];
-  buildDataContextComposition: (lineDetail: LineDetail, contextName: string) => LineDetail[];
+  buildDataContextComposition: (lineDetail: LineDetail, contextName: string, configName?: string) => LineDetail[];
 }

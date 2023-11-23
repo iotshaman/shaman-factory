@@ -34,7 +34,7 @@ export class TypescriptSourceFactory implements ISourceFactory {
     })]
   }
 
-  buildDataContextComposition(line: LineDetail, contextName: string): LineDetail[] {
+  buildDataContextComposition(line: LineDetail, contextName: string, configName: string): LineDetail[] {
     let lineDetails: LineDetail[] = [];
     lineDetails.push(new LineDetail({
       index: line.index,
@@ -45,7 +45,7 @@ export class TypescriptSourceFactory implements ISourceFactory {
     }));
     lineDetails.push(new LineDetail({
       index: line.index + 1,
-      content: `context.initialize(config.mysqlConfig);`,
+      content: `context.initialize(config.${configName});`,
       indent: line.indent,
       lifecycleHook: false,
       generated: true

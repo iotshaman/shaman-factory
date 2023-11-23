@@ -29,21 +29,21 @@ describe('Typescript Source Factory', () => {
   it('buildDataContextComposition should return context instantiation line', () => {    
     let line = new LineDetail({index: 0, indent: 0, content: '', lifecycleHook: false});
     let subject = new TypescriptSourceFactory();
-    let result = subject.buildDataContextComposition(line, "SampleContext");
+    let result = subject.buildDataContextComposition(line, "SampleContext", "sampleConfig");
     expect(result[0].content).to.equal("let context = new SampleContext();");
   });
 
   it('buildDataContextComposition should return context initialization line', () => {    
     let line = new LineDetail({index: 0, indent: 0, content: '', lifecycleHook: false});
     let subject = new TypescriptSourceFactory();
-    let result = subject.buildDataContextComposition(line, "SampleContext");
-    expect(result[1].content).to.equal("context.initialize(config.mysqlConfig);");
+    let result = subject.buildDataContextComposition(line, "SampleContext", "sampleConfig");
+    expect(result[1].content).to.equal("context.initialize(config.sampleConfig);");
   });
 
   it('buildDataContextComposition should return context initialization line', () => {    
     let line = new LineDetail({index: 0, indent: 0, content: '', lifecycleHook: false});
     let subject = new TypescriptSourceFactory();
-    let result = subject.buildDataContextComposition(line, "SampleContext");
+    let result = subject.buildDataContextComposition(line, "SampleContext", "sampleConfig");
     expect(result[2].content).to.equal("container.bind<ISampleContext>(TYPES.SampleContext).toConstantValue(context);");
   });
 

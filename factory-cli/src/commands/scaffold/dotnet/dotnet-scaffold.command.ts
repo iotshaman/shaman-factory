@@ -31,12 +31,8 @@ export class DotnetScaffoldCommand implements IEnvironmentCommand {
       .then(_ => this.addDotnetSolutionFile(this.solution.name, this.solutionFolder))
       .then(_ => this.fileService.createFolderRecursive(this.solutionFolder + projectPath))
       .then(_ => {
-        if (project.custom) return this.templateService.getCustomTemplate("dotnet", templateName, this.solution.auth, language);
-        else return this.templateService.getTemplate("dotnet", templateName);
-      })
-      .then(template => {
-        if (project.custom) return this.templateService.unzipCustomProjectTemplate(template, folderPath);
-        else return this.templateService.unzipProjectTemplate(template, folderPath);
+        if (project.custom) return this.getAndUnzipCustomTemplate(templateName, folderPath);
+        else return this.getAndUnzipTemplate(templateName, folderPath);
       })
       .then(_ => this.environmentService.updateProjectDefinition(folderPath, name, this.solution))
       .then(_ => this.environmentService.addProjectScaffoldFile(folderPath, name, this.solution))
@@ -46,6 +42,16 @@ export class DotnetScaffoldCommand implements IEnvironmentCommand {
       .then(_ => {
         console.log("Scaffolding is complete.");
       })
+  }
+
+  private getAndUnzipTemplate = (templateName: string, folderPath: string): Promise<void> => {
+    return this.templateService.getTemplate("dotnet", templateName)
+      .then(template => this.templateService.unzipProjectTemplate(template, folderPath));
+  }
+
+  private getAndUnzipCustomTemplate = (templateName: string, folderPath: string): Promise<void> => {
+    return this.templateService.getCustomTemplate("dotnet", templateName, this.solution.auth)
+      .then(template => this.templateService.unzipCustomProjectTemplate(template, folderPath));
   }
 
   private addDotnetSolutionFile = (solutionName: string, solutionFolder: string): Promise<void> => {
